@@ -8,3 +8,5 @@ CLAUDE.md
 # Env
 *.env*
 !.env.example
+
+/tmp

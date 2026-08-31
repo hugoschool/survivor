@@ -4,5 +4,6 @@ import "gorm.io/gorm"
 
 type Video struct {
 	gorm.Model
-	Link string
+	UserID uint
+	Link   string
 }
