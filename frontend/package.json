@@ -13,6 +13,13 @@
         "fix": "pnpm run check && pnpm run format && pnpm run lint",
         "ci": "biome ci"
     },
+    "devEngines": {
+        "runtime": {
+            "name": "node",
+            "version": "26.x",
+            "onFail": "download"
+        }
+    },
     "dependencies": {
         "@base-ui/react": "^1.7.0",
         "@fontsource-variable/geist": "^5.3.0",

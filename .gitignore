@@ -4,3 +4,7 @@
 .claude
 AGENTS.md
 CLAUDE.md
+
+# Env
+*.env*
+!.env.example
