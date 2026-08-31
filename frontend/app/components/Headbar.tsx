@@ -1,19 +1,25 @@
 export function HeadBar() {
-    return(
+    return (
         <header className="bg-white text-black">
             <div className="flex mx-auto items-center justify-center">
                 <div className="flex flex-1 mx-auto items-center justify-center gap-6 mt-4">
-                    <div className="flex-1"/>
+                    <div className="flex-1" />
                     <nav>
                         <ul className="flex items-center gap-20 text-sm font-medium">
                             <li>
-                                <a className="text-gray-500 transition hover:text-gray-500/75">Home</a>
+                                <a className="text-gray-500 transition hover:text-gray-500/75 hover:underline">
+                                    Home
+                                </a>
                             </li>
                             <li>
-                                <a className="text-gray-500 transition hover:text-gray-500/75">Recruit</a>
+                                <a className="text-gray-500 transition hover:text-gray-500/75 hover:underline">
+                                    Recruit
+                                </a>
                             </li>
                             <li>
-                                <a className="text-gray-500 transition hover:text-gray-500/75">Administration</a>
+                                <a className="text-gray-500 transition hover:text-gray-500/75 hover:underline">
+                                    Administration
+                                </a>
                             </li>
                         </ul>
                     </nav>
@@ -34,5 +40,5 @@ export function HeadBar() {
                 </div>
             </div>
         </header>
-    )
+    );
 }

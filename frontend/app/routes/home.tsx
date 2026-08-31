@@ -11,7 +11,9 @@ export default function Home() {
         <div>
             <HeadBar />
             <div className="flex mx-auto items-center justify-center font-medium text-gray-500 min-h-screen">
-                <a>Welcome to ProfilsActif. Try Searching for new employee...</a>
+                <a>
+                    Welcome to ProfilsActif. Try Searching for new employee...
+                </a>
             </div>
         </div>
     );
