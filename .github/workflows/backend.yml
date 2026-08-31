@@ -1,0 +1,64 @@
+name: Backend
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  GO_VERSION: 1.26.6
+
+jobs:
+  format:
+    name: Check formatting
+    if: ${{ github.repository_owner == 'hugoschool' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "${{ env.GO_VERSION }}"
+          cache-dependency-path: "backend/go.sum"
+
+      - name: Format
+        run: go fmt ./...
+        working-directory: "backend/"
+
+      - name: Check for diffs
+        run: git diff --exit-code
+
+  golangci-lint:
+    name: Check lint
+    if: ${{ github.repository_owner == 'hugoschool' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "${{ env.GO_VERSION }}"
+          cache-dependency-path: "backend/go.sum"
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
+        with:
+          working-directory: "backend/"
+          version: "v2.12"
+
+  build:
+    name: Build
+    if: ${{ github.repository_owner == 'hugoschool' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "${{ env.GO_VERSION }}"
+          cache-dependency-path: "backend/go.sum"
+
+      - name: Build
+        run: go build
+        working-directory: "backend/"
