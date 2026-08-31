@@ -4,8 +4,15 @@ import "gorm.io/gorm"
 
 type User struct {
 	gorm.Model
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Role      string `json:"role"`
-	Age       int    `json:"age"`
+	UserID       uint
+	FirstName    string
+	Lastname     string
+	Role         string
+	Age          uint
+	Views        uint
+	Competencies []Competencie
+	Locations    []Location
+	Sectors      []Sector
+	Videos       []Video
 }
+
