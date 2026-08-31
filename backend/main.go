@@ -10,6 +10,7 @@ func main() {
 	router := gin.Default()
 
 	database.Connect()
+	database.Migrate()
 
 	account := router.Group("/account")
 	account.POST("/login", routes.LoginHandler)
