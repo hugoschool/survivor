@@ -9,6 +9,9 @@ type User struct {
 	Role      string
 	Age       uint
 	Views     uint
+
+	Login Login
+
 	Skills    []Skill
 	Locations []Location
 	Sectors   []Sector
