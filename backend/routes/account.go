@@ -3,9 +3,13 @@ package routes
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/hugoarnal/survivor/database"
 	"github.com/hugoarnal/survivor/models"
 	"golang.org/x/crypto/bcrypt"
@@ -21,9 +25,55 @@ type registerBody struct {
 	Password  string `json:"password" binding:"required"`
 }
 
+type loginBody struct {
+	Mail     string `json:"mail" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
 func LoginHandler(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "pong",
+	var body loginBody
+
+	if err := c.ShouldBindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Incorrect body"})
+		return
+	}
+
+	ctx := context.Background()
+	login, err := gorm.G[models.Login](database.DB).Where("mail = ?", body.Mail).First(ctx)
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{
+				"message": "User not found",
+			})
+			return
+		} else {
+			fmt.Println(err.Error())
+			c.JSON(http.StatusInternalServerError, nil)
+			return
+		}
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(login.Password), []byte(body.Password)); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Incorrect body"})
+		return
+	}
+
+	unsignedToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"login": login.Mail,
+		"exp":   time.Now().Add(time.Hour * 24 * 5).Unix(),
+	})
+
+	token, err := unsignedToken.SignedString([]byte(os.Getenv("JWT_SECRET")))
+
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, nil)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"token": token,
 	})
 }
 
