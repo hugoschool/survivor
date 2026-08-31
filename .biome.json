@@ -1,0 +1,25 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.5.7/schema.json",
+    "formatter": {
+        "indentStyle": "space",
+        "lineWidth": 80,
+        "indentWidth": 4
+    },
+    "files": {
+        "includes": [
+            "!frontend/.react-router/**",
+            "frontend/**/*.css",
+            "frontend/**/*.ts",
+            "frontend/**/*.tsx",
+            ".biome.json",
+            "frontend/tsconfig.json",
+            "frontend/*.config.ts",
+            "frontend/package.json"
+        ]
+    },
+    "css": {
+        "parser": {
+            "tailwindDirectives": true
+        }
+    }
+}
