@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-type Competencie struct {
+type Skill struct {
 	gorm.Model
-	Comp string
+	Content string
 }
