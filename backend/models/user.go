@@ -14,4 +14,3 @@ type User struct {
 	Sectors      []Sector
 	Videos       []Video
 }
-
