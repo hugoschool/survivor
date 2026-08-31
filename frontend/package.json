@@ -13,6 +13,13 @@
         "fix": "pnpm run check && pnpm run format && pnpm run lint",
         "ci": "biome ci"
     },
+    "devEngines": {
+        "runtime": {
+            "name": "node",
+            "version": "26.x",
+            "onFail": "download"
+        }
+    },
     "dependencies": {
         "@react-router/node": "^8",
         "@react-router/serve": "^8",
