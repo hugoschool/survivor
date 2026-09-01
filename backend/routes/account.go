@@ -19,8 +19,8 @@ import (
 type registerBody struct {
 	FirstName string `json:"first_name" binding:"required"`
 	LastName  string `json:"last_name" binding:"required"`
-	Role      uint   `json:"role" binding:"required"`
-	Age       uint   `json:"age" binding:"required"`
+	Role      *uint  `json:"role" binding:"required"`
+	Age       *uint  `json:"age" binding:"required"`
 	Mail      string `json:"mail" binding:"required"`
 	Password  string `json:"password" binding:"required"`
 }
@@ -111,7 +111,7 @@ func RegisterHandler(c *gin.Context) {
 		return
 	}
 
-	if body.Role != models.RoleJobSeeker && body.Role != models.RoleRecruiter {
+	if *body.Role != models.RoleJobSeeker && *body.Role != models.RoleRecruiter {
 		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect role"})
 		return
 	}
@@ -150,8 +150,8 @@ func RegisterHandler(c *gin.Context) {
 	user := models.User{
 		FirstName: body.FirstName,
 		LastName:  body.LastName,
-		Role:      body.Role,
-		Age:       body.Age,
+		Role:      *body.Role,
+		Age:       *body.Age,
 		Views:     0,
 		Login:     login,
 		Skills:    nil,
