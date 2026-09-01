@@ -15,7 +15,9 @@ import (
 // @Accept json
 // @Produce json
 // @Success 200 {object} models.ApiMessage
+// @Failure 401 {object} models.ApiError
 // @Router /ping [get]
+// @Router /ping/auth [get]
 func PingHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, models.ApiMessage{Message: "pong"})
 }

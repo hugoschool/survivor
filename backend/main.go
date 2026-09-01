@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/hugoarnal/survivor/database"
+	"github.com/hugoarnal/survivor/middlewares"
 	"github.com/hugoarnal/survivor/routes"
 
 	_ "github.com/hugoarnal/survivor/docs"
@@ -27,6 +28,7 @@ func main() {
 	account.POST("/register", routes.RegisterHandler)
 
 	router.GET("/ping", routes.PingHandler)
+	router.GET("/ping/auth", middlewares.AuthMiddleware, routes.PingHandler)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	err := router.Run(":8080")
