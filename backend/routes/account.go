@@ -75,8 +75,9 @@ func LoginHandler(c *gin.Context) {
 	}
 
 	unsignedToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"login": login.Mail,
-		"exp":   time.Now().Add(time.Hour * 24 * 5).Unix(),
+		"userId": login.UserID,
+		"login":  login.Mail,
+		"exp":    time.Now().Add(time.Hour * 24 * 5).Unix(),
 	})
 
 	token, err := unsignedToken.SignedString([]byte(os.Getenv("JWT_SECRET")))

@@ -138,6 +138,41 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/models.ApiMessage"
                         }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ping/auth": {
+            "get": {
+                "description": "Simply says pong",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "ping",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiMessage"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
                     }
                 }
             }
@@ -147,7 +182,7 @@ const docTemplate = `{
         "models.ApiError": {
             "type": "object",
             "properties": {
-                "string": {
+                "message": {
                     "type": "string"
                 }
             }
@@ -155,7 +190,7 @@ const docTemplate = `{
         "models.ApiMessage": {
             "type": "object",
             "properties": {
-                "string": {
+                "message": {
                     "type": "string"
                 }
             }
