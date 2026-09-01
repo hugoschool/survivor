@@ -9,7 +9,7 @@ var (
 )
 
 type ApiMessage struct {
-	Message string `json:"string"`
+	Message string `json:"message"`
 }
 
 type ApiError = ApiMessage
