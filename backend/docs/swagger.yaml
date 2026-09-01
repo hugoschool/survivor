@@ -1,12 +1,12 @@
 definitions:
   models.ApiError:
     properties:
-      string:
+      message:
         type: string
     type: object
   models.ApiMessage:
     properties:
-      string:
+      message:
         type: string
     type: object
   routes.loginBody:
@@ -129,6 +129,29 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.ApiMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: ping
+      tags:
+      - Utils
+  /ping/auth:
+    get:
+      consumes:
+      - application/json
+      description: Simply says pong
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ApiMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
       summary: ping
       tags:
       - Utils
