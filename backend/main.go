@@ -6,6 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hugoarnal/survivor/database"
 	"github.com/hugoarnal/survivor/routes"
+
+	_ "github.com/hugoarnal/survivor/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func main() {
@@ -23,6 +27,7 @@ func main() {
 	account.POST("/register", routes.RegisterHandler)
 
 	router.GET("/ping", routes.PingHandler)
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	err := router.Run(":8080")
 	if err != nil {
