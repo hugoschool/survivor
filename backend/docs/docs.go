@@ -176,9 +176,64 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/survey": {
+            "get": {
+                "description": "Get the full survey",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey"
+                ],
+                "summary": "Get the full survey",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Survey"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "models.Answer": {
+            "type": "object",
+            "properties": {
+                "answer": {
+                    "type": "string"
+                },
+                "correct": {
+                    "type": "boolean"
+                },
+                "question_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "models.ApiError": {
             "type": "object",
             "properties": {
@@ -192,6 +247,37 @@ const docTemplate = `{
             "properties": {
                 "message": {
                     "type": "string"
+                }
+            }
+        },
+        "models.Question": {
+            "type": "object",
+            "properties": {
+                "answers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Answer"
+                    }
+                },
+                "question": {
+                    "type": "string"
+                },
+                "survey_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.Survey": {
+            "type": "object",
+            "properties": {
+                "obtention_rate": {
+                    "type": "integer"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Question"
+                    }
                 }
             }
         },

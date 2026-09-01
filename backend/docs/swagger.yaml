@@ -1,4 +1,13 @@
 definitions:
+  models.Answer:
+    properties:
+      answer:
+        type: string
+      correct:
+        type: boolean
+      question_id:
+        type: integer
+    type: object
   models.ApiError:
     properties:
       message:
@@ -8,6 +17,26 @@ definitions:
     properties:
       message:
         type: string
+    type: object
+  models.Question:
+    properties:
+      answers:
+        items:
+          $ref: '#/definitions/models.Answer'
+        type: array
+      question:
+        type: string
+      survey_id:
+        type: integer
+    type: object
+  models.Survey:
+    properties:
+      obtention_rate:
+        type: integer
+      questions:
+        items:
+          $ref: '#/definitions/models.Question'
+        type: array
     type: object
   routes.loginBody:
     properties:
@@ -155,4 +184,31 @@ paths:
       summary: ping
       tags:
       - Utils
+  /survey:
+    get:
+      consumes:
+      - application/json
+      description: Get the full survey
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Survey'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Get the full survey
+      tags:
+      - Survey
 swagger: "2.0"

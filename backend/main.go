@@ -27,6 +27,9 @@ func main() {
 	account.POST("/login", routes.LoginHandler)
 	account.POST("/register", routes.RegisterHandler)
 
+	survey := router.Group("/survey")
+	survey.GET("", middlewares.AuthMiddleware, routes.SurveyGetHandler)
+
 	router.GET("/ping", routes.PingHandler)
 	router.GET("/ping/auth", middlewares.AuthMiddleware, routes.PingHandler)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
