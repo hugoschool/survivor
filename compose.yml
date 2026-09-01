@@ -3,8 +3,12 @@ services:
     container_name: survivor-frontend
     build:
       context: ./frontend
+    environment:
+      BACKEND_URL: http://survivor-backend:8080
     ports:
       - "3000:3000"
+    networks:
+      - survivor
     depends_on:
       - backend
 
@@ -17,8 +21,12 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     ports:
       - "0.0.0.0:8080:8080"
+    networks:
+      - survivor
+      - db
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   postgres:
     container_name: survivor-postgres
@@ -28,8 +36,19 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+    networks:
+      - db
     volumes:
       - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+
+networks:
+  survivor:
+  db:
 
 volumes:
   postgres_data:
