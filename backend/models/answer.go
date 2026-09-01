@@ -4,5 +4,7 @@ import "gorm.io/gorm"
 
 type Answer struct {
 	gorm.Model
-	Answer []string
+	QuestionID uint
+	Answer     string
+	Correct    bool
 }

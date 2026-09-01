@@ -1,11 +1,13 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
 
-func PingHandler() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	}
+	"github.com/gin-gonic/gin"
+)
+
+func PingHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "pong",
+	})
 }
