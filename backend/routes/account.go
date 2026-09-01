@@ -30,11 +30,28 @@ type loginBody struct {
 	Password string `json:"password" binding:"required"`
 }
 
+type loginResponse struct {
+	Token string `json:"token"`
+}
+
+// Login godoc
+// @Summary Account login endpoint
+// @Schemes
+// @Description Account login endpoint
+// @Tags Account
+// @Accept json
+// @Produce json
+// @Param request body loginBody true "Request body"
+// @Success 200 {object} loginResponse
+// @Failure 400 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /account/login [post]
 func LoginHandler(c *gin.Context) {
 	var body loginBody
 
 	if err := c.ShouldBindJSON(&body); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "Incorrect body"})
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect body"})
 		return
 	}
 
@@ -43,19 +60,17 @@ func LoginHandler(c *gin.Context) {
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{
-				"message": "User not found",
-			})
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "Incorrect body"})
 			return
 		} else {
 			fmt.Println(err.Error())
-			c.JSON(http.StatusInternalServerError, nil)
+			c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 			return
 		}
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(login.Password), []byte(body.Password)); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "Incorrect body"})
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect body"})
 		return
 	}
 
@@ -68,29 +83,36 @@ func LoginHandler(c *gin.Context) {
 
 	if err != nil {
 		fmt.Println(err.Error())
-		c.JSON(http.StatusInternalServerError, nil)
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"token": token,
-	})
+	c.JSON(http.StatusOK, loginResponse{Token: token})
 }
 
+// Register godoc
+// @Summary Account register endpoint
+// @Schemes
+// @Description Account register endpoint
+// @Tags Account
+// @Accept json
+// @Produce json
+// @Param request body registerBody true "Request body"
+// @Success 200 {object} models.ApiMessage
+// @Failure 400 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /account/register [post]
 func RegisterHandler(c *gin.Context) {
 	var body registerBody
 
 	if err := c.ShouldBindJSON(&body); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Incorrect body",
-		})
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect body"})
 		return
 	}
 
 	if body.Role != models.RoleJobSeeker && body.Role != models.RoleRecruiter {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Incorrect role",
-		})
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect role"})
 		return
 	}
 
@@ -100,26 +122,22 @@ func RegisterHandler(c *gin.Context) {
 	_, err = gorm.G[models.Login](database.DB).Where("mail = ?", body.Mail).First(ctx)
 
 	if err == nil {
-		c.JSON(http.StatusNotFound, gin.H{
-			"message": "User already exists",
-		})
+		c.JSON(http.StatusNotFound, models.ApiError{Message: "User already exists"})
 		return
 	}
 
 	if !errors.Is(err, gorm.ErrRecordNotFound) {
-		c.JSON(http.StatusInternalServerError, nil)
+		c.JSON(http.StatusInternalServerError, models.ApiError{Message: "User already exists"})
 		return
 	}
 
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), bcrypt.DefaultCost)
 	if err != nil {
 		if errors.Is(err, bcrypt.ErrPasswordTooLong) {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": "Given password is too long",
-			})
+			c.JSON(http.StatusBadRequest, models.ApiError{Message: "Given password is too long"})
 			return
 		} else {
-			c.JSON(http.StatusInternalServerError, nil)
+			c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 			return
 		}
 	}
@@ -146,11 +164,9 @@ func RegisterHandler(c *gin.Context) {
 	err = gorm.G[models.User](database.DB).Create(ctx, &user)
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, nil)
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
-	c.JSON(200, gin.H{
-		"message": "Success",
-	})
+	c.JSON(200, models.ApiMessage{Message: "Success"})
 }

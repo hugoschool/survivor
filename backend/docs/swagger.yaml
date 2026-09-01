@@ -1,0 +1,135 @@
+definitions:
+  models.ApiError:
+    properties:
+      string:
+        type: string
+    type: object
+  models.ApiMessage:
+    properties:
+      string:
+        type: string
+    type: object
+  routes.loginBody:
+    properties:
+      mail:
+        type: string
+      password:
+        type: string
+    required:
+    - mail
+    - password
+    type: object
+  routes.loginResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  routes.registerBody:
+    properties:
+      age:
+        type: integer
+      first_name:
+        type: string
+      last_name:
+        type: string
+      mail:
+        type: string
+      password:
+        type: string
+      role:
+        type: integer
+    required:
+    - age
+    - first_name
+    - last_name
+    - mail
+    - password
+    - role
+    type: object
+info:
+  contact: {}
+paths:
+  /account/login:
+    post:
+      consumes:
+      - application/json
+      description: Account login endpoint
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/routes.loginBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/routes.loginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Account login endpoint
+      tags:
+      - Account
+  /account/register:
+    post:
+      consumes:
+      - application/json
+      description: Account register endpoint
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/routes.registerBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ApiMessage'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Account register endpoint
+      tags:
+      - Account
+  /ping:
+    get:
+      consumes:
+      - application/json
+      description: Simply says pong
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ApiMessage'
+      summary: ping
+      tags:
+      - Utils
+swagger: "2.0"
