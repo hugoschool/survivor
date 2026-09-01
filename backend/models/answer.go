@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Answer struct {
 	gorm.Model `json:"-"`
-	QuestionID uint
+	QuestionID uint   `json:"question_id"`
 	Answer     string `json:"answer"`
-	Correct    bool `json:"-"`
+	Correct    bool   `json:"correct"`
 }

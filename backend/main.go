@@ -31,6 +31,9 @@ func main() {
 	account.POST("/login", routes.LoginHandler)
 	account.POST("/register", routes.RegisterHandler)
 
+	survey := router.Group("/survey")
+	survey.GET("", middlewares.AuthMiddleware, routes.SurveyGetHandler)
+
 	router.GET("/ping", routes.PingHandler)
 	router.GET("/users/:id", routes.GetUser(database.DB))
 	router.GET("/users", routes.GetAllUser(database.DB))

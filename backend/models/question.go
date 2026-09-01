@@ -3,9 +3,8 @@ package models
 import "gorm.io/gorm"
 
 type Question struct {
-	gorm.Model
-	SurveyID uint
-	Question string `json:"question"`
-	Weight uint `json:"weight"`
-	Answers  []Answer
+	gorm.Model `json:"-"`
+	SurveyID   uint     `json:"survey_id"`
+	Question   string   `json:"question"`
+	Answers    []Answer `json:"answers"`
 }
