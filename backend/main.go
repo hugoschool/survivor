@@ -8,6 +8,7 @@ import (
 	"github.com/hugoarnal/survivor/middlewares"
 	"github.com/hugoarnal/survivor/routes"
 
+	cors "github.com/gin-contrib/cors"
 	_ "github.com/hugoarnal/survivor/docs"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -19,6 +20,9 @@ func main() {
 	}
 
 	router := gin.Default()
+
+	// TODO: change this for a proper CORS config asap
+	router.Use(cors.Default())
 
 	database.Connect()
 	database.Migrate()
