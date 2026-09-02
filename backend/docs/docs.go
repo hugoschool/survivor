@@ -311,9 +311,90 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/survey/submit": {
+            "post": {
+                "description": "User submitted answers to the survey, used to calculate the score",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey"
+                ],
+                "summary": "User submitted answers to the survey",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.userSubmitBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/routes.userSubmitResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "gorm.Model": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Answer": {
             "type": "object",
             "properties": {
@@ -322,6 +403,9 @@ const docTemplate = `{
                 },
                 "correct": {
                     "type": "boolean"
+                },
+                "model": {
+                    "$ref": "#/definitions/gorm.Model"
                 },
                 "question_id": {
                     "type": "integer"
@@ -352,6 +436,9 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/models.Answer"
                     }
+                },
+                "model": {
+                    "$ref": "#/definitions/gorm.Model"
                 },
                 "question": {
                     "type": "string"
@@ -425,6 +512,61 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "role": {
+                    "type": "integer"
+                }
+            }
+        },
+        "routes.userSubmitAnswer": {
+            "type": "object",
+            "required": [
+                "checked",
+                "id"
+            ],
+            "properties": {
+                "checked": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "routes.userSubmitBody": {
+            "type": "object",
+            "required": [
+                "questions"
+            ],
+            "properties": {
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/routes.userSubmitQuestion"
+                    }
+                }
+            }
+        },
+        "routes.userSubmitQuestion": {
+            "type": "object",
+            "required": [
+                "answers",
+                "id"
+            ],
+            "properties": {
+                "answers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/routes.userSubmitAnswer"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "routes.userSubmitResponse": {
+            "type": "object",
+            "properties": {
+                "percentage": {
                     "type": "integer"
                 }
             }

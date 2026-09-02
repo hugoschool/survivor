@@ -75,17 +75,9 @@ func AuthMiddleware(c *gin.Context) {
 }
 
 func AdminMiddleware(c *gin.Context) {
-	userAny, ok := c.Get("user")
+	user, err := models.GetUserFromContext(c)
 
-	if !ok {
-		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
-		c.Abort()
-		return
-	}
-
-	user, ok := userAny.(models.User)
-
-	if !ok {
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		c.Abort()
 		return
