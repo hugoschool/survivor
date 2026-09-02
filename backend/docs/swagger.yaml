@@ -1,10 +1,31 @@
 definitions:
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  gorm.Model:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
   models.Answer:
     properties:
       answer:
         type: string
       correct:
         type: boolean
+      model:
+        $ref: '#/definitions/gorm.Model'
       question_id:
         type: integer
     type: object
@@ -24,6 +45,8 @@ definitions:
         items:
           $ref: '#/definitions/models.Answer'
         type: array
+      model:
+        $ref: '#/definitions/gorm.Model'
       question:
         type: string
       survey_id:
@@ -74,6 +97,42 @@ definitions:
     - mail
     - password
     - role
+    type: object
+  routes.userSubmitAnswer:
+    properties:
+      checked:
+        type: boolean
+      id:
+        type: integer
+    required:
+    - checked
+    - id
+    type: object
+  routes.userSubmitBody:
+    properties:
+      questions:
+        items:
+          $ref: '#/definitions/routes.userSubmitQuestion'
+        type: array
+    required:
+    - questions
+    type: object
+  routes.userSubmitQuestion:
+    properties:
+      answers:
+        items:
+          $ref: '#/definitions/routes.userSubmitAnswer'
+        type: array
+      id:
+        type: integer
+    required:
+    - answers
+    - id
+    type: object
+  routes.userSubmitResponse:
+    properties:
+      percentage:
+        type: integer
     type: object
 info:
   contact: {}
@@ -271,6 +330,40 @@ paths:
           schema:
             $ref: '#/definitions/models.ApiError'
       summary: Modify the survey
+      tags:
+      - Survey
+  /survey/submit:
+    post:
+      consumes:
+      - application/json
+      description: User submitted answers to the survey, used to calculate the score
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/routes.userSubmitBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/routes.userSubmitResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: User submitted answers to the survey
       tags:
       - Survey
 swagger: "2.0"
