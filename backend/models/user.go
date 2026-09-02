@@ -47,22 +47,22 @@ type UserUpdateForm struct {
 }
 
 type User struct {
-	gorm.Model
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Role      uint   `json:"role"`
-	Age       uint   `json:"age"`
-	Views     uint   `json:"views"`
+	gorm.Model `json:"model"`
+	FirstName  string `json:"first_name"`
+	LastName   string `json:"last_name"`
+	Role       uint   `json:"role"`
+	Age        uint   `json:"age"`
+	Views      uint   `json:"views"`
 
 	// Percentage, out of a hundred
-	SurveyScore *uint
+	SurveyScore *uint `json:"survey_score"`
 
-	Login Login
+	Login Login `json:"-"`
 
-	Skills    []Skill
-	Locations []Location
-	Sectors   []Sector
-	Videos    []Video
+	Skills    []Skill    `json:"skills"`
+	Locations []Location `json:"locations"`
+	Sectors   []Sector   `json:"sectors"`
+	Videos    []Video    `json:"videos"`
 }
 
 func GetUserFromContext(c *gin.Context) (User, error) {
