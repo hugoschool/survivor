@@ -23,6 +23,11 @@ export function HeadBar() {
                                     Administration
                                 </p>
                             </NavLink>
+                            <NavLink to="/survey" end>
+                                <p className="text-gray-500 transition hover:text-gray-500/75 hover:underNavLinkne">
+                                    Survey
+                                </p>
+                            </NavLink>
                         </ul>
                     </nav>
 
