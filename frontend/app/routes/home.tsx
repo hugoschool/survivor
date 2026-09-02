@@ -1,7 +1,5 @@
-import { useState } from "react";
-import { data } from "react-router";
 import { HeadBar } from "../components/Headbar";
-import type { Route } from "./+types/home";
+
 export function meta() {
     return [
         { title: "Home" },
@@ -9,20 +7,7 @@ export function meta() {
     ];
 }
 
-export async function loader() {
-    const pingRawRes = await fetch(`${process.env.BACKEND_URL}/ping`);
-
-    if (!pingRawRes.ok) {
-        return data({});
-    }
-
-    const pingRes = await pingRawRes.json();
-    return pingRes;
-}
-
-export default function Home({ loaderData }: Route.ComponentProps) {
-    const [ping, _setPing] = useState(JSON.stringify(loaderData));
-
+export default function Home() {
     return (
         <div>
             <HeadBar />
@@ -30,7 +15,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                 <p>
                     Welcome to ProfilsActif. Try Searching for new employee...
                 </p>
-                <h2>{ping}</h2>
             </div>
         </div>
     );
