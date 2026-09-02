@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
-@import '@fontsource/spectral';
+@import "@fontsource/spectral";
 
 @custom-variant dark (&:is(.dark *));
 
