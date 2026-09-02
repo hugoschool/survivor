@@ -12,6 +12,10 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+const (
+	UsersPageSize int = 20
+)
+
 var (
 	ErrSkillNotFound    = errors.New("skill not found")
 	ErrLocationNotFound = errors.New("location not found")
@@ -19,6 +23,20 @@ var (
 	ErrVideoNotFound    = errors.New("video not found")
 )
 
+// UserGetId godoc
+// @Summary Get a singular user
+// @Schemes
+// @Description Get a singular user
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} models.User
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /users/:id [get]
 func UserGetHandler(c *gin.Context) {
 	id := c.Param("id")
 	var user models.User
@@ -31,11 +49,12 @@ func UserGetHandler(c *gin.Context) {
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
-			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "User not found"})
+			return
+		} else {
+			c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
-		return
 	}
 
 	c.JSON(http.StatusOK, user)
@@ -43,15 +62,27 @@ func UserGetHandler(c *gin.Context) {
 
 func Paginate(page int) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-		pageSize := 20
 		if page <= 0 {
 			page = 1
 		}
-		offset := (page - 1) * pageSize
-		return db.Offset(offset).Limit(pageSize)
+		offset := (page - 1) * UsersPageSize
+		return db.Offset(offset).Limit(UsersPageSize)
 	}
 }
 
+// UsersGet godoc
+// @Summary Get all users (paginated)
+// @Schemes
+// @Description Get all users (paginated)
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Param page query int true "Page"
+// @Success 200 {object} []models.User
+// @Failure 401 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /users [get]
 func UsersPaginatedHandler(c *gin.Context) {
 	var users []models.User
 	page, _ := strconv.Atoi(c.Query("page"))
@@ -62,7 +93,7 @@ func UsersPaginatedHandler(c *gin.Context) {
 		Preload("Videos").Find(&users).Error
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 	c.JSON(http.StatusOK, users)
@@ -179,6 +210,21 @@ func UpdateVideos(db *gorm.DB, user *models.User, input []models.UserVideoInput)
 	return nil
 }
 
+// UserUpdateId godoc
+// @Summary Update a singular user
+// @Schemes
+// @Description Update a singular user
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Param request body models.UserUpdateForm true "Request body"
+// @Success 200 {object} models.User
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /users/:id [put]
 func UserUpdateHandler(c *gin.Context) {
 	id := c.Param("id")
 	var user models.User
@@ -192,52 +238,51 @@ func UserUpdateHandler(c *gin.Context) {
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
-			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "User not found"})
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
-	err := c.ShouldBindJSON(&form)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	if err := c.ShouldBindJSON(&form); err != nil {
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Bad request"})
 		return
 	}
 
 	if err := UpdateSkills(database.DB, &user, form.Skills); err != nil {
 		if errors.Is(err, ErrSkillNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch skills id"})
+			c.JSON(http.StatusNotFound, models.ApiMessage{Message: "Mismatch skills id"})
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
 	if err := UpdateLocations(database.DB, &user, form.Locations); err != nil {
 		if errors.Is(err, ErrLocationNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Location id"})
+			c.JSON(http.StatusNotFound, models.ApiMessage{Message: "Mismatch Location id"})
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
 	if err := UpdateSectors(database.DB, &user, form.Sectors); err != nil {
 		if errors.Is(err, ErrSectorNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Sector id"})
+			c.JSON(http.StatusNotFound, models.ApiMessage{Message: "Mismatch Sector id"})
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
 	if err := UpdateVideos(database.DB, &user, form.Videos); err != nil {
 		if errors.Is(err, ErrVideoNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Video id"})
+			c.JSON(http.StatusNotFound, models.ApiMessage{Message: "Mismatch Video id"})
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
@@ -259,12 +304,26 @@ func UserUpdateHandler(c *gin.Context) {
 
 	final_save := database.DB.Save(&user)
 	if final_save.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": final_save.Error.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 	c.JSON(http.StatusOK, user)
 }
 
+// UserDeleteId godoc
+// @Summary Delete a singular user
+// @Schemes
+// @Description Delete a singular user
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} models.ApiMessage
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /users/:id [delete]
 func UserDeleteHandler(c *gin.Context) {
 	id := c.Param("id")
 	var user models.User
@@ -273,17 +332,17 @@ func UserDeleteHandler(c *gin.Context) {
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
-			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "User not found"})
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
 	err := database.DB.Select(clause.Associations).Delete(&user).Error
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
-	c.Status(http.StatusOK)
+	c.JSON(http.StatusOK, models.ApiMessage{Message: "Success"})
 }
