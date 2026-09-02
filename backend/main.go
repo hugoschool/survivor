@@ -33,6 +33,8 @@ func main() {
 
 	survey := router.Group("/survey")
 	survey.GET("", middlewares.AuthMiddleware, routes.SurveyGetHandler)
+	survey.POST("", middlewares.AuthMiddleware, routes.SurveyPostHandler)
+	survey.PUT("", middlewares.AuthMiddleware, routes.SurveyPutHandler)
 
 	router.GET("/ping", routes.PingHandler)
 	router.GET("/users/:id", routes.GetUser(database.DB))

@@ -135,10 +135,6 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.ApiError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ApiError'
         "500":
           description: Internal Server Error
           schema:
@@ -209,6 +205,72 @@ paths:
           schema:
             $ref: '#/definitions/models.ApiError'
       summary: Get the full survey
+      tags:
+      - Survey
+    post:
+      consumes:
+      - application/json
+      description: Initialize the first survey
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Survey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Survey'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Initialize the first survey
+      tags:
+      - Survey
+    put:
+      consumes:
+      - application/json
+      description: Modify the survey
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Survey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Survey'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Modify the survey
       tags:
       - Survey
 swagger: "2.0"
