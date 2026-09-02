@@ -29,11 +29,12 @@ func main() {
 
 	survey := router.Group("/survey")
 	survey.GET("", middlewares.AuthMiddleware, routes.SurveyGetHandler)
-	survey.POST("", middlewares.AuthMiddleware, routes.SurveyPostHandler)
-	survey.PUT("", middlewares.AuthMiddleware, routes.SurveyPutHandler)
+	survey.POST("", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.SurveyPostHandler)
+	survey.PUT("", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.SurveyPutHandler)
 
 	router.GET("/ping", routes.PingHandler)
 	router.GET("/ping/auth", middlewares.AuthMiddleware, routes.PingHandler)
+	router.GET("/ping/admin", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.PingHandler)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	err := router.Run(":8080")

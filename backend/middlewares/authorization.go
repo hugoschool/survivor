@@ -73,3 +73,29 @@ func AuthMiddleware(c *gin.Context) {
 
 	c.Next()
 }
+
+func AdminMiddleware(c *gin.Context) {
+	userAny, ok := c.Get("user")
+
+	if !ok {
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		c.Abort()
+		return
+	}
+
+	user, ok := userAny.(models.User)
+
+	if !ok {
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		c.Abort()
+		return
+	}
+
+	if user.Role != models.RoleAdmin {
+		c.JSON(http.StatusUnauthorized, models.ApiError{Message: "You aren't authorized to make this call"})
+		c.Abort()
+		return
+	}
+
+	c.Next()
+}
