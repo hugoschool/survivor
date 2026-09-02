@@ -8,6 +8,7 @@
     "files": {
         "includes": [
             "!frontend/.react-router/**",
+            "!frontend/build/**",
             "frontend/**/*.css",
             "frontend/**/*.ts",
             "frontend/**/*.tsx",
