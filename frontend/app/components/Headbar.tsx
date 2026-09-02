@@ -2,12 +2,12 @@ import { NavLink } from "react-router";
 
 export function HeadBar() {
     return (
-        <header className="bg-white text-black">
+        <header className="bg-white text-black px-4">
             <div className="flex mx-auto items-center justify-center">
                 <div className="flex flex-1 mx-auto items-center justify-center gap-6 mt-4">
-                    <div className="flex-1" />
+                    <div className="hidden flex-1 md:block" />
                     <nav>
-                        <ul className="flex items-center gap-20 text-sm font-medium">
+                        <ul className="flex items-center gap-5 md:gap-20 text-sm font-medium">
                             <NavLink to="/" end>
                                 <p className="text-gray-500 transition hover:text-gray-500/75 hover:underline">
                                     Home
@@ -32,7 +32,7 @@ export function HeadBar() {
                     </nav>
 
                     <div className="flex flex-1 mx-auto items-center justify-end gap-4 me-4">
-                        <NavLink to="/login" className="sm:flex sm:gap-4" end>
+                        <NavLink to="/login" end>
                             <p className="rounded-md bg-black text-white px-5 py-2.5 text-sm font-medium shadow-sm">
                                 Log In
                             </p>
