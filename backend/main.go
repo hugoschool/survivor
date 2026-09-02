@@ -43,6 +43,11 @@ func main() {
 	router.GET("/ping/admin", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.PingHandler)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
+	router.GET("/users/:id", routes.GetUser(database.DB))
+	router.GET("/users", routes.GetAllUser(database.DB))
+	router.PUT("/users/:id", routes.UpdateUser(database.DB))
+	router.DELETE("/users/:id", routes.DeleteUser(database.DB))
+
 	err := router.Run(":8080")
 	if err != nil {
 		panic(err)

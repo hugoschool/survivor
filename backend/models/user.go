@@ -15,13 +15,44 @@ var (
 	ErrUserNotInGin = errors.New("user not found in context")
 )
 
+type UserSkillInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserLocationInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserSectorInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserVideoInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserUpdateForm struct {
+	FirstName *string `json:"first_name"`
+	LastName  *string `json:"last_name"`
+	Role      *uint   `json:"role"`
+	Age       *uint   `json:"age"`
+	Skills    []UserSkillInput
+	Locations []UserLocationInput
+	Sectors   []UserSectorInput
+	Videos    []UserVideoInput
+}
+
 type User struct {
 	gorm.Model
-	FirstName string
-	Lastname  string
-	Role      uint
-	Age       uint
-	Views     uint
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Role      uint   `json:"role"`
+	Age       uint   `json:"age"`
+	Views     uint   `json:"views"`
 
 	// Percentage, out of a hundred
 	SurveyScore *uint
