@@ -37,16 +37,17 @@ func main() {
 	survey.PUT("", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.SurveyPutHandler)
 	survey.POST("/submit", middlewares.AuthMiddleware, routes.SurveySubmitHandler)
 
+	users := router.Group("/users")
+	users.GET("/:id", routes.UserGetHandler)
+	users.GET("", routes.UsersPaginatedHandler)
+	users.PUT("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserUpdateHandler)
+	users.DELETE("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserDeleteHandler)
+
 	router.GET("/health", routes.HealthHandler)
 	router.GET("/ping", routes.PingHandler)
 	router.GET("/ping/auth", middlewares.AuthMiddleware, routes.PingHandler)
 	router.GET("/ping/admin", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.PingHandler)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-
-	router.GET("/users/:id", routes.GetUser(database.DB))
-	router.GET("/users", routes.GetAllUser(database.DB))
-	router.PUT("/users/:id", routes.UpdateUser(database.DB))
-	router.DELETE("/users/:id", routes.DeleteUser(database.DB))
 
 	err := router.Run(":8080")
 	if err != nil {

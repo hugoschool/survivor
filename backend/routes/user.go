@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hugoarnal/survivor/database"
 	"github.com/hugoarnal/survivor/models"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -18,28 +19,26 @@ var (
 	ErrVideoNotFound    = errors.New("video not found")
 )
 
-func GetUser(db *gorm.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		id := c.Param("id")
-		var user models.User
+func UserGetHandler(c *gin.Context) {
+	id := c.Param("id")
+	var user models.User
 
-		result := db.Preload("Skills").
-			Preload("Locations").
-			Preload("Sectors").
-			Preload("Videos").
-			First(&user, id)
+	result := database.DB.Preload("Skills").
+		Preload("Locations").
+		Preload("Sectors").
+		Preload("Videos").
+		First(&user, id)
 
-		if result.Error != nil {
-			if result.Error == gorm.ErrRecordNotFound {
-				c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+	if result.Error != nil {
+		if result.Error == gorm.ErrRecordNotFound {
+			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 			return
 		}
-
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		return
 	}
+
+	c.JSON(http.StatusOK, user)
 }
 
 func Paginate(page int) func(db *gorm.DB) *gorm.DB {
@@ -53,25 +52,24 @@ func Paginate(page int) func(db *gorm.DB) *gorm.DB {
 	}
 }
 
-func GetAllUser(db *gorm.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		var users []models.User
-		page, _ := strconv.Atoi(c.Query("page"))
+func UsersPaginatedHandler(c *gin.Context) {
+	var users []models.User
+	page, _ := strconv.Atoi(c.Query("page"))
 
-		if err := db.Scopes(Paginate(page)).Preload("Skills").
-			Preload("Locations").
-			Preload("Sectors").
-			Preload("Videos").Find(&users).Error; err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-		c.JSON(http.StatusOK, users)
+	err := database.DB.Scopes(Paginate(page)).Preload("Skills").
+		Preload("Locations").
+		Preload("Sectors").
+		Preload("Videos").Find(&users).Error
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
 	}
+	c.JSON(http.StatusOK, users)
 }
 
 func UpdateSkills(db *gorm.DB, user *models.User, input []models.UserSkillInput) error {
-
-	for i := 0; i < len(input); i++ {
+	for i := range input {
 		input_skill_id := input[i].ID
 		if input_skill_id != nil {
 			found := false
@@ -98,8 +96,7 @@ func UpdateSkills(db *gorm.DB, user *models.User, input []models.UserSkillInput)
 }
 
 func UpdateLocations(db *gorm.DB, user *models.User, input []models.UserLocationInput) error {
-
-	for i := 0; i < len(input); i++ {
+	for i := range input {
 		input_location_id := input[i].ID
 		if input_location_id != nil {
 			found := false
@@ -127,8 +124,7 @@ func UpdateLocations(db *gorm.DB, user *models.User, input []models.UserLocation
 }
 
 func UpdateSectors(db *gorm.DB, user *models.User, input []models.UserSectorInput) error {
-
-	for i := 0; i < len(input); i++ {
+	for i := range input {
 		input_Sector_id := input[i].ID
 		if input_Sector_id != nil {
 			found := false
@@ -156,8 +152,7 @@ func UpdateSectors(db *gorm.DB, user *models.User, input []models.UserSectorInpu
 }
 
 func UpdateVideos(db *gorm.DB, user *models.User, input []models.UserVideoInput) error {
-
-	for i := 0; i < len(input); i++ {
+	for i := range input {
 		input_Video_id := input[i].ID
 		if input_Video_id != nil {
 			found := false
@@ -184,113 +179,111 @@ func UpdateVideos(db *gorm.DB, user *models.User, input []models.UserVideoInput)
 	return nil
 }
 
-func UpdateUser(db *gorm.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		id := c.Param("id")
-		var user models.User
-		var form models.UserUpdateForm
+func UserUpdateHandler(c *gin.Context) {
+	id := c.Param("id")
+	var user models.User
+	var form models.UserUpdateForm
 
-		result := db.Preload("Skills").
-			Preload("Locations").
-			Preload("Sectors").
-			Preload("Videos").
-			First(&user, id)
+	result := database.DB.Preload("Skills").
+		Preload("Locations").
+		Preload("Sectors").
+		Preload("Videos").
+		First(&user, id)
 
-		if result.Error != nil {
-			if result.Error == gorm.ErrRecordNotFound {
-				c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+	if result.Error != nil {
+		if result.Error == gorm.ErrRecordNotFound {
+			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 			return
 		}
-
-		err := c.ShouldBindJSON(&form)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		}
-
-		if err := UpdateSkills(db, &user, form.Skills); err != nil {
-			if errors.Is(err, ErrSkillNotFound) {
-				c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch skills id"})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		if err := UpdateLocations(db, &user, form.Locations); err != nil {
-			if errors.Is(err, ErrLocationNotFound) {
-				c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Location id"})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		if err := UpdateSectors(db, &user, form.Sectors); err != nil {
-			if errors.Is(err, ErrSectorNotFound) {
-				c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Sector id"})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		if err := UpdateVideos(db, &user, form.Videos); err != nil {
-			if errors.Is(err, ErrVideoNotFound) {
-				c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Video id"})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		if form.FirstName != nil {
-			user.FirstName = *form.FirstName
-		}
-
-		if form.LastName != nil {
-			user.LastName = *form.LastName
-		}
-
-		if form.Age != nil {
-			user.Age = *form.Age
-		}
-
-		if form.Role != nil {
-			user.Role = *form.Role
-		}
-
-		final_save := db.Save(&user)
-		if final_save.Error != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": final_save.Error.Error()})
-			return
-		}
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		return
 	}
+
+	err := c.ShouldBindJSON(&form)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := UpdateSkills(database.DB, &user, form.Skills); err != nil {
+		if errors.Is(err, ErrSkillNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch skills id"})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := UpdateLocations(database.DB, &user, form.Locations); err != nil {
+		if errors.Is(err, ErrLocationNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Location id"})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := UpdateSectors(database.DB, &user, form.Sectors); err != nil {
+		if errors.Is(err, ErrSectorNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Sector id"})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := UpdateVideos(database.DB, &user, form.Videos); err != nil {
+		if errors.Is(err, ErrVideoNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Mismatch Video id"})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if form.FirstName != nil {
+		user.FirstName = *form.FirstName
+	}
+
+	if form.LastName != nil {
+		user.LastName = *form.LastName
+	}
+
+	if form.Age != nil {
+		user.Age = *form.Age
+	}
+
+	if form.Role != nil {
+		user.Role = *form.Role
+	}
+
+	final_save := database.DB.Save(&user)
+	if final_save.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": final_save.Error.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, user)
 }
 
-func DeleteUser(db *gorm.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		id := c.Param("id")
-		var user models.User
+func UserDeleteHandler(c *gin.Context) {
+	id := c.Param("id")
+	var user models.User
 
-		result := db.First(&user, id)
+	result := database.DB.First(&user, id)
 
-		if result.Error != nil {
-			if result.Error == gorm.ErrRecordNotFound {
-				c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
-				return
-			}
-			c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+	if result.Error != nil {
+		if result.Error == gorm.ErrRecordNotFound {
+			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 			return
 		}
-		if err := db.Select(clause.Associations).Delete(&user).Error; err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-		c.Status(http.StatusNoContent)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		return
 	}
+
+	err := database.DB.Select(clause.Associations).Delete(&user).Error
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.Status(http.StatusOK)
 }
