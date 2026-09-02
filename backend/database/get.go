@@ -16,3 +16,13 @@ func GetUserById(userId uint) (models.User, error) {
 		First(&user)
 	return user, tx.Error
 }
+
+func GetLastSurvey() (models.Survey, error) {
+	var survey models.Survey
+
+	tx := DB.Model(&survey).
+		Preload("Questions").
+		Preload("Questions.Answers").
+		Last(&survey)
+	return survey, tx.Error
+}

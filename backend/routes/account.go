@@ -101,7 +101,6 @@ func LoginHandler(c *gin.Context) {
 // @Param request body registerBody true "Request body"
 // @Success 200 {object} models.ApiMessage
 // @Failure 400 {object} models.ApiError
-// @Failure 404 {object} models.ApiError
 // @Failure 500 {object} models.ApiError
 // @Router /account/register [post]
 func RegisterHandler(c *gin.Context) {
@@ -123,12 +122,12 @@ func RegisterHandler(c *gin.Context) {
 	_, err = gorm.G[models.Login](database.DB).Where("mail = ?", body.Mail).First(ctx)
 
 	if err == nil {
-		c.JSON(http.StatusNotFound, models.ApiError{Message: "User already exists"})
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "User already exists"})
 		return
 	}
 
 	if !errors.Is(err, gorm.ErrRecordNotFound) {
-		c.JSON(http.StatusInternalServerError, models.ApiError{Message: "User already exists"})
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
