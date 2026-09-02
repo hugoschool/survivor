@@ -37,6 +37,7 @@ func main() {
 	survey.PUT("", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.SurveyPutHandler)
 	survey.POST("/submit", middlewares.AuthMiddleware, routes.SurveySubmitHandler)
 
+	router.GET("/health", routes.HealthHandler)
 	router.GET("/ping", routes.PingHandler)
 	router.GET("/users/:id", routes.GetUser(database.DB))
 	router.GET("/users", routes.GetAllUser(database.DB))
