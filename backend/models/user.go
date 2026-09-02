@@ -10,11 +10,11 @@ var (
 
 type User struct {
 	gorm.Model
-	FirstName string
-	Lastname  string
-	Role      uint
-	Age       uint
-	Views     uint
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Role      uint `json:"role"`
+	Age       uint   `json:"age"`
+	Views     uint   `json:"views"`
 
 	Login Login
 

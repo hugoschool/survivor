@@ -3,8 +3,8 @@ package models
 import "gorm.io/gorm"
 
 type Answer struct {
-	gorm.Model
+	gorm.Model `json:"-"`
 	QuestionID uint
-	Answer     string
-	Correct    bool
+	Answer     string `json:"answer"`
+	Correct    bool `json:"-"`
 }

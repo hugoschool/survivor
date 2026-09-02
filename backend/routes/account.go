@@ -131,7 +131,7 @@ func RegisterHandler(c *gin.Context) {
 
 	user := models.User{
 		FirstName: body.FirstName,
-		Lastname:  body.LastName,
+		LastName:  body.LastName,
 		Role:      body.Role,
 		Age:       body.Age,
 		Views:     0,

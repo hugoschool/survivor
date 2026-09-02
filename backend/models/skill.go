@@ -5,5 +5,5 @@ import "gorm.io/gorm"
 type Skill struct {
 	gorm.Model
 	UserID  uint
-	Content string
+	Content string `json:"content"`
 }
