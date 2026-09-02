@@ -61,6 +61,13 @@ definitions:
           $ref: '#/definitions/models.Question'
         type: array
     type: object
+  routes.healthResponse:
+    properties:
+      db_status:
+        type: string
+      version:
+        type: string
+    type: object
   routes.loginBody:
     properties:
       mail:
@@ -201,6 +208,25 @@ paths:
       summary: Account register endpoint
       tags:
       - Account
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Health check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/routes.healthResponse'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/routes.healthResponse'
+      summary: Health check
+      tags:
+      - Utils
   /ping:
     get:
       consumes:

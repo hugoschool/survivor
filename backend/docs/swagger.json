@@ -102,6 +102,35 @@
                 }
             }
         },
+        "/health": {
+            "get": {
+                "description": "Health check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "Health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/routes.healthResponse"
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/routes.healthResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/ping": {
             "get": {
                 "description": "Simply says pong",
@@ -448,6 +477,17 @@
                     "items": {
                         "$ref": "#/definitions/models.Question"
                     }
+                }
+            }
+        },
+        "routes.healthResponse": {
+            "type": "object",
+            "properties": {
+                "db_status": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
                 }
             }
         },
