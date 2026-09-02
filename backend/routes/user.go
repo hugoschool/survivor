@@ -9,7 +9,6 @@ import (
 	"github.com/hugoarnal/survivor/database"
 	"github.com/hugoarnal/survivor/models"
 	"gorm.io/gorm"
-	"gorm.io/gorm/clause"
 )
 
 const (
@@ -325,13 +324,17 @@ func UserUpdateHandler(c *gin.Context) {
 // @Failure 500 {object} models.ApiError
 // @Router /users/:id [delete]
 func UserDeleteHandler(c *gin.Context) {
-	id := c.Param("id")
-	var user models.User
+	id, err := strconv.ParseInt(c.Param("id"), 10, 0)
 
-	result := database.DB.First(&user, id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Bad request"})
+		return
+	}
 
-	if result.Error != nil {
-		if result.Error == gorm.ErrRecordNotFound {
+	user, err := database.GetUserById(uint(id))
+
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
 			c.JSON(http.StatusNotFound, models.ApiError{Message: "User not found"})
 			return
 		}
@@ -339,7 +342,8 @@ func UserDeleteHandler(c *gin.Context) {
 		return
 	}
 
-	err := database.DB.Select(clause.Associations).Delete(&user).Error
+	err = database.DB.Delete(&user).Error
+
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return

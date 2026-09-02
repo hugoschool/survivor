@@ -2,18 +2,24 @@ package database
 
 import (
 	"github.com/hugoarnal/survivor/models"
+	"gorm.io/gorm"
 )
 
-func GetUserById(userId uint) (models.User, error) {
+func GetUserTX() *gorm.DB {
 	var user models.User
 
-	tx := DB.Model(&user).
+	return DB.Model(&user).
 		Preload("Login").
 		Preload("Skills").
 		Preload("Locations").
 		Preload("Sectors").
-		Preload("Videos").
-		First(&user)
+		Preload("Videos")
+}
+
+func GetUserById(userId uint) (models.User, error) {
+	var user models.User
+
+	tx := GetUserTX().Where("id = ?", userId).First(&user)
 	return user, tx.Error
 }
 
