@@ -20,6 +20,8 @@ import {
 } from "../components/ui/dropdown-menu";
 import { Input } from "../components/ui/input";
 
+const MIN_AGE = 16;
+
 // biome-ignore lint: params not used but is mandatory for func
 export async function loader({ params }: Route.LoaderArgs) {
     return { message: "Register" };
@@ -53,9 +55,18 @@ export default function Register() {
     // biome-ignore lint: any type for the moment
     const handleChange = async (e: any) => {
         const { name, value } = e.target;
+
+        if (name === "age") {
+            setForm((prev) => ({
+                ...prev,
+                age: value === "" ? "" : Number(value),
+            }));
+            return;
+        }
+
         setForm((prev) => ({
             ...prev,
-            [name]: name === "age" || name === "role" ? Number(value) : value,
+            [name]: name === "role" ? Number(value) : value,
         }));
     };
 
@@ -66,6 +77,11 @@ export default function Register() {
 
         if (form.password !== confirmPassword) {
             alert("wrong pwd");
+            return;
+        }
+
+        if (Number(form.age) < MIN_AGE) {
+            alert(`Tu dois avoir au moins ${MIN_AGE} ans pour t'inscrire.`);
             return;
         }
 
@@ -156,6 +172,7 @@ export default function Register() {
                                         id="age"
                                         name="age"
                                         type="number"
+                                        min={MIN_AGE}
                                         value={form.age}
                                         onChange={handleChange}
                                         required
@@ -250,7 +267,10 @@ export default function Register() {
                                 </div>
                             </div>
                             <CardFooter className="flex-col gap-2 mt-5">
-                                <Button type="submit" className="w-full">
+                                <Button
+                                    type="submit"
+                                    className="w-full bg-white text-institutionnel border-2 border-institutionnel hover:bg-institutionnel/15"
+                                >
                                     S'inscrire
                                 </Button>
                             </CardFooter>
