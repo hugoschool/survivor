@@ -172,7 +172,6 @@ export default function Register() {
                                         id="age"
                                         name="age"
                                         type="number"
-                                        min={MIN_AGE}
                                         value={form.age}
                                         onChange={handleChange}
                                         required
