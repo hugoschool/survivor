@@ -11,10 +11,8 @@ export default function Home() {
     return (
         <div>
             <HeadBar />
-            <div className="flex mx-auto items-center justify-center font-medium text-gray-500 min-h-screen">
-                <p>
-                    Welcome to ProfilsActif. Try Searching for new employee...
-                </p>
+            <div className="flex mx-auto items-center justify-center font-medium text-institutionnel min-h-screen">
+                <p>Bienvenue sur JibJob !</p>
             </div>
         </div>
     );

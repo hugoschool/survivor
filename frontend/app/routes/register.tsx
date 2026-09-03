@@ -12,6 +12,12 @@ import {
     CardHeader,
     CardTitle,
 } from "../components/ui/card";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
 import { Input } from "../components/ui/input";
 
 // biome-ignore lint: params not used but is mandatory for func
@@ -20,10 +26,15 @@ export async function loader({ params }: Route.LoaderArgs) {
 }
 
 export default function Register() {
+    const roleOptions = [
+        { value: 0, label: "Rechercheur d'emploi" },
+        { value: 1, label: "Recruteur" },
+    ];
+
     const [form, setForm] = useState({
         first_name: "",
         last_name: "",
-        role: 1,
+        role: 0,
         age: "",
         mail: "",
         password: "",
@@ -86,10 +97,10 @@ export default function Register() {
             <div className="flex min-h-screen items-center justify-center p-4">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
-                        <CardTitle>Sign up</CardTitle>
+                        <CardTitle>Inscription</CardTitle>
                         <CardDescription className="flex items-center">
-                            Fill All the information for registering a new
-                            account
+                            Remplis toute les informations pour t'inscrire sur
+                            JibJob
                         </CardDescription>
                         <CardAction>
                             <NavLink
@@ -97,7 +108,7 @@ export default function Register() {
                                 className="hover:underline"
                                 end
                             >
-                                Log In
+                                Connexion
                             </NavLink>
                         </CardAction>
                     </CardHeader>
@@ -168,23 +179,47 @@ export default function Register() {
                             </div>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
-                                    <label htmlFor="mail" className="mt-4">
-                                        role
-                                    </label>
-                                    <Input
-                                        id="role"
-                                        name="role"
-                                        type="number"
-                                        value={form.role}
-                                        onChange={handleChange}
-                                        required
-                                    />
+                                    <div className="mt-4">Rôle</div>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger>
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                className="w-full justify-between"
+                                            >
+                                                {roleOptions.find(
+                                                    (option) =>
+                                                        option.value ===
+                                                        form.role,
+                                                )?.label ??
+                                                    "Rechercheur d'emploi"}
+                                                <span aria-hidden="true">
+                                                    ▾
+                                                </span>
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className="w-(--anchor-width)">
+                                            {roleOptions.map((option) => (
+                                                <DropdownMenuItem
+                                                    key={option.value}
+                                                    onClick={() =>
+                                                        setForm((prev) => ({
+                                                            ...prev,
+                                                            role: option.value,
+                                                        }))
+                                                    }
+                                                >
+                                                    {option.label}
+                                                </DropdownMenuItem>
+                                            ))}
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
                                     <label htmlFor="password" className="mt-4">
-                                        Password
+                                        Mot de passe
                                     </label>
                                     <Input
                                         id="password"
@@ -202,7 +237,7 @@ export default function Register() {
                                         htmlFor="confirmPassword"
                                         className="mt-4"
                                     >
-                                        Confirm Password
+                                        Confirmé le Mot de passe
                                     </label>
                                     <Input
                                         id="confirmPassword"
@@ -216,7 +251,7 @@ export default function Register() {
                             </div>
                             <CardFooter className="flex-col gap-2 mt-5">
                                 <Button type="submit" className="w-full">
-                                    Register
+                                    S'inscrire
                                 </Button>
                             </CardFooter>
                         </form>
