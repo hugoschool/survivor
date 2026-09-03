@@ -87,7 +87,7 @@ export function HeadBar() {
                                         Recrutement
                                     </p>
                                 </NavLink>
-                                <NavLink
+                                {/* <NavLink
                                     to="/administration"
                                     end
                                     onClick={() => setMenuOpen(false)}
@@ -95,7 +95,7 @@ export function HeadBar() {
                                     <p className="text-institutionnel transition hover:text-institutionnel/75 hover:underline">
                                         Administration
                                     </p>
-                                </NavLink>
+                                </NavLink> */}
                                 <NavLink
                                     to="/survey"
                                     end
