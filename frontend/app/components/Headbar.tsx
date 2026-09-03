@@ -37,9 +37,11 @@ export function HeadBar() {
             <div className="mx-auto flex max-w-7xl items-center justify-center px-4 sm:px-6">
                 <div className="relative flex w-full items-center py-4 sm:grid sm:grid-cols-3">
                     <div className="flex w-full items-center justify-between sm:w-auto sm:justify-self-start">
-                        <div className="text-2xl font-medium sm:text-left text-institutionnel">
-                            JibJob
-                        </div>
+                        <NavLink to="/" end>
+                            <p className="text-2xl font-medium sm:text-left text-institutionnel">
+                                JibJob
+                            </p>
+                        </NavLink>
                         <button
                             type="button"
                             className="relative h-10 w-10 rounded-md p-2 text-ink transition-colors hover:bg-gray-100 sm:hidden"
@@ -69,15 +71,6 @@ export function HeadBar() {
                     >
                         <nav className="sm:col-start-2 sm:justify-self-center">
                             <ul className="flex flex-col items-center gap-4 text-sm font-medium sm:flex-row sm:gap-8 lg:gap-20">
-                                <NavLink
-                                    to="/"
-                                    end
-                                    onClick={() => setMenuOpen(false)}
-                                >
-                                    <p className="text-institutionnel transition hover:text-institutionnel/75 hover:underline">
-                                        Accueil
-                                    </p>
-                                </NavLink>
                                 <NavLink
                                     to="/recruit"
                                     end
