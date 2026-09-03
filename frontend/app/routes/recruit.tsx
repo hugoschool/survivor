@@ -193,7 +193,7 @@ export default function Recruit() {
         });
     };
 
-    const currentLikeCount = currentVideoId
+    const _currentLikeCount = currentVideoId
         ? (likeCounts[currentVideoId] ?? 0)
         : 0;
 
@@ -368,7 +368,7 @@ export default function Recruit() {
                                 <DrawerFooter className="border-t border-[#1B3A6B]/15 bg-white">
                                     <Button
                                         onClick={applyFilters}
-                                        className="h-11 rounded-none bg-[#F6C343] font-[Marianne] font-bold text-[#1B3A6B] hover:bg-[#eab52e]"
+                                        className="h-11 rounded-none border-[#1B3A6B] bg-[#ffffff] font-[Marianne] font-bold text-[#1B3A6B] hover:bg-[#1B3A6B]/5"
                                     >
                                         Appliquer
                                     </Button>
@@ -447,9 +447,7 @@ export default function Recruit() {
                                         toggleLike(currentVideoId)
                                     }
                                 />
-                                <span className="font-[Marianne] text-xs font-bold text-white">
-                                    {currentLikeCount}
-                                </span>
+                                <span className="font-[Marianne] text-xs font-bold text-white"></span>
                             </div>
                         </div>
                     </div>
