@@ -1,7 +1,7 @@
-import { HeadBar } from "../components/Headbar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { NavLink } from "react-router";
 import { Carousel } from "../components/application/carousel/carousel-base";
-import { NavLink, useNavigate } from "react-router";
+import { HeadBar } from "../components/Headbar";
 
 export function meta() {
     return [
@@ -40,18 +40,21 @@ export const CarouselLg = () => {
             <Carousel.Content className="gap-2">
                 <Carousel.Item className="overflow-hidden rounded-xl">
                     <img
+                        alt="Example Illustration"
                         src="https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2026-06/esr_orientation_concours_emploi_rh_esr_orientation_concours_emploi_rh_2_1.svg"
                         className="size-full object-cover"
                     />
                 </Carousel.Item>
                 <Carousel.Item className="overflow-hidden rounded-xl">
                     <img
+                        alt="Example Illustration"
                         src="https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2026-07/esr_bleu_illustration_vie_etudiante_recherche_femme_0.svg"
                         className="size-full object-cover"
                     />
                 </Carousel.Item>
                 <Carousel.Item className="overflow-hidden rounded-xl">
                     <img
+                        alt="Example Illustration"
                         src="https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2026-07/esr_illustration_recherche_science_enseignement_sup_statistique.svg"
                         className="size-full object-cover"
                     />
@@ -73,9 +76,9 @@ export default function Home() {
                         </div>
                         <div className="font-spectral text-lg sm:text-xl lg:text-2xl text-[#1B3A6B]">
                             <p className="pt-3">
-                                La plateforme de référence pour la recherche d'emploi basée
-                                sur la publication de vidéos propulsée par le ministère du
-                                Job et du Bonheur.
+                                La plateforme de référence pour la recherche
+                                d'emploi basée sur la publication de vidéos
+                                propulsée par le ministère du Job et du Bonheur.
                             </p>
                         </div>
                         <div className="font-spectral font-light text-2xl sm:text-3xl lg:text-4xl text-[#1B3A6B] pt-8 sm:pt-10">

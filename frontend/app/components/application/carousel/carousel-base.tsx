@@ -1,6 +1,24 @@
-import type { CSSProperties, ComponentPropsWithRef, HTMLAttributes, KeyboardEvent, ReactNode, Ref } from "react";
-import { cloneElement, createContext, isValidElement, useCallback, useContext, useEffect, useState } from "react";
-import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
+// biome-ignore-all lint: doesn't work
+import useEmblaCarousel, {
+    type UseEmblaCarouselType,
+} from "embla-carousel-react";
+import type {
+    ComponentPropsWithRef,
+    CSSProperties,
+    HTMLAttributes,
+    KeyboardEvent,
+    ReactNode,
+    Ref,
+} from "react";
+import {
+    cloneElement,
+    createContext,
+    isValidElement,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { cx } from "~/lib/utils/cx";
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -44,13 +62,23 @@ export const useCarousel = () => {
     const context = useContext(CarouselContext);
 
     if (!context) {
-        throw new Error("The `useCarousel` hook must be used within a <Carousel />");
+        throw new Error(
+            "The `useCarousel` hook must be used within a <Carousel />",
+        );
     }
 
     return context;
 };
 
-const CarouselRoot = ({ orientation = "horizontal", opts, setApi, plugins, className, children, ...props }: ComponentPropsWithRef<"div"> & CarouselProps) => {
+const CarouselRoot = ({
+    orientation = "horizontal",
+    opts,
+    setApi,
+    plugins,
+    className,
+    children,
+    ...props
+}: ComponentPropsWithRef<"div"> & CarouselProps) => {
     const [carouselRef, api] = useEmblaCarousel(
         {
             ...opts,
@@ -125,7 +153,9 @@ const CarouselRoot = ({ orientation = "horizontal", opts, setApi, plugins, class
                 carouselRef,
                 api: api,
                 opts,
-                orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+                orientation:
+                    orientation ||
+                    (opts?.axis === "y" ? "vertical" : "horizontal"),
                 scrollPrev,
                 scrollNext,
                 canScrollPrev,
@@ -134,7 +164,13 @@ const CarouselRoot = ({ orientation = "horizontal", opts, setApi, plugins, class
                 scrollSnaps,
             }}
         >
-            <div onKeyDownCapture={handleKeyDown} className={cx("relative", className)} role="region" aria-roledescription="carousel" {...props}>
+            <div
+                onKeyDownCapture={handleKeyDown}
+                className={cx("relative", className)}
+                role="region"
+                aria-roledescription="carousel"
+                {...props}
+            >
                 {children}
             </div>
         </CarouselContext.Provider>
@@ -148,18 +184,42 @@ interface CarouselContentProps extends ComponentPropsWithRef<"div"> {
     overflowHidden?: boolean;
 }
 
-const CarouselContent = ({ className, overflowHidden = true, ...props }: CarouselContentProps) => {
+const CarouselContent = ({
+    className,
+    overflowHidden = true,
+    ...props
+}: CarouselContentProps) => {
     const { carouselRef, orientation } = useCarousel();
 
     return (
-        <div ref={carouselRef} className={cx("h-full w-full", overflowHidden && "overflow-hidden")}>
-            <div className={cx("flex max-h-full", orientation === "horizontal" ? "" : "flex-col", className)} {...props} />
+        <div
+            ref={carouselRef}
+            className={cx("h-full w-full", overflowHidden && "overflow-hidden")}
+        >
+            <div
+                className={cx(
+                    "flex max-h-full",
+                    orientation === "horizontal" ? "" : "flex-col",
+                    className,
+                )}
+                {...props}
+            />
         </div>
     );
 };
 
-const CarouselItem = ({ className, ...props }: ComponentPropsWithRef<"div">) => {
-    return <div role="group" aria-roledescription="slide" className={cx("min-w-0 shrink-0 grow-0 basis-full", className)} {...props} />;
+const CarouselItem = ({
+    className,
+    ...props
+}: ComponentPropsWithRef<"div">) => {
+    return (
+        <div
+            role="group"
+            aria-roledescription="slide"
+            className={cx("min-w-0 shrink-0 grow-0 basis-full", className)}
+            {...props}
+        />
+    );
 };
 
 interface TriggerRenderProps {
@@ -182,8 +242,16 @@ interface TriggerProps {
     className?: string | ((args: { isDisabled: boolean }) => string);
 }
 
-const Trigger = ({ className, children, asChild, direction, style, ...props }: TriggerProps) => {
-    const { scrollPrev, canScrollNext, scrollNext, canScrollPrev } = useCarousel();
+const Trigger = ({
+    className,
+    children,
+    asChild,
+    direction,
+    style,
+    ...props
+}: TriggerProps) => {
+    const { scrollPrev, canScrollNext, scrollNext, canScrollPrev } =
+        useCarousel();
 
     const isDisabled = direction === "prev" ? !canScrollPrev : !canScrollNext;
 
@@ -193,9 +261,11 @@ const Trigger = ({ className, children, asChild, direction, style, ...props }: T
         direction === "prev" ? scrollPrev() : scrollNext();
     };
 
-    const computedClassName = typeof className === "function" ? className({ isDisabled }) : className;
+    const computedClassName =
+        typeof className === "function" ? className({ isDisabled }) : className;
 
-    const defaultAriaLabel = direction === "prev" ? "Previous slide" : "Next slide";
+    const defaultAriaLabel =
+        direction === "prev" ? "Previous slide" : "Next slide";
 
     // If the children is a render prop, we need to pass the necessary props to the render prop.
     if (typeof children === "function") {
@@ -208,21 +278,40 @@ const Trigger = ({ className, children, asChild, direction, style, ...props }: T
             onClick: handleClick,
             disabled: isDisabled,
             "aria-label": defaultAriaLabel,
-            style: { ...(children.props as HTMLAttributes<HTMLElement>).style, ...style },
-            className: [computedClassName, (children.props as HTMLAttributes<HTMLElement>).className].filter(Boolean).join(" ") || undefined,
+            style: {
+                ...(children.props as HTMLAttributes<HTMLElement>).style,
+                ...style,
+            },
+            className:
+                [
+                    computedClassName,
+                    (children.props as HTMLAttributes<HTMLElement>).className,
+                ]
+                    .filter(Boolean)
+                    .join(" ") || undefined,
         } as HTMLAttributes<HTMLElement>);
     }
 
     return (
-        <button aria-label={defaultAriaLabel} disabled={isDisabled} className={computedClassName} onClick={handleClick} {...props}>
+        <button
+            aria-label={defaultAriaLabel}
+            disabled={isDisabled}
+            className={computedClassName}
+            onClick={handleClick}
+            {...props}
+        >
             {children}
         </button>
     );
 };
 
-const CarouselPrevTrigger = (props: Omit<TriggerProps, "direction">) => <Trigger {...props} direction="prev" />;
+const CarouselPrevTrigger = (props: Omit<TriggerProps, "direction">) => (
+    <Trigger {...props} direction="prev" />
+);
 
-const CarouselNextTrigger = (props: Omit<TriggerProps, "direction">) => <Trigger {...props} direction="next" />;
+const CarouselNextTrigger = (props: Omit<TriggerProps, "direction">) => (
+    <Trigger {...props} direction="next" />
+);
 
 interface CarouselIndicatorRenderProps {
     isSelected: boolean;
@@ -244,7 +333,14 @@ interface CarouselIndicatorProps {
     className?: string | ((args: { isSelected: boolean }) => string);
 }
 
-const CarouselIndicator = ({ index, isSelected = false, children, asChild, className, style }: CarouselIndicatorProps) => {
+const CarouselIndicator = ({
+    index,
+    isSelected = false,
+    children,
+    asChild,
+    className,
+    style,
+}: CarouselIndicatorProps) => {
     const { api, selectedIndex } = useCarousel();
 
     isSelected = isSelected || selectedIndex === index;
@@ -252,7 +348,8 @@ const CarouselIndicator = ({ index, isSelected = false, children, asChild, class
     const handleClick = () => {
         api?.scrollTo(index);
     };
-    const computedClassName = typeof className === "function" ? className({ isSelected }) : className;
+    const computedClassName =
+        typeof className === "function" ? className({ isSelected }) : className;
 
     const defaultAriaLabel = "Go to slide" + (index + 1);
 
@@ -267,29 +364,52 @@ const CarouselIndicator = ({ index, isSelected = false, children, asChild, class
             onClick: handleClick,
             "aria-label": defaultAriaLabel,
             "aria-current": isSelected ? "true" : undefined,
-            style: { ...(children.props as HTMLAttributes<HTMLElement>).style, ...style },
-            className: [computedClassName, (children.props as HTMLAttributes<HTMLElement>).className].filter(Boolean).join(" ") || undefined,
+            style: {
+                ...(children.props as HTMLAttributes<HTMLElement>).style,
+                ...style,
+            },
+            className:
+                [
+                    computedClassName,
+                    (children.props as HTMLAttributes<HTMLElement>).className,
+                ]
+                    .filter(Boolean)
+                    .join(" ") || undefined,
         } as HTMLAttributes<HTMLElement>);
     }
 
     return (
-        <button aria-label={defaultAriaLabel} aria-current={isSelected ? "true" : undefined} className={computedClassName} onClick={handleClick}>
+        <button
+            type="button"
+            aria-label={defaultAriaLabel}
+            aria-current={isSelected ? "true" : undefined}
+            className={computedClassName}
+            onClick={handleClick}
+        >
             {children}
         </button>
     );
 };
 
-interface CarouselIndicatorGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+interface CarouselIndicatorGroupProps
+    extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
     children: ReactNode | ((props: { index: number }) => ReactNode);
     className?: string;
 }
 
-const CarouselIndicatorGroup = ({ children, ...props }: CarouselIndicatorGroupProps) => {
+const CarouselIndicatorGroup = ({
+    children,
+    ...props
+}: CarouselIndicatorGroupProps) => {
     const { scrollSnaps } = useCarousel();
 
     // If the children is a render prop, we need to pass the index to the render prop.
     if (typeof children === "function") {
-        return <nav {...props}>{scrollSnaps.map((index) => children({ index }))}</nav>;
+        return (
+            <nav {...props}>
+                {scrollSnaps.map((index) => children({ index }))}
+            </nav>
+        );
     }
 
     return <nav {...props}>{children}</nav>;

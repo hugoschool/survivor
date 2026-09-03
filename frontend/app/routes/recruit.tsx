@@ -193,7 +193,7 @@ export default function Recruit() {
         });
     };
 
-    const currentLikeCount = currentVideoId
+    const _currentLikeCount = currentVideoId
         ? (likeCounts[currentVideoId] ?? 0)
         : 0;
 
