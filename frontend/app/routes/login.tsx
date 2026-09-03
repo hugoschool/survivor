@@ -164,7 +164,7 @@ export default function Login() {
                             <CardFooter className="mt-5 flex-col gap-2">
                                 <Button
                                     type="submit"
-                                    className="w-full"
+                                    className="w-full bg-white text-institutionnel border-2 border-institutionnel hover:bg-institutionnel/15"
                                     disabled={loading}
                                 >
                                     {loading ? "Connexion..." : "Connexion"}
