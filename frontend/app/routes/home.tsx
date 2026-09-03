@@ -71,28 +71,28 @@ export default function Home() {
             <div className="mx-6 my-16 sm:mx-10 sm:my-20 lg:mx-16 lg:my-24 xl:mx-20 min-h-[70vh]">
                 <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-12 xl:gap-16">
                     <div className="lg:flex-1 max-w-2xl">
-                        <div className="font-marianne font-bold text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-[#1B3A6B]">
+                        <div className="font-marianne font-bold text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-institutionnel">
                             JibJob
                         </div>
-                        <div className="font-spectral text-lg sm:text-xl lg:text-2xl text-[#1B3A6B]">
+                        <div className="font-spectral text-lg sm:text-xl lg:text-2xl text-institutionnel">
                             <p className="pt-3">
                                 La plateforme de référence pour la recherche
                                 d'emploi basée sur la publication de vidéos
                                 propulsée par le ministère du Job et du Bonheur.
                             </p>
                         </div>
-                        <div className="font-spectral font-light text-2xl sm:text-3xl lg:text-4xl text-[#1B3A6B] pt-8 sm:pt-10">
+                        <div className="font-marianne font-bold text-2xl sm:text-3xl lg:text-4xl text-institutionnel pt-8 sm:pt-10">
                             Montrez votre talent en une vidéo :
                         </div>
                         <div className="flex flex-wrap gap-4 pt-4">
                             <NavLink to="/login" end>
-                                <p className="rounded-md bg-black text-white px-5 py-2.5 text-sm font-medium shadow-sm">
-                                    Log In
+                                <p className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15 font-marianne">
+                                    Connexion
                                 </p>
                             </NavLink>
                             <NavLink to="/register" end>
-                                <p className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-black">
-                                    Register
+                                <p className="rounded-md bg-institutionnel/50 px-5 py-2.5 text-white font-marianne font-medium hover:bg-institutionnel/15 hover:text-institutionnel">
+                                    Inscription
                                 </p>
                             </NavLink>
                         </div>

@@ -106,11 +106,11 @@ export default function Login() {
     return (
         <div>
             <HeadBar />
-            <div className="flex min-h-screen items-center justify-center p-4">
+            <div className="flex min-h-screen items-center justify-center p-4 font-marianne">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
                         <CardTitle>Connection</CardTitle>
-                        <CardDescription className="flex items-center">
+                        <CardDescription className="flex items-center font-spectral">
                             Entre ton email pour te connecter a ton compte
                         </CardDescription>
                         <CardAction>
