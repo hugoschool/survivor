@@ -59,6 +59,30 @@ func UserGetHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
+// UserGetCurrent godoc
+// @Summary Get the current user's details
+// @Schemes
+// @Description Get the current user's details
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.User
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /users/me [get]
+func UserGetCurrentHandler(c *gin.Context) {
+	user, err := models.GetUserFromContext(c)
+
+	if err != nil {
+		c.JSON(http.StatusNotFound, models.ApiError{Message: "User not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, user)
+}
+
 func Paginate(page int) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if page <= 0 {

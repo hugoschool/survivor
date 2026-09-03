@@ -671,6 +671,21 @@ paths:
       produces:
       - application/json
       responses:
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Update a singular user
+      tags:
+      - Users
+  /users/me:
+    get:
+      consumes:
+      - application/json
+      description: Get the current user's details
+      produces:
+      - application/json
+      responses:
         "200":
           description: OK
           schema:
@@ -691,7 +706,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ApiError'
-      summary: Update a singular user
+      summary: Get the current user's details
       tags:
       - Users
 swagger: "2.0"

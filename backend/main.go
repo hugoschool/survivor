@@ -40,6 +40,7 @@ func main() {
 	users := router.Group("/users")
 	users.GET("/:id", routes.UserGetHandler)
 	users.GET("", routes.UsersPaginatedHandler)
+	users.GET("/me", middlewares.AuthMiddleware, routes.UserGetCurrentHandler)
 	// users.PUT("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserUpdateHandler)
 	users.DELETE("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserDeleteHandler)
 
