@@ -116,6 +116,11 @@ func RegisterHandler(c *gin.Context) {
 		return
 	}
 
+	if *body.Age < 16 {
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect age"})
+		return
+	}
+
 	var err error
 
 	ctx := context.Background()
