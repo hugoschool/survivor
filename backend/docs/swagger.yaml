@@ -39,6 +39,21 @@ definitions:
       message:
         type: string
     type: object
+  models.Location:
+    properties:
+      content:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      updatedAt:
+        type: string
+      user_id:
+        type: integer
+    type: object
   models.Question:
     properties:
       answers:
@@ -51,6 +66,38 @@ definitions:
         type: string
       survey_id:
         type: integer
+      weight:
+        type: integer
+    type: object
+  models.Sector:
+    properties:
+      content:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      updatedAt:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.Skill:
+    properties:
+      content:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      updatedAt:
+        type: string
+      user_id:
+        type: integer
     type: object
   models.Survey:
     properties:
@@ -60,6 +107,110 @@ definitions:
         items:
           $ref: '#/definitions/models.Question'
         type: array
+    type: object
+  models.User:
+    properties:
+      age:
+        type: integer
+      first_name:
+        type: string
+      last_name:
+        type: string
+      locations:
+        items:
+          $ref: '#/definitions/models.Location'
+        type: array
+      model:
+        $ref: '#/definitions/gorm.Model'
+      role:
+        type: integer
+      sectors:
+        items:
+          $ref: '#/definitions/models.Sector'
+        type: array
+      skills:
+        items:
+          $ref: '#/definitions/models.Skill'
+        type: array
+      survey_score:
+        description: Percentage, out of a hundred
+        type: integer
+      videos:
+        items:
+          $ref: '#/definitions/models.Video'
+        type: array
+      views:
+        type: integer
+    type: object
+  models.UserLocationInput:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+    type: object
+  models.UserSectorInput:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+    type: object
+  models.UserSkillInput:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+    type: object
+  models.UserUpdateForm:
+    properties:
+      age:
+        type: integer
+      first_name:
+        type: string
+      last_name:
+        type: string
+      locations:
+        items:
+          $ref: '#/definitions/models.UserLocationInput'
+        type: array
+      role:
+        type: integer
+      sectors:
+        items:
+          $ref: '#/definitions/models.UserSectorInput'
+        type: array
+      skills:
+        items:
+          $ref: '#/definitions/models.UserSkillInput'
+        type: array
+      videos:
+        items:
+          $ref: '#/definitions/models.UserVideoInput'
+        type: array
+    type: object
+  models.UserVideoInput:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+    type: object
+  models.Video:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      link:
+        type: string
+      updatedAt:
+        type: string
+      user_id:
+        type: integer
     type: object
   routes.healthResponse:
     properties:
@@ -392,4 +543,170 @@ paths:
       summary: User submitted answers to the survey
       tags:
       - Survey
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get all users (paginated)
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Get all users (paginated)
+      tags:
+      - Users
+  /users/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a singular user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ApiMessage'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Delete a singular user
+      tags:
+      - Users
+    get:
+      consumes:
+      - application/json
+      description: Get a singular user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Get a singular user
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update a singular user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserUpdateForm'
+      produces:
+      - application/json
+      responses:
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Update a singular user
+      tags:
+      - Users
+  /users/me:
+    get:
+      consumes:
+      - application/json
+      description: Get the current user's details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Get the current user's details
+      tags:
+      - Users
 swagger: "2.0"

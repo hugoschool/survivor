@@ -6,5 +6,6 @@ type Question struct {
 	gorm.Model `json:"model"`
 	SurveyID   uint     `json:"survey_id"`
 	Question   string   `json:"question"`
+	Weight     uint     `json:"weight"`
 	Answers    []Answer `json:"answers"`
 }

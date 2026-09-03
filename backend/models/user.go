@@ -15,23 +15,54 @@ var (
 	ErrUserNotInGin = errors.New("user not found in context")
 )
 
+type UserSkillInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserLocationInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserSectorInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserVideoInput struct {
+	ID      *uint   `json:"id"`
+	Content *string `json:"content"`
+}
+
+type UserUpdateForm struct {
+	FirstName *string `json:"first_name"`
+	LastName  *string `json:"last_name"`
+	Role      *uint   `json:"role"`
+	Age       *uint   `json:"age"`
+	Skills    []UserSkillInput
+	Locations []UserLocationInput
+	Sectors   []UserSectorInput
+	Videos    []UserVideoInput
+}
+
 type User struct {
-	gorm.Model
-	FirstName string
-	Lastname  string
-	Role      uint
-	Age       uint
-	Views     uint
+	gorm.Model `json:"model"`
+	FirstName  string `json:"first_name"`
+	LastName   string `json:"last_name"`
+	Role       uint   `json:"role"`
+	Age        uint   `json:"age"`
+	Views      uint   `json:"views"`
 
 	// Percentage, out of a hundred
-	SurveyScore *uint
+	SurveyScore *uint `json:"survey_score"`
 
-	Login Login
+	Login Login `json:"-"`
 
-	Skills    []Skill
-	Locations []Location
-	Sectors   []Sector
-	Videos    []Video
+	Skills    []Skill    `json:"skills"`
+	Locations []Location `json:"locations"`
+	Sectors   []Sector   `json:"sectors"`
+	Videos    []Video    `json:"videos"`
 }
 
 func GetUserFromContext(c *gin.Context) (User, error) {

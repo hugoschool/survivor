@@ -69,6 +69,19 @@ func LoginHandler(c *gin.Context) {
 		}
 	}
 
+	_, err = database.GetUserById(login.UserID)
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "Incorrect body"})
+			return
+		} else {
+			fmt.Println(err.Error())
+			c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+			return
+		}
+	}
+
 	if err := bcrypt.CompareHashAndPassword([]byte(login.Password), []byte(body.Password)); err != nil {
 		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect body"})
 		return
@@ -154,7 +167,7 @@ func RegisterHandler(c *gin.Context) {
 
 	user := models.User{
 		FirstName: body.FirstName,
-		Lastname:  body.LastName,
+		LastName:  body.LastName,
 		Role:      *body.Role,
 		Age:       *body.Age,
 		Views:     0,
