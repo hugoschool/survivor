@@ -109,13 +109,13 @@ export default function Login() {
             <div className="flex min-h-screen items-center justify-center p-4">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
-                        <CardTitle>Login to your account</CardTitle>
+                        <CardTitle>Connection</CardTitle>
                         <CardDescription className="flex items-center">
-                            Enter your email below to login to your account
+                            Entre ton email pour te connecter a ton compte
                         </CardDescription>
                         <CardAction>
                             <NavLink to="/register" className="hover:underline">
-                                Sign Up
+                                Inscription
                             </NavLink>
                         </CardAction>
                     </CardHeader>
@@ -136,14 +136,14 @@ export default function Login() {
                                 <div className="grid gap-2">
                                     <div className="flex items-center">
                                         <Label htmlFor="password">
-                                            Password
+                                            Mot de passe
                                         </Label>
                                         <button
                                             type="button"
                                             onClick={Alert}
                                             className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                                         >
-                                            Forgot your password?
+                                            Mot de passe oublié ?
                                         </button>
                                     </div>
                                     <Input
@@ -167,7 +167,7 @@ export default function Login() {
                                     className="w-full"
                                     disabled={loading}
                                 >
-                                    {loading ? "Connexion..." : "Login"}
+                                    {loading ? "Connexion..." : "Connexion"}
                                 </Button>
                             </CardFooter>
                         </form>

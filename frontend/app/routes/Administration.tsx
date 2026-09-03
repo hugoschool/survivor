@@ -10,7 +10,7 @@ export default function Administration() {
     return (
         <div>
             <HeadBar />
-            <div className="flex mx-auto items-center justify-center font-medium text-gray-500 min-h-screen">
+            <div className="flex mx-auto items-center justify-center font-medium text-institutionnel min-h-screen">
                 <p>Administration Pages under construction...</p>
             </div>
         </div>
