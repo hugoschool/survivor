@@ -83,16 +83,6 @@ func UserGetCurrentHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
-func Paginate(page int) func(db *gorm.DB) *gorm.DB {
-	return func(db *gorm.DB) *gorm.DB {
-		if page <= 0 {
-			page = 1
-		}
-		offset := (page - 1) * UsersPageSize
-		return db.Offset(offset).Limit(UsersPageSize)
-	}
-}
-
 // UsersGet godoc
 // @Summary Get all users (paginated)
 // @Schemes
@@ -100,7 +90,6 @@ func Paginate(page int) func(db *gorm.DB) *gorm.DB {
 // @Tags Users
 // @Accept json
 // @Produce json
-// @Param id path int true "User ID"
 // @Param page query int true "Page"
 // @Success 200 {object} []models.User
 // @Failure 401 {object} models.ApiError
@@ -110,10 +99,12 @@ func UsersPaginatedHandler(c *gin.Context) {
 	var users []models.User
 	page, _ := strconv.Atoi(c.Query("page"))
 
-	err := database.DB.Scopes(Paginate(page)).Preload("Skills").
+	err := database.DB.Scopes(database.Paginate(page, UsersPageSize)).
+		Preload("Skills").
 		Preload("Locations").
 		Preload("Sectors").
-		Preload("Videos").Find(&users).Error
+		Preload("Videos").
+		Find(&users).Error
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
