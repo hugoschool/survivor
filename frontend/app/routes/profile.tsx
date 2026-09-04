@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { HeadBar } from "~/components/Headbar";
 import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
@@ -53,15 +53,6 @@ const getSessionUser = (): SessionUser | null => {
     }
 };
 
-const formatDate = (value?: string) => {
-    if (!value) return "Information indisponible";
-
-    return new Intl.DateTimeFormat("fr-FR", {
-        dateStyle: "long",
-        timeStyle: "short",
-    }).format(new Date(value));
-};
-
 const getDisplayName = (user: SessionUser | null, email?: string) => {
     const firstName = (user?.firstName ?? user?.first_name ?? "").trim();
     const lastName = (user?.lastName ?? user?.last_name ?? "").trim();
@@ -85,8 +76,6 @@ const getDisplayName = (user: SessionUser | null, email?: string) => {
 };
 
 export default function Profile() {
-    const navigate = useNavigate();
-    const [menuOpen, setMenuOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState<boolean>(isAuthenticated);
     const [user, setUser] = useState<SessionUser | null>(getSessionUser);
 
@@ -107,7 +96,6 @@ export default function Profile() {
 
     const email = user?.email || user?.mail || "Utilisateur connecté";
     const displayName = getDisplayName(user, email);
-    const connectedAt = formatDate(user?.connectedAt);
     const likesCount = 0;
 
     return (
@@ -162,7 +150,7 @@ export default function Profile() {
                         </CardContent>
                     </Card>
                 ) : (
-                    <NavLink to="/login" end onClick={() => setMenuOpen(false)}>
+                    <NavLink to="/login" end>
                         <p className="rounded-md bg-white px-5 py-2.5 flex align-middle text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15">
                             Connexion
                         </p>
