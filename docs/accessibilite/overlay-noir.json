@@ -1,0 +1,134 @@
+{
+  "videoState": [
+    {
+      "src": "s.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+      "readyState": 4,
+      "videoWidth": 960,
+      "videoHeight": 540,
+      "paused": false,
+      "currentTime": 1.2,
+      "networkState": 1
+    },
+    {
+      "src": "s.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+      "readyState": 4,
+      "videoWidth": 640,
+      "videoHeight": 480,
+      "paused": true,
+      "currentTime": 0.21,
+      "networkState": 1
+    }
+  ],
+  "results": [
+    {
+      "idx": 0,
+      "zone": "incrustation vidéo",
+      "text": "Camille R.",
+      "color": "#ffffff",
+      "alpha": 1,
+      "fontPx": 18,
+      "weight": 700,
+      "rect": {
+        "x": 467,
+        "y": 766,
+        "w": 88,
+        "h": 28
+      },
+      "need": 4.5,
+      "ratioMedian": 20.21,
+      "ratioP05": 20.54,
+      "ratioP95": 19.96,
+      "ratioWorst": 19.93,
+      "pass": true,
+      "pixels": 2464
+    },
+    {
+      "idx": 1,
+      "zone": "incrustation vidéo",
+      "text": "Développeuse front-end",
+      "color": "#ffffff",
+      "alpha": 0.95,
+      "fontPx": 14,
+      "weight": 400,
+      "rect": {
+        "x": 467,
+        "y": 802,
+        "w": 295,
+        "h": 20
+      },
+      "need": 4.5,
+      "ratioMedian": 19.47,
+      "ratioP05": 19.71,
+      "ratioP95": 19.32,
+      "ratioWorst": 19.32,
+      "pass": true,
+      "pixels": 5900
+    },
+    {
+      "idx": 2,
+      "zone": "incrustation vidéo",
+      "text": "Tech",
+      "color": "#1b3a6b",
+      "alpha": 1,
+      "fontPx": 12,
+      "weight": 500,
+      "rect": {
+        "x": 467,
+        "y": 834,
+        "w": 46,
+        "h": 26
+      },
+      "need": 4.5,
+      "ratioMedian": 11.27,
+      "ratioP05": 11.27,
+      "ratioP95": 11.27,
+      "ratioWorst": 11.27,
+      "pass": true,
+      "pixels": 1196
+    },
+    {
+      "idx": 3,
+      "zone": "incrustation vidéo",
+      "text": "Lyon",
+      "color": "#ffffff",
+      "alpha": 1,
+      "fontPx": 12,
+      "weight": 500,
+      "rect": {
+        "x": 521,
+        "y": 834,
+        "w": 67,
+        "h": 26
+      },
+      "need": 4.5,
+      "ratioMedian": 19.02,
+      "ratioP05": 19.19,
+      "ratioP95": 18.86,
+      "ratioWorst": 18.75,
+      "pass": true,
+      "pixels": 1742
+    },
+    {
+      "idx": 4,
+      "zone": "bouton j'aime (icône)",
+      "text": "Aimer cette vidéo",
+      "color": "#ffffff",
+      "alpha": 1,
+      "fontPx": 0,
+      "weight": 400,
+      "rect": {
+        "x": 777,
+        "y": 808,
+        "w": 44,
+        "h": 44
+      },
+      "need": 4.5,
+      "ratioMedian": 13.07,
+      "ratioP05": 19.46,
+      "ratioP95": 12.69,
+      "ratioWorst": 12.69,
+      "pass": true,
+      "pixels": 1936
+    }
+  ]
+}
