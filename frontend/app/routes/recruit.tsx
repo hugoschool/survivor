@@ -299,7 +299,7 @@ export default function Recruit() {
                                                     sector: event.target.value,
                                                 }))
                                             }
-                                            className="h-11 rounded-none border border-institutionnel/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-institutionnel focus:ring-2 focus:ring-institutionnel/20 [color-scheme:light]"
+                                            className="h-11 rounded-none border border-institutionnel/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-institutionnel focus:ring-2 focus:ring-institutionnel/20 scheme-light"
                                         >
                                             <option value="all">
                                                 Tous les secteurs
@@ -332,7 +332,7 @@ export default function Recruit() {
                                                         event.target.value,
                                                 }))
                                             }
-                                            className="h-11 rounded-none border border-institutionnel/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-institutionnel focus:ring-2 focus:ring-institutionnel/20 [color-scheme:light]"
+                                            className="h-11 rounded-none border border-institutionnel/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-institutionnel focus:ring-2 focus:ring-institutionnel/20 scheme-light"
                                         >
                                             <option value="all">
                                                 Toutes les villes
