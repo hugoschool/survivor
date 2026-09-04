@@ -1,0 +1,2557 @@
+[
+  {
+    "name": "register",
+    "url": "http://localhost:5173/register",
+    "contrast": [
+      {
+        "text": "Remplis toute les informations pour t'inscrire sur JibJob",
+        "selector": "div.text-sm.text-muted-foreground",
+        "fg": "#737373",
+        "bg": "#ffffff",
+        "rawFg": "oklch(0.556 0 0)",
+        "ratio": 4.74,
+        "fontPx": 14,
+        "weight": 400,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "JibJob",
+        "selector": "p.text-2xl.font-medium",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 24,
+        "weight": 500,
+        "large": true,
+        "need": 3,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Recrutement",
+        "selector": "p.text-institutionnel.transition",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 14,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Inscription",
+        "selector": "div.font-heading.text-base",
+        "fg": "#0a0a0a",
+        "bg": "#ffffff",
+        "rawFg": "oklch(0.145 0 0)",
+        "ratio": 19.8,
+        "fontPx": 16,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      }
+    ],
+    "structure": {
+      "lang": "en",
+      "title": "",
+      "landmarks": {
+        "main": 0,
+        "header": 1,
+        "nav": 1,
+        "footer": 0
+      },
+      "skipLink": false,
+      "nestedInteractive": [
+        {
+          "inner": "button.group/button.inline-flex",
+          "outer": "button#base-ui-_r_7_",
+          "text": "Rechercheur d'emploi ▾"
+        }
+      ],
+      "duplicateIds": [],
+      "unlabelled": [],
+      "headings": [],
+      "imagesNoAlt": [],
+      "media": [],
+      "invisibleFocusable": []
+    },
+    "tab": [
+      {
+        "step": 1,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 24,
+          "y": 22,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 2,
+        "tag": "a",
+        "selector": "a",
+        "label": "Recrutement",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 508,
+          "y": 28,
+          "w": 89,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 3,
+        "tag": "a",
+        "selector": "a",
+        "label": "Questionnaire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 677,
+          "y": 28,
+          "w": 96,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 4,
+        "tag": "a",
+        "selector": "a",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 1138,
+          "y": 16,
+          "w": 118,
+          "h": 44
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 5,
+        "tag": "a",
+        "selector": "a.hover:underline",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 742,
+          "y": 184,
+          "w": 74,
+          "h": 21
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 6,
+        "tag": "input",
+        "selector": "input#first_name",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 311,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 7,
+        "tag": "input",
+        "selector": "input#last_name",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 387,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 8,
+        "tag": "input",
+        "selector": "input#age",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 463,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 9,
+        "tag": "input",
+        "selector": "input#mail",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 539,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 10,
+        "tag": "button",
+        "selector": "button#base-ui-_r_7_",
+        "label": "Rechercheur d'emploi ▾",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 615,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 11,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "Rechercheur d'emploi ▾",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 615,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 12,
+        "tag": "input",
+        "selector": "input#password",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 691,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 13,
+        "tag": "input",
+        "selector": "input#confirmPassword",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 767,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 14,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "S'inscrire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 480,
+          "y": 836,
+          "w": 320,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#fafafa",
+          "ratio": 1
+        },
+        "bg": "#fafafa"
+      },
+      {
+        "step": 15,
+        "none": true
+      },
+      {
+        "step": 16,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 24,
+          "y": 22,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff",
+        "cycled": true
+      }
+    ]
+  },
+  {
+    "name": "register-dropdown-ouvert",
+    "url": "http://localhost:5173/register",
+    "contrast": [
+      {
+        "text": "Remplis toute les informations pour t'inscrire sur JibJob",
+        "selector": "div.text-sm.text-muted-foreground",
+        "fg": "#737373",
+        "bg": "#ffffff",
+        "rawFg": "oklch(0.556 0 0)",
+        "ratio": 4.74,
+        "fontPx": 14,
+        "weight": 400,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "JibJob",
+        "selector": "p.text-2xl.font-medium",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 24,
+        "weight": 500,
+        "large": true,
+        "need": 3,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Recrutement",
+        "selector": "p.text-institutionnel.transition",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 14,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Inscription",
+        "selector": "div.font-heading.text-base",
+        "fg": "#0a0a0a",
+        "bg": "#ffffff",
+        "rawFg": "oklch(0.145 0 0)",
+        "ratio": 19.8,
+        "fontPx": 16,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      }
+    ],
+    "structure": {
+      "lang": "en",
+      "title": "",
+      "landmarks": {
+        "main": 0,
+        "header": 1,
+        "nav": 1,
+        "footer": 0
+      },
+      "skipLink": false,
+      "nestedInteractive": [
+        {
+          "inner": "a",
+          "outer": "body",
+          "text": "JibJob"
+        },
+        {
+          "inner": "button.relative.h-10",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "a",
+          "outer": "body",
+          "text": "Recrutement"
+        },
+        {
+          "inner": "a",
+          "outer": "body",
+          "text": "Questionnaire"
+        },
+        {
+          "inner": "a",
+          "outer": "body",
+          "text": "Connexion"
+        },
+        {
+          "inner": "a.hover:underline",
+          "outer": "body",
+          "text": "Connexion"
+        },
+        {
+          "inner": "input#first_name",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "input#last_name",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "input#age",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "input#mail",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "button#base-ui-_r_7_",
+          "outer": "body",
+          "text": "Rechercheur d'emploi ▾"
+        },
+        {
+          "inner": "button.group/button.inline-flex",
+          "outer": "button#base-ui-_r_7_",
+          "text": "Rechercheur d'emploi ▾"
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "input#password",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "input#confirmPassword",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "button.group/button.inline-flex",
+          "outer": "body",
+          "text": "S'inscrire"
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "div#_r_5_",
+          "outer": "body",
+          "text": "Rechercheur d'emploi Recruteur"
+        },
+        {
+          "inner": "div#base-ui-_r_c_",
+          "outer": "div#_r_5_",
+          "text": "Rechercheur d'emploi"
+        },
+        {
+          "inner": "div#base-ui-_r_d_",
+          "outer": "div#_r_5_",
+          "text": "Recruteur"
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        }
+      ],
+      "duplicateIds": [],
+      "unlabelled": [],
+      "headings": [],
+      "imagesNoAlt": [],
+      "media": [],
+      "invisibleFocusable": []
+    },
+    "tab": [
+      {
+        "step": 1,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 24,
+          "y": 22,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 2,
+        "tag": "a",
+        "selector": "a",
+        "label": "Recrutement",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 508,
+          "y": 28,
+          "w": 89,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 3,
+        "tag": "a",
+        "selector": "a",
+        "label": "Questionnaire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 677,
+          "y": 28,
+          "w": 96,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 4,
+        "tag": "a",
+        "selector": "a",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 1138,
+          "y": 16,
+          "w": 118,
+          "h": 44
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 5,
+        "tag": "a",
+        "selector": "a.hover:underline",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 742,
+          "y": 184,
+          "w": 74,
+          "h": 21
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 6,
+        "tag": "input",
+        "selector": "input#first_name",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 311,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 7,
+        "tag": "input",
+        "selector": "input#last_name",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 387,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 8,
+        "tag": "input",
+        "selector": "input#age",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 463,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 9,
+        "tag": "input",
+        "selector": "input#mail",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 539,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 10,
+        "none": true
+      },
+      {
+        "step": 11,
+        "tag": "button",
+        "selector": "button#base-ui-_r_7_",
+        "label": "Rechercheur d'emploi ▾",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 615,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 12,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "Rechercheur d'emploi ▾",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 615,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 13,
+        "tag": "input",
+        "selector": "input#password",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 691,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 14,
+        "tag": "input",
+        "selector": "input#confirmPassword",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 464,
+          "y": 767,
+          "w": 352,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 15,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "S'inscrire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 480,
+          "y": 836,
+          "w": 320,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#fafafa",
+          "ratio": 1
+        },
+        "bg": "#fafafa"
+      },
+      {
+        "step": 16,
+        "none": true
+      },
+      {
+        "step": 17,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 24,
+          "y": 22,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff",
+        "cycled": true
+      }
+    ]
+  },
+  {
+    "name": "recruit",
+    "url": "http://localhost:5173/recruit",
+    "contrast": [
+      {
+        "text": "JibJob",
+        "selector": "p.text-2xl.font-medium",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 24,
+        "weight": 500,
+        "large": true,
+        "need": 3,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Recrutement",
+        "selector": "p.text-institutionnel.transition",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 14,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Développeuse front-end",
+        "selector": "p.text-sm.text-white/95",
+        "fg": "#f2f2f2",
+        "bg": "#000000",
+        "rawFg": "oklab(0.999994 0.0000455678 0.0000200868 / 0.95)",
+        "ratio": 18.76,
+        "fontPx": 14,
+        "weight": 400,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": "linear-gradient(to top, oklab(0.193512 -0.00848374 -0.0476596 / 0.95) 0%, oklab(0.193512 -"
+      },
+      {
+        "text": "Camille R.",
+        "selector": "h2.font-[Marianne].text-lg",
+        "fg": "#ffffff",
+        "bg": "#000000",
+        "rawFg": "rgb(255, 255, 255)",
+        "ratio": 21,
+        "fontPx": 18,
+        "weight": 700,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": "linear-gradient(to top, oklab(0.193512 -0.00848374 -0.0476596 / 0.95) 0%, oklab(0.193512 -"
+      }
+    ],
+    "structure": {
+      "lang": "en",
+      "title": "",
+      "landmarks": {
+        "main": 1,
+        "header": 1,
+        "nav": 1,
+        "footer": 0
+      },
+      "skipLink": false,
+      "nestedInteractive": [],
+      "duplicateIds": [],
+      "unlabelled": [],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Découvrez les talents",
+          "visible": true
+        },
+        {
+          "level": 2,
+          "text": "Camille R.",
+          "visible": true
+        }
+      ],
+      "imagesNoAlt": [],
+      "media": [
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "ve-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "ve-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "https://media.w3.org/2010/05/bunny/trailer.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "https://media.w3.org/2010/05/video/movie_300.mp4",
+          "tabIndex": 0
+        }
+      ],
+      "invisibleFocusable": []
+    },
+    "tab": [
+      {
+        "step": 1,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 24,
+          "y": 22,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 2,
+        "tag": "a",
+        "selector": "a.active",
+        "label": "Recrutement",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 508,
+          "y": 28,
+          "w": 89,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 3,
+        "tag": "a",
+        "selector": "a",
+        "label": "Questionnaire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 677,
+          "y": 28,
+          "w": 96,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 4,
+        "tag": "a",
+        "selector": "a",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 1138,
+          "y": 16,
+          "w": 118,
+          "h": 44
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 5,
+        "tag": "button",
+        "selector": "button#base-ui-_R_rpj5_",
+        "label": "Filtres",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 1092,
+          "y": 99,
+          "w": 92,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 6,
+        "tag": "div",
+        "selector": "div",
+        "label": "",
+        "ariaLabel": "Vertical video feed",
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 447,
+          "y": 186,
+          "w": 387,
+          "h": 694
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#515151",
+          "ratio": 2.65
+        },
+        "bg": "#000000"
+      },
+      {
+        "step": 7,
+        "tag": "button",
+        "selector": "button.flex.h-11",
+        "label": "",
+        "ariaLabel": "Aimer cette vidéo",
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 777,
+          "y": 808,
+          "w": 44,
+          "h": 44
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#515151",
+          "ratio": 2.65
+        },
+        "bg": "#000000"
+      },
+      {
+        "step": 8,
+        "none": true
+      },
+      {
+        "step": 9,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 24,
+          "y": 22,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff",
+        "cycled": true
+      }
+    ]
+  },
+  {
+    "name": "recruit-filtres-ouvert",
+    "url": "http://localhost:5173/recruit",
+    "contrast": [
+      {
+        "text": "Affinez le feed par compétence, secteur, localisation ou sta",
+        "selector": "p#base-ui-_r_2_",
+        "fg": "#737373",
+        "bg": "#ffffff",
+        "rawFg": "oklch(0.556 0 0)",
+        "ratio": 4.74,
+        "fontPx": 14,
+        "weight": 400,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Compétence ou mot-clé",
+        "selector": "label.font-[Marianne].text-sm",
+        "fg": "#1b3a6b",
+        "bg": "#f7f9fc",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 10.68,
+        "fontPx": 14,
+        "weight": 700,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "JibJob",
+        "selector": "p.text-2xl.font-medium",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 24,
+        "weight": 500,
+        "large": true,
+        "need": 3,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Recrutement",
+        "selector": "p.text-institutionnel.transition",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 14,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Certifiés uniquement",
+        "selector": "label.flex.items-center",
+        "fg": "#172033",
+        "bg": "#f7f9fc",
+        "rawFg": "rgb(23, 32, 51)",
+        "ratio": 15.42,
+        "fontPx": 14,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Filtres",
+        "selector": "button#base-ui-_R_rpj5_",
+        "fg": "#0a0a0a",
+        "bg": "#f5f5f5",
+        "rawFg": "oklch(0.145 0 0)",
+        "ratio": 18.16,
+        "fontPx": 14,
+        "weight": 700,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Développeuse front-end",
+        "selector": "p.text-sm.text-white/95",
+        "fg": "#f2f2f2",
+        "bg": "#000000",
+        "rawFg": "oklab(0.999994 0.0000455678 0.0000200868 / 0.95)",
+        "ratio": 18.76,
+        "fontPx": 14,
+        "weight": 400,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": "linear-gradient(to top, oklab(0.193512 -0.00848374 -0.0476596 / 0.95) 0%, oklab(0.193512 -"
+      },
+      {
+        "text": "Camille R.",
+        "selector": "h2.font-[Marianne].text-lg",
+        "fg": "#ffffff",
+        "bg": "#000000",
+        "rawFg": "rgb(255, 255, 255)",
+        "ratio": 21,
+        "fontPx": 18,
+        "weight": 700,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": "linear-gradient(to top, oklab(0.193512 -0.00848374 -0.0476596 / 0.95) 0%, oklab(0.193512 -"
+      }
+    ],
+    "structure": {
+      "lang": "en",
+      "title": "",
+      "landmarks": {
+        "main": 1,
+        "header": 1,
+        "nav": 1,
+        "footer": 0
+      },
+      "skipLink": false,
+      "nestedInteractive": [
+        {
+          "inner": "a",
+          "outer": "body",
+          "text": "JibJob"
+        },
+        {
+          "inner": "button.relative.h-10",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "a.active",
+          "outer": "body",
+          "text": "Recrutement"
+        },
+        {
+          "inner": "a",
+          "outer": "body",
+          "text": "Questionnaire"
+        },
+        {
+          "inner": "a",
+          "outer": "body",
+          "text": "Connexion"
+        },
+        {
+          "inner": "button#base-ui-_R_rpj5_",
+          "outer": "body",
+          "text": "Filtres"
+        },
+        {
+          "inner": "div",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "button.flex.h-11",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        },
+        {
+          "inner": "div#_R_9j5_",
+          "outer": "body",
+          "text": "Filtrer les profils Affinez le feed par compétence, secteur,"
+        },
+        {
+          "inner": "input#filter-query",
+          "outer": "div#_R_9j5_",
+          "text": ""
+        },
+        {
+          "inner": "select#filter-sector",
+          "outer": "div#_R_9j5_",
+          "text": "Tous les secteurs Tech Design Marketing"
+        },
+        {
+          "inner": "select#filter-location",
+          "outer": "div#_R_9j5_",
+          "text": "Toutes les villes Lyon Paris Bordeaux Lille Nantes"
+        },
+        {
+          "inner": "input.h-4.w-4",
+          "outer": "div#_R_9j5_",
+          "text": ""
+        },
+        {
+          "inner": "button.group/button.inline-flex",
+          "outer": "div#_R_9j5_",
+          "text": "Appliquer"
+        },
+        {
+          "inner": "button.group/button.inline-flex",
+          "outer": "div#_R_9j5_",
+          "text": "Réinitialiser"
+        },
+        {
+          "inner": "span",
+          "outer": "body",
+          "text": ""
+        }
+      ],
+      "duplicateIds": [],
+      "unlabelled": [],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Découvrez les talents",
+          "visible": true
+        },
+        {
+          "level": 2,
+          "text": "Camille R.",
+          "visible": true
+        },
+        {
+          "level": 2,
+          "text": "Filtrer les profils",
+          "visible": true
+        }
+      ],
+      "imagesNoAlt": [],
+      "media": [
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "ve-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "ve-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "https://media.w3.org/2010/05/bunny/trailer.mp4",
+          "tabIndex": 0
+        },
+        {
+          "tag": "video",
+          "controls": false,
+          "tracks": 0,
+          "autoplay": true,
+          "muted": true,
+          "loop": true,
+          "src": "https://media.w3.org/2010/05/video/movie_300.mp4",
+          "tabIndex": 0
+        }
+      ],
+      "invisibleFocusable": []
+    },
+    "tab": [
+      {
+        "step": 1,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 24,
+          "y": 22,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 2,
+        "tag": "a",
+        "selector": "a.active",
+        "label": "Recrutement",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 508,
+          "y": 28,
+          "w": 89,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 3,
+        "tag": "a",
+        "selector": "a",
+        "label": "Questionnaire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 677,
+          "y": 28,
+          "w": 96,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 4,
+        "tag": "a",
+        "selector": "a",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 1138,
+          "y": 16,
+          "w": 118,
+          "h": 44
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 5,
+        "tag": "button",
+        "selector": "button#base-ui-_R_rpj5_",
+        "label": "Filtres",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 1092,
+          "y": 99,
+          "w": 92,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 6,
+        "tag": "div",
+        "selector": "div",
+        "label": "",
+        "ariaLabel": "Vertical video feed",
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 447,
+          "y": 186,
+          "w": 387,
+          "h": 694
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#515151",
+          "ratio": 2.65
+        },
+        "bg": "#000000"
+      },
+      {
+        "step": 7,
+        "tag": "button",
+        "selector": "button.flex.h-11",
+        "label": "",
+        "ariaLabel": "Aimer cette vidéo",
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 777,
+          "y": 808,
+          "w": 44,
+          "h": 44
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#515151",
+          "ratio": 2.65
+        },
+        "bg": "#000000"
+      },
+      {
+        "step": 8,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "Réinitialiser",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 849,
+          "y": 840,
+          "w": 415,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 9,
+        "tag": "input",
+        "selector": "input#filter-query",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 857,
+          "y": 157,
+          "w": 399,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#f7f9fc",
+          "ratio": 1
+        },
+        "bg": "#f7f9fc"
+      },
+      {
+        "step": 10,
+        "tag": "select",
+        "selector": "select#filter-sector",
+        "label": "Tous les secteurs Tech Design Marketing",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 857,
+          "y": 247,
+          "w": 399,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#f7f9fc",
+          "ratio": 1
+        },
+        "bg": "#f7f9fc"
+      },
+      {
+        "step": 11,
+        "tag": "select",
+        "selector": "select#filter-location",
+        "label": "Toutes les villes Lyon Paris Bordeaux Lille Nantes",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 857,
+          "y": 337,
+          "w": 399,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#f7f9fc",
+          "ratio": 1
+        },
+        "bg": "#f7f9fc"
+      },
+      {
+        "step": 12,
+        "tag": "input",
+        "selector": "input.h-4.w-4",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 857,
+          "y": 403,
+          "w": 16,
+          "h": 16
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#cccdcf",
+          "ratio": 1.51
+        },
+        "bg": "#f7f9fc"
+      },
+      {
+        "step": 13,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "Appliquer",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 849,
+          "y": 788,
+          "w": 415,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 14,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "Réinitialiser",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 849,
+          "y": 840,
+          "w": 415,
+          "h": 44
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff",
+        "cycled": true
+      }
+    ]
+  },
+  {
+    "name": "register-mobile-390",
+    "url": "http://localhost:5173/register",
+    "contrast": [
+      {
+        "text": "Remplis toute les informations pour t'inscrire sur JibJob",
+        "selector": "div.text-sm.text-muted-foreground",
+        "fg": "#737373",
+        "bg": "#ffffff",
+        "rawFg": "oklch(0.556 0 0)",
+        "ratio": 4.74,
+        "fontPx": 14,
+        "weight": 400,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "JibJob",
+        "selector": "p.text-2xl.font-medium",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 24,
+        "weight": 500,
+        "large": true,
+        "need": 3,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Recrutement",
+        "selector": "p.text-institutionnel.transition",
+        "fg": "#1b3a6b",
+        "bg": "#ffffff",
+        "rawFg": "rgb(27, 58, 107)",
+        "ratio": 11.27,
+        "fontPx": 14,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      },
+      {
+        "text": "Inscription",
+        "selector": "div.font-heading.text-base",
+        "fg": "#0a0a0a",
+        "bg": "#ffffff",
+        "rawFg": "oklch(0.145 0 0)",
+        "ratio": 19.8,
+        "fontPx": 16,
+        "weight": 500,
+        "large": false,
+        "need": 4.5,
+        "pass": true,
+        "imageWarning": null
+      }
+    ],
+    "structure": {
+      "lang": "en",
+      "title": "",
+      "landmarks": {
+        "main": 0,
+        "header": 1,
+        "nav": 1,
+        "footer": 0
+      },
+      "skipLink": false,
+      "nestedInteractive": [
+        {
+          "inner": "button.group/button.inline-flex",
+          "outer": "button#base-ui-_r_7_",
+          "text": "Rechercheur d'emploi ▾"
+        }
+      ],
+      "duplicateIds": [],
+      "unlabelled": [],
+      "headings": [],
+      "imagesNoAlt": [],
+      "media": [],
+      "invisibleFocusable": [
+        {
+          "selector": "a",
+          "text": "Recrutement",
+          "hiddenBy": "div#headbar-menu"
+        },
+        {
+          "selector": "a",
+          "text": "Questionnaire",
+          "hiddenBy": "div#headbar-menu"
+        },
+        {
+          "selector": "a",
+          "text": "Connexion",
+          "hiddenBy": "div#headbar-menu"
+        }
+      ]
+    },
+    "tab": [
+      {
+        "step": 1,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 16,
+          "y": 20,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 2,
+        "tag": "button",
+        "selector": "button.relative.h-10",
+        "label": "",
+        "ariaLabel": "Ouvrir le menu",
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 334,
+          "y": 16,
+          "w": 40,
+          "h": 40
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 3,
+        "tag": "a",
+        "selector": "a",
+        "label": "Recrutement",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 151,
+          "y": 85,
+          "w": 89,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 4,
+        "tag": "a",
+        "selector": "a",
+        "label": "Questionnaire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 147,
+          "y": 75,
+          "w": 96,
+          "h": 20
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 5,
+        "tag": "a",
+        "selector": "a",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 136,
+          "y": 63,
+          "w": 118,
+          "h": 44
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 6,
+        "tag": "a",
+        "selector": "a.hover:underline",
+        "label": "Connexion",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 284,
+          "y": 152,
+          "w": 74,
+          "h": 21
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 7,
+        "tag": "input",
+        "selector": "input#first_name",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 279,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 8,
+        "tag": "input",
+        "selector": "input#last_name",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 355,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 9,
+        "tag": "input",
+        "selector": "input#age",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 431,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 10,
+        "tag": "input",
+        "selector": "input#mail",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 507,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 11,
+        "tag": "button",
+        "selector": "button#base-ui-_r_7_",
+        "label": "Rechercheur d'emploi ▾",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 583,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 12,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "Rechercheur d'emploi ▾",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 583,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 13,
+        "tag": "input",
+        "selector": "input#password",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 659,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 14,
+        "tag": "input",
+        "selector": "input#confirmPassword",
+        "label": "",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 32,
+          "y": 735,
+          "w": 326,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#ffffff",
+          "ratio": 1
+        },
+        "bg": "#ffffff"
+      },
+      {
+        "step": 15,
+        "tag": "button",
+        "selector": "button.group/button.inline-flex",
+        "label": "S'inscrire",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 48,
+          "y": 804,
+          "w": 294,
+          "h": 32
+        },
+        "outlineStyle": "none",
+        "outlineWidth": "2px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "indicator": {
+          "kind": "box-shadow",
+          "raw": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+          "color": "#fafafa",
+          "ratio": 1
+        },
+        "bg": "#fafafa"
+      },
+      {
+        "step": 16,
+        "none": true
+      },
+      {
+        "step": 17,
+        "tag": "a",
+        "selector": "a",
+        "label": "JibJob",
+        "ariaLabel": null,
+        "visible": true,
+        "inViewport": true,
+        "rect": {
+          "x": 16,
+          "y": 20,
+          "w": 70,
+          "h": 32
+        },
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "boxShadow": null,
+        "indicator": {
+          "kind": "outline",
+          "width": 1,
+          "color": "#d0d0d0",
+          "ratio": 1.54
+        },
+        "bg": "#ffffff",
+        "cycled": true
+      }
+    ]
+  }
+]

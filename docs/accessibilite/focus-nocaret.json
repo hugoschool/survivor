@@ -1,0 +1,1036 @@
+{
+  "inscription": [
+    {
+      "step": 1,
+      "tag": "a",
+      "sel": "a",
+      "label": "JibJob",
+      "fixed": false,
+      "rect": {
+        "x": 24,
+        "y": 22,
+        "w": 70,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 448,
+      "pourcentZone": 10.9,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 2,
+      "tag": "a",
+      "sel": "a",
+      "label": "Recrutement",
+      "fixed": false,
+      "rect": {
+        "x": 508,
+        "y": 28,
+        "w": 89,
+        "h": 20
+      },
+      "scrollStable": true,
+      "pixelsChanges": 464,
+      "pourcentZone": 12.3,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 3,
+      "tag": "a",
+      "sel": "a",
+      "label": "Questionnaire",
+      "fixed": false,
+      "rect": {
+        "x": 677,
+        "y": 28,
+        "w": 96,
+        "h": 20
+      },
+      "scrollStable": true,
+      "pixelsChanges": 488,
+      "pourcentZone": 12.1,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 4,
+      "tag": "a",
+      "sel": "a",
+      "label": "Connexion",
+      "fixed": false,
+      "rect": {
+        "x": 1138,
+        "y": 16,
+        "w": 118,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 672,
+      "pourcentZone": 8.4,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 5,
+      "tag": "a",
+      "sel": "a.hover:underline",
+      "label": "Connexion",
+      "fixed": false,
+      "rect": {
+        "x": 742,
+        "y": 184,
+        "w": 74,
+        "h": 21
+      },
+      "scrollStable": true,
+      "pixelsChanges": 404,
+      "pourcentZone": 12.1,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 6,
+      "tag": "input",
+      "sel": "input#first_name",
+      "label": "",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 311,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3088,
+      "pourcentZone": 17.5,
+      "contrasteIndicateur": 2.05,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          229,
+          229,
+          229
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 7,
+      "tag": "input",
+      "sel": "input#last_name",
+      "label": "",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 387,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3088,
+      "pourcentZone": 17.5,
+      "contrasteIndicateur": 2.05,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          229,
+          229,
+          229
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 8,
+      "tag": "input",
+      "sel": "input#age",
+      "label": "",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 463,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3128,
+      "pourcentZone": 17.7,
+      "contrasteIndicateur": 3.41,
+      "couples": {
+        "avec": [
+          139,
+          139,
+          139
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 9,
+      "tag": "input",
+      "sel": "input#mail",
+      "label": "",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 539,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3088,
+      "pourcentZone": 17.5,
+      "contrasteIndicateur": 2.05,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          229,
+          229,
+          229
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 10,
+      "tag": "button",
+      "sel": "button#base-ui-_r_7_",
+      "label": "Rechercheur d'emploi ▾",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 615,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 1544,
+      "pourcentZone": 8.7,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 11,
+      "tag": "button",
+      "sel": "button.group/button.inline-flex",
+      "label": "Rechercheur d'emploi ▾",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 615,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3088,
+      "pourcentZone": 17.5,
+      "contrasteIndicateur": 2.05,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          229,
+          229,
+          229
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 12,
+      "tag": "input",
+      "sel": "input#password",
+      "label": "",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 691,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3088,
+      "pourcentZone": 17.5,
+      "contrasteIndicateur": 2.05,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          229,
+          229,
+          229
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 13,
+      "tag": "input",
+      "sel": "input#confirmPassword",
+      "label": "",
+      "fixed": false,
+      "rect": {
+        "x": 464,
+        "y": 767,
+        "w": 352,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3088,
+      "pourcentZone": 17.5,
+      "contrasteIndicateur": 2.05,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          229,
+          229,
+          229
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 14,
+      "tag": "button",
+      "sel": "button.group/button.inline-flex",
+      "label": "S'inscrire",
+      "fixed": false,
+      "rect": {
+        "x": 480,
+        "y": 836,
+        "w": 320,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3508,
+      "pourcentZone": 21.8,
+      "contrasteIndicateur": 4.36,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          27,
+          58,
+          107
+        ]
+      },
+      "conforme": true
+    }
+  ],
+  "catalogue": [
+    {
+      "step": 1,
+      "tag": "a",
+      "sel": "a",
+      "label": "JibJob",
+      "fixed": false,
+      "rect": {
+        "x": 24,
+        "y": 22,
+        "w": 70,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 448,
+      "pourcentZone": 10.9,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 2,
+      "tag": "a",
+      "sel": "a.active",
+      "label": "Recrutement",
+      "fixed": false,
+      "rect": {
+        "x": 508,
+        "y": 28,
+        "w": 89,
+        "h": 20
+      },
+      "scrollStable": true,
+      "pixelsChanges": 464,
+      "pourcentZone": 12.3,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 3,
+      "tag": "a",
+      "sel": "a",
+      "label": "Questionnaire",
+      "fixed": false,
+      "rect": {
+        "x": 677,
+        "y": 28,
+        "w": 96,
+        "h": 20
+      },
+      "scrollStable": true,
+      "pixelsChanges": 488,
+      "pourcentZone": 12.1,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 4,
+      "tag": "a",
+      "sel": "a",
+      "label": "Connexion",
+      "fixed": false,
+      "rect": {
+        "x": 1138,
+        "y": 16,
+        "w": 118,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 672,
+      "pourcentZone": 8.4,
+      "contrasteIndicateur": 1.54,
+      "couples": {
+        "avec": [
+          208,
+          208,
+          208
+        ],
+        "sans": [
+          255,
+          255,
+          255
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 5,
+      "tag": "button",
+      "sel": "button#base-ui-_R_rpj5_",
+      "label": "Filtres",
+      "fixed": false,
+      "rect": {
+        "x": 1092,
+        "y": 99,
+        "w": 92,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 1104,
+      "pourcentZone": 17,
+      "contrasteIndicateur": 4.36,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          27,
+          58,
+          107
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 6,
+      "tag": "div",
+      "sel": "div",
+      "label": "Vertical video feed",
+      "fixed": false,
+      "rect": {
+        "x": 447,
+        "y": 186,
+        "w": 387,
+        "h": 694
+      },
+      "scrollStable": true,
+      "pixelsChanges": 57771,
+      "pourcentZone": 20.2,
+      "contrasteIndicateur": 10.22,
+      "couples": {
+        "avec": [
+          40,
+          23,
+          17
+        ],
+        "sans": [
+          255,
+          186,
+          105
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 7,
+      "tag": "button",
+      "sel": "button.flex.h-11",
+      "label": "Aimer cette vidéo",
+      "fixed": false,
+      "rect": {
+        "x": 777,
+        "y": 808,
+        "w": 44,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 512,
+      "pourcentZone": 14.2,
+      "contrasteIndicateur": 18.2,
+      "couples": {
+        "avec": [
+          251,
+          251,
+          251
+        ],
+        "sans": [
+          9,
+          17,
+          34
+        ]
+      },
+      "conforme": true
+    }
+  ],
+  "catalogue-filtres": [
+    {
+      "step": 1,
+      "tag": "a",
+      "sel": "a",
+      "label": "JibJob",
+      "fixed": false,
+      "rect": {
+        "x": 24,
+        "y": 22,
+        "w": 70,
+        "h": 32
+      },
+      "scrollStable": true,
+      "pixelsChanges": 448,
+      "pourcentZone": 10.9,
+      "contrasteIndicateur": 1.39,
+      "couples": {
+        "avec": [
+          104,
+          104,
+          104
+        ],
+        "sans": [
+          127,
+          127,
+          127
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 2,
+      "tag": "a",
+      "sel": "a.active",
+      "label": "Recrutement",
+      "fixed": false,
+      "rect": {
+        "x": 508,
+        "y": 28,
+        "w": 89,
+        "h": 20
+      },
+      "scrollStable": true,
+      "pixelsChanges": 464,
+      "pourcentZone": 12.3,
+      "contrasteIndicateur": 1.39,
+      "couples": {
+        "avec": [
+          104,
+          104,
+          104
+        ],
+        "sans": [
+          127,
+          127,
+          127
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 3,
+      "tag": "a",
+      "sel": "a",
+      "label": "Questionnaire",
+      "fixed": false,
+      "rect": {
+        "x": 677,
+        "y": 28,
+        "w": 96,
+        "h": 20
+      },
+      "scrollStable": true,
+      "pixelsChanges": 488,
+      "pourcentZone": 12.1,
+      "contrasteIndicateur": 1.39,
+      "couples": {
+        "avec": [
+          104,
+          104,
+          104
+        ],
+        "sans": [
+          127,
+          127,
+          127
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 4,
+      "tag": "a",
+      "sel": "a",
+      "label": "Connexion",
+      "fixed": false,
+      "rect": {
+        "x": 1138,
+        "y": 16,
+        "w": 118,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 0,
+      "pourcentZone": 0,
+      "contrasteIndicateur": 1,
+      "couples": null,
+      "conforme": false
+    },
+    {
+      "step": 5,
+      "tag": "button",
+      "sel": "button#base-ui-_R_rpj5_",
+      "label": "Filtres",
+      "fixed": false,
+      "rect": {
+        "x": 1092,
+        "y": 99,
+        "w": 92,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 0,
+      "pourcentZone": 0,
+      "contrasteIndicateur": 1,
+      "couples": null,
+      "conforme": false
+    },
+    {
+      "step": 6,
+      "tag": "div",
+      "sel": "div",
+      "label": "Vertical video feed",
+      "fixed": false,
+      "rect": {
+        "x": 447,
+        "y": 186,
+        "w": 387,
+        "h": 694
+      },
+      "scrollStable": true,
+      "pixelsChanges": 36641,
+      "pourcentZone": 12.8,
+      "contrasteIndicateur": 3.23,
+      "couples": {
+        "avec": [
+          24,
+          9,
+          5
+        ],
+        "sans": [
+          127,
+          92,
+          56
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 7,
+      "tag": "button",
+      "sel": "button.flex.h-11",
+      "label": "Aimer cette vidéo",
+      "fixed": false,
+      "rect": {
+        "x": 777,
+        "y": 808,
+        "w": 44,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 493,
+      "pourcentZone": 13.7,
+      "contrasteIndicateur": 4.87,
+      "couples": {
+        "avec": [
+          125,
+          125,
+          125
+        ],
+        "sans": [
+          4,
+          8,
+          16
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 8,
+      "tag": "button",
+      "sel": "button.group/button.inline-flex",
+      "label": "Réinitialiser",
+      "fixed": true,
+      "rect": {
+        "x": 849,
+        "y": 840,
+        "w": 415,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3704,
+      "pourcentZone": 14.3,
+      "contrasteIndicateur": 4.36,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          27,
+          58,
+          107
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 9,
+      "tag": "input",
+      "sel": "input#filter-query",
+      "label": "",
+      "fixed": true,
+      "rect": {
+        "x": 857,
+        "y": 157,
+        "w": 399,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3576,
+      "pourcentZone": 14.4,
+      "contrasteIndicateur": 5.74,
+      "couples": {
+        "avec": [
+          27,
+          58,
+          107
+        ],
+        "sans": [
+          175,
+          186,
+          203
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 10,
+      "tag": "select",
+      "sel": "select#filter-sector",
+      "label": "Tous les secteurs Tech Design Marketing",
+      "fixed": true,
+      "rect": {
+        "x": 857,
+        "y": 247,
+        "w": 399,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 2670,
+      "pourcentZone": 10.7,
+      "contrasteIndicateur": 5.74,
+      "couples": {
+        "avec": [
+          27,
+          58,
+          107
+        ],
+        "sans": [
+          175,
+          186,
+          203
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 11,
+      "tag": "select",
+      "sel": "select#filter-location",
+      "label": "Toutes les villes Lyon Paris Bordeaux Lille Nantes",
+      "fixed": true,
+      "rect": {
+        "x": 857,
+        "y": 337,
+        "w": 399,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 2670,
+      "pourcentZone": 10.7,
+      "contrasteIndicateur": 5.74,
+      "couples": {
+        "avec": [
+          27,
+          58,
+          107
+        ],
+        "sans": [
+          175,
+          186,
+          203
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 12,
+      "tag": "input",
+      "sel": "input.h-4.w-4",
+      "label": "",
+      "fixed": true,
+      "rect": {
+        "x": 857,
+        "y": 403,
+        "w": 16,
+        "h": 16
+      },
+      "scrollStable": true,
+      "pixelsChanges": 252,
+      "pourcentZone": 24.6,
+      "contrasteIndicateur": 1.51,
+      "couples": {
+        "avec": [
+          204,
+          205,
+          207
+        ],
+        "sans": [
+          247,
+          249,
+          252
+        ]
+      },
+      "conforme": false
+    },
+    {
+      "step": 13,
+      "tag": "button",
+      "sel": "button.group/button.inline-flex",
+      "label": "Appliquer",
+      "fixed": true,
+      "rect": {
+        "x": 849,
+        "y": 788,
+        "w": 415,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3704,
+      "pourcentZone": 14.3,
+      "contrasteIndicateur": 4.36,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          27,
+          58,
+          107
+        ]
+      },
+      "conforme": true
+    },
+    {
+      "step": 14,
+      "tag": "button",
+      "sel": "button.group/button.inline-flex",
+      "label": "Réinitialiser",
+      "fixed": true,
+      "rect": {
+        "x": 849,
+        "y": 840,
+        "w": 415,
+        "h": 44
+      },
+      "scrollStable": true,
+      "pixelsChanges": 3704,
+      "pourcentZone": 14.3,
+      "contrasteIndicateur": 4.36,
+      "couples": {
+        "avec": [
+          161,
+          161,
+          161
+        ],
+        "sans": [
+          27,
+          58,
+          107
+        ]
+      },
+      "conforme": true
+    }
+  ]
+}

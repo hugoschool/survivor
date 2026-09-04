@@ -1,0 +1,226 @@
+{
+  "registerAX": [
+    {
+      "role": "link",
+      "name": "Connexion",
+      "ignored": false
+    },
+    {
+      "role": "textbox",
+      "name": "Prénom",
+      "ignored": false
+    },
+    {
+      "role": "textbox",
+      "name": "Nom",
+      "ignored": false
+    },
+    {
+      "role": "textbox",
+      "name": "Email",
+      "ignored": false
+    },
+    {
+      "role": "button",
+      "name": "Rechercheur d'emploi",
+      "ignored": false
+    },
+    {
+      "role": "textbox",
+      "name": "Mot de passe",
+      "ignored": false
+    },
+    {
+      "role": "textbox",
+      "name": "Confirmé le Mot de passe",
+      "ignored": false
+    },
+    {
+      "role": "button",
+      "name": "S'inscrire",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "JibJob",
+      "ignored": false
+    },
+    {
+      "role": "button",
+      "name": "Rechercheur d'emploi",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "Connexion",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "Recrutement",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "Questionnaire",
+      "ignored": false
+    }
+  ],
+  "registerRole": {
+    "etiquetteRoleEstUnLabel": "div",
+    "declencheurAssocie": {
+      "ariaLabel": null,
+      "ariaLabelledby": null,
+      "texte": "Rechercheur d'emploi ▾"
+    }
+  },
+  "registerErreurs": {
+    "ariaLive": 0,
+    "champsAriaInvalid": 0,
+    "champsAriaDescribedby": 0,
+    "autocomplete": [
+      {
+        "name": "first_name",
+        "autocomplete": null,
+        "type": "text"
+      },
+      {
+        "name": "last_name",
+        "autocomplete": null,
+        "type": "text"
+      },
+      {
+        "name": "age",
+        "autocomplete": null,
+        "type": "number"
+      },
+      {
+        "name": "mail",
+        "autocomplete": null,
+        "type": "text"
+      },
+      {
+        "name": "password",
+        "autocomplete": null,
+        "type": "password"
+      },
+      {
+        "name": "confirmPassword",
+        "autocomplete": null,
+        "type": "password"
+      }
+    ]
+  },
+  "registerTitres": {
+    "h1": 0,
+    "titreCarte": "div : Inscription",
+    "main": 0,
+    "lang": "en",
+    "title": ""
+  },
+  "recruitAX": [
+    {
+      "role": "heading",
+      "name": "Découvrez les talents",
+      "ignored": false
+    },
+    {
+      "role": "button",
+      "name": "Filtres",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "JibJob",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "Connexion",
+      "ignored": false
+    },
+    {
+      "role": "heading",
+      "name": "Camille R.",
+      "ignored": false
+    },
+    {
+      "role": "image",
+      "name": "Profil certifié",
+      "ignored": false
+    },
+    {
+      "role": "button",
+      "name": "Aimer cette vidéo",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "Recrutement",
+      "ignored": false
+    },
+    {
+      "role": "link",
+      "name": "Questionnaire",
+      "ignored": false
+    }
+  ],
+  "recruitDivers": {
+    "feedRole": {
+      "tag": "div",
+      "role": "feed",
+      "ariaLabel": "Vertical video feed",
+      "tabIndex": 0
+    },
+    "videoPistes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "videoAria": [
+      {
+        "ariaLabel": null,
+        "title": null
+      },
+      {
+        "ariaLabel": null,
+        "title": null
+      },
+      {
+        "ariaLabel": null,
+        "title": null
+      },
+      {
+        "ariaLabel": null,
+        "title": null
+      },
+      {
+        "ariaLabel": null,
+        "title": null
+      }
+    ],
+    "langue": "en",
+    "titre": "",
+    "h1": [
+      "Découvrez les talents"
+    ]
+  },
+  "tiroir": {
+    "ariaLabelledby": "base-ui-_r_1_",
+    "libelleResolu": "Filtrer les profils",
+    "ariaModal": null,
+    "caseEtiquetee": true
+  },
+  "tiroirSequenceNaturelle": [
+    "input[text] «filter-query»",
+    "select[select-one] «Tous les secteurs\nTech\nDes»",
+    "select[select-one] «Toutes les villes\nLyon\nPar»",
+    "input[checkbox] «»",
+    "button[button] «Appliquer»",
+    "button[button] «Réinitialiser»",
+    "input[text] «filter-query»",
+    "select[select-one] «Tous les secteurs\nTech\nDes»"
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "roleAvantEnter": "button «Rechercheur d'emploi\n▾»",
+  "roleMenuOuvertApresEnter": true,
+  "roleFocusApresEnter": "div «Rechercheur d'emploi»",
+  "roleFocusApresFleche": "div «Recruteur»",
+  "roleValeurApresSelection": "Recruteur ▾",
+  "arretsAutourDuRole": [
+    "input «mail»",
+    "button «Recruteur\n▾»",
+    "button «Recruteur\n▾»",
+    "input «password»"
+  ],
+  "submitEstUnBouton": {
+    "formPresent": true,
+    "submitPresent": true,
+    "submitTag": "button",
+    "submitDansForm": true
+  },
+  "videoProfilInitial": "Camille R.",
+  "videoFocusConteneur": "div «Vertical video feed»",
+  "videoApres_ArrowDown": "Yanis B.",
+  "videoApres_PageDown": "Sarah M.",
+  "videoApres_Space": "Sarah M.",
+  "videoApres_End": "Thomas G.",
+  "videoChangeAuClavier": true,
+  "videoControlesNatifs": [
+    {
+      "controls": false,
+      "tabIndex": 0
+    },
+    {
+      "controls": false,
+      "tabIndex": 0
+    },
+    {
+      "controls": false,
+      "tabIndex": 0
+    },
+    {
+      "controls": false,
+      "tabIndex": 0
+    },
+    {
+      "controls": false,
+      "tabIndex": 0
+    }
+  ],
+  "videoAutoplaySansPause": {
+    "autoplay": true,
+    "loop": true,
+    "enLecture": false,
+    "boutonPauseTrouve": false
+  },
+  "tiroirOuvert": true,
+  "tiroirRole": {
+    "role": "dialog",
+    "ariaModal": null,
+    "ariaLabel": "base-ui-_r_1_"
+  },
+  "tiroirFocusInitial": "div «Filtrer les profils\n\nAffinez l»",
+  "tiroirFuitesDeFocus": [],
+  "tiroirPiegeFocusCorrect": true,
+  "tiroirFermeParEchap": true,
+  "tiroirFocusRendu": "button «Filtres»",
+  "mobileMenuFerme": {
+    "opaciteMenu": "0",
+    "hauteurMax": "0px",
+    "pointerEvents": "none",
+    "ariaHidden": null,
+    "inert": false,
+    "liens": [
+      {
+        "texte": "Recrutement",
+        "tabIndex": 0,
+        "hauteurRendue": 20
+      },
+      {
+        "texte": "Questionnaire",
+        "tabIndex": 0,
+        "hauteurRendue": 20
+      },
+      {
+        "texte": "Connexion",
+        "tabIndex": 0,
+        "hauteurRendue": 44
+      }
+    ]
+  },
+  "mobileParcours": [
+    {
+      "quoi": "a «JibJob»",
+      "dansMenuCache": false,
+      "visibleALEcran": false
+    },
+    {
+      "quoi": "button «Ouvrir le menu»",
+      "dansMenuCache": false,
+      "visibleALEcran": false
+    },
+    {
+      "quoi": "a «Recrutement»",
+      "dansMenuCache": true,
+      "visibleALEcran": false
+    },
+    {
+      "quoi": "a «Questionnaire»",
+      "dansMenuCache": true,
+      "visibleALEcran": false
+    },
+    {
+      "quoi": "a «Connexion»",
+      "dansMenuCache": true,
+      "visibleALEcran": false
+    },
+    {
+      "quoi": "a «Connexion»",
+      "dansMenuCache": false,
+      "visibleALEcran": false
+    }
+  ]
+}

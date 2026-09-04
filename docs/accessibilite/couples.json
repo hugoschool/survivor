@@ -1,0 +1,219 @@
+{
+  "Parcours d'inscription": [
+    {
+      "fg": "#737373",
+      "bg": "#ffffff",
+      "large": false,
+      "need": 4.5,
+      "ratio": 4.74,
+      "fondNonUni": false,
+      "tailles": "14px/400",
+      "exemples": [
+        "Remplis toute les informations pou"
+      ]
+    },
+    {
+      "fg": "#1b3a6b",
+      "bg": "#ffffff",
+      "large": true,
+      "need": 3,
+      "ratio": 11.27,
+      "fondNonUni": false,
+      "tailles": "24px/500",
+      "exemples": [
+        "JibJob"
+      ]
+    },
+    {
+      "fg": "#1b3a6b",
+      "bg": "#ffffff",
+      "large": false,
+      "need": 4.5,
+      "ratio": 11.27,
+      "fondNonUni": false,
+      "tailles": "14px/500",
+      "exemples": [
+        "Recrutement",
+        "Questionnaire",
+        "Connexion",
+        "S'inscrire"
+      ]
+    },
+    {
+      "fg": "#0a0a0a",
+      "bg": "#ffffff",
+      "large": false,
+      "need": 4.5,
+      "ratio": 19.8,
+      "fondNonUni": false,
+      "tailles": "16px/500, 14px/400, 14px/500",
+      "exemples": [
+        "Inscription",
+        "Connexion",
+        "Prénom",
+        "Nom"
+      ]
+    }
+  ],
+  "Catalogue recruteur": [
+    {
+      "fg": "#1b3a6b",
+      "bg": "#ffffff",
+      "large": true,
+      "need": 3,
+      "ratio": 11.27,
+      "fondNonUni": false,
+      "tailles": "24px/500, 30px/700",
+      "exemples": [
+        "JibJob",
+        "Découvrez les talents"
+      ]
+    },
+    {
+      "fg": "#1b3a6b",
+      "bg": "#ffffff",
+      "large": false,
+      "need": 4.5,
+      "ratio": 11.27,
+      "fondNonUni": false,
+      "tailles": "14px/500, 12px/700, 14px/700, 12px/500",
+      "exemples": [
+        "Recrutement",
+        "Questionnaire",
+        "Connexion",
+        "ESPACE RECRUTEUR"
+      ]
+    },
+    {
+      "fg": "#f2f2f2",
+      "bg": "#000000",
+      "large": false,
+      "need": 4.5,
+      "ratio": 18.76,
+      "fondNonUni": true,
+      "tailles": "14px/400",
+      "exemples": [
+        "Développeuse front-end"
+      ]
+    },
+    {
+      "fg": "#ffffff",
+      "bg": "#000000",
+      "large": false,
+      "need": 4.5,
+      "ratio": 21,
+      "fondNonUni": true,
+      "tailles": "18px/700, 12px/500",
+      "exemples": [
+        "Camille R.",
+        "Lyon"
+      ]
+    }
+  ],
+  "Catalogue recruteur — tiroir Filtres": [
+    {
+      "fg": "#737373",
+      "bg": "#ffffff",
+      "large": false,
+      "need": 4.5,
+      "ratio": 4.74,
+      "fondNonUni": false,
+      "tailles": "14px/400",
+      "exemples": [
+        "Affinez le feed par compétence, se"
+      ]
+    },
+    {
+      "fg": "#1b3a6b",
+      "bg": "#f7f9fc",
+      "large": false,
+      "need": 4.5,
+      "ratio": 10.68,
+      "fondNonUni": false,
+      "tailles": "14px/700",
+      "exemples": [
+        "Compétence ou mot-clé",
+        "Secteur",
+        "Localisation"
+      ]
+    },
+    {
+      "fg": "#1b3a6b",
+      "bg": "#ffffff",
+      "large": true,
+      "need": 3,
+      "ratio": 11.27,
+      "fondNonUni": false,
+      "tailles": "24px/500, 30px/700, 20px/700",
+      "exemples": [
+        "JibJob",
+        "Découvrez les talents",
+        "Filtrer les profils"
+      ]
+    },
+    {
+      "fg": "#1b3a6b",
+      "bg": "#ffffff",
+      "large": false,
+      "need": 4.5,
+      "ratio": 11.27,
+      "fondNonUni": false,
+      "tailles": "14px/500, 12px/700, 12px/500, 14px/700",
+      "exemples": [
+        "Recrutement",
+        "Questionnaire",
+        "Connexion",
+        "ESPACE RECRUTEUR"
+      ]
+    },
+    {
+      "fg": "#172033",
+      "bg": "#f7f9fc",
+      "large": false,
+      "need": 4.5,
+      "ratio": 15.42,
+      "fondNonUni": false,
+      "tailles": "14px/500",
+      "exemples": [
+        "Certifiés uniquement"
+      ]
+    },
+    {
+      "fg": "#0a0a0a",
+      "bg": "#f5f5f5",
+      "large": false,
+      "need": 4.5,
+      "ratio": 18.16,
+      "fondNonUni": false,
+      "tailles": "14px/700",
+      "exemples": [
+        "Filtres"
+      ]
+    },
+    {
+      "fg": "#f2f2f2",
+      "bg": "#000000",
+      "large": false,
+      "need": 4.5,
+      "ratio": 18.76,
+      "fondNonUni": true,
+      "tailles": "14px/400",
+      "exemples": [
+        "Développeuse front-end"
+      ]
+    },
+    {
+      "fg": "#ffffff",
+      "bg": "#000000",
+      "large": false,
+      "need": 4.5,
+      "ratio": 21,
+      "fondNonUni": true,
+      "tailles": "18px/700, 12px/500",
+      "exemples": [
+        "Camille R.",
+        "Lyon"
+      ]
+    }
+  ]
+}
