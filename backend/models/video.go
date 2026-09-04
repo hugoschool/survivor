@@ -3,7 +3,7 @@ package models
 import "gorm.io/gorm"
 
 type Video struct {
-	gorm.Model
-	UserID uint   `json:"user_id"`
-	Link   string `json:"link"`
+	gorm.Model `json:"model"`
+	UserID     uint   `json:"user_id"`
+	Link       string `json:"link"`
 }

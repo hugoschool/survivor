@@ -23,6 +23,14 @@ func GetUserById(userId uint) (models.User, error) {
 	return user, tx.Error
 }
 
+// Gets without fetching most tables, only the first one
+func GetSimpleUserById(userId uint) (models.User, error) {
+	var user models.User
+
+	tx := DB.Model(&user).Where("id = ?", userId).First(&user)
+	return user, tx.Error
+}
+
 func GetLastSurvey() (models.Survey, error) {
 	var survey models.Survey
 

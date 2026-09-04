@@ -199,18 +199,14 @@ definitions:
     type: object
   models.Video:
     properties:
-      createdAt:
-        type: string
-      deletedAt:
-        $ref: '#/definitions/gorm.DeletedAt'
-      id:
-        type: integer
-      link:
-        type: string
-      updatedAt:
+      model:
+        $ref: '#/definitions/gorm.Model'
+      status:
         type: string
       user_id:
         type: integer
+      video_id:
+        type: string
     type: object
   routes.healthResponse:
     properties:
@@ -291,6 +287,13 @@ definitions:
     properties:
       percentage:
         type: integer
+    type: object
+  routes.videoPaginatedResponse:
+    properties:
+      user:
+        $ref: '#/definitions/models.User'
+      video:
+        $ref: '#/definitions/models.Video'
     type: object
 info:
   contact: {}
@@ -549,11 +552,6 @@ paths:
       - application/json
       description: Get all users (paginated)
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
       - description: Page
         in: query
         name: page
@@ -709,4 +707,39 @@ paths:
       summary: Get the current user's details
       tags:
       - Users
+  /videos:
+    get:
+      consumes:
+      - application/json
+      description: Get a feed of videos
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/routes.videoPaginatedResponse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Get a feed of videos
+      tags:
+      - Videos
 swagger: "2.0"
