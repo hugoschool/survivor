@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { NavLink } from "react-router";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
+import { useAuth } from "~/lib/authContext";
 import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
 import {
@@ -22,12 +23,26 @@ import { Input } from "../components/ui/input";
 
 const MIN_AGE = 16;
 
+const AUTH_KEYS = {
+    token: "token",
+};
+
+const persistSession = (token: string) => {
+    if (typeof window === "undefined") return;
+
+    const safeToken = token || `local-${Date.now()}`;
+    window.localStorage.setItem(AUTH_KEYS.token, safeToken);
+};
+
 // biome-ignore lint: params not used but is mandatory for func
 export async function loader({ params }: Route.LoaderArgs) {
     return { message: "Register" };
 }
 
 export default function Register() {
+    const navigate = useNavigate();
+    const { user, refetch } = useAuth();
+
     const roleOptions = [
         { value: 0, label: "Rechercheur d'emploi" },
         { value: 1, label: "Recruteur" },
@@ -41,11 +56,18 @@ export default function Register() {
         mail: "",
         password: "",
     });
+
     // biome-ignore lint: usefull later
     const [error, setError] = useState(null);
     // biome-ignore lint: usefull later
     const [loading, setLoading] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    useEffect(() => {
+        if (user) {
+            navigate("/", { replace: true });
+        }
+    }, [user, navigate]);
 
     // biome-ignore lint: any type for the moment
     const handleConfirmPasswordChange = (e: any) => {
@@ -99,6 +121,27 @@ export default function Register() {
                 throw new Error(data?.error || "Inscription error");
             }
 
+            const loginForm = {
+                mail: form.mail,
+                password: form.password,
+            };
+            const resLog = await fetch("http://localhost:8080/account/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(loginForm),
+            });
+            const loginData = await resLog.json().catch(() => ({}));
+
+            if (!resLog.ok) {
+                throw new Error(loginData?.error || "Connection error");
+            }
+
+            const token = loginData?.token || `local-${Date.now()}`;
+            persistSession(token);
+
+            await refetch();
+
+            navigate("/", { replace: true });
             // biome-ignore lint: any type for the moment
         } catch (err: any) {
             alert("failed");
@@ -124,7 +167,7 @@ export default function Register() {
                                 className="hover:underline"
                                 end
                             >
-                                Connexion
+                                Connexion●●
                             </NavLink>
                         </CardAction>
                     </CardHeader>

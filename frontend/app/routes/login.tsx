@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
+import { useAuth } from "~/lib/authContext";
 import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
 import {
@@ -17,29 +18,13 @@ import { Label } from "../components/ui/label";
 
 const AUTH_KEYS = {
     token: "token",
-    legacyToken: "jwt-token",
-    user: "user",
-    fist_name: "first_name",
 };
 
-const isAuthenticated = () => {
-    if (typeof window === "undefined") return false;
-    return Boolean(
-        window.localStorage.getItem(AUTH_KEYS.token) ||
-            window.localStorage.getItem(AUTH_KEYS.legacyToken),
-    );
-};
-
-const persistSession = (token: string, email: string) => {
+const persistSession = (token: string) => {
     if (typeof window === "undefined") return;
 
     const safeToken = token || `local-${Date.now()}`;
     window.localStorage.setItem(AUTH_KEYS.token, safeToken);
-    window.localStorage.setItem(AUTH_KEYS.legacyToken, safeToken);
-    window.localStorage.setItem(
-        AUTH_KEYS.user,
-        JSON.stringify({ email, connectedAt: new Date().toISOString() }),
-    );
 };
 
 // biome-ignore lint: params not used but is mandatory for func
@@ -53,6 +38,7 @@ function Alert() {
 
 export default function Login() {
     const navigate = useNavigate();
+    const { user, refetch } = useAuth();
     const [form, setForm] = useState({
         mail: "",
         password: "",
@@ -61,10 +47,10 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (isAuthenticated()) {
+        if (user) {
             navigate("/", { replace: true });
         }
-    }, [navigate]);
+    }, [user, navigate]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -93,7 +79,10 @@ export default function Login() {
             }
 
             const token = data?.token || `local-${Date.now()}`;
-            persistSession(token, form.mail.trim());
+            persistSession(token);
+
+            await refetch();
+
             navigate("/", { replace: true });
             // biome-ignore lint: any type for the moment
         } catch (err: any) {

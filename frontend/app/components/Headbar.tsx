@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+import { useAuth } from "~/lib/authContext";
 
 const isAuthenticated = () => {
     if (typeof window === "undefined") return false;
@@ -14,6 +15,7 @@ export function HeadBar() {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState<boolean>(isAuthenticated);
     const [menuOpen, setMenuOpen] = useState(false);
+    const { user } = useAuth();
 
     useEffect(() => {
         const syncAuth = () => setLoggedIn(isAuthenticated());
@@ -24,11 +26,12 @@ export function HeadBar() {
     }, []);
 
     const handleLogout = () => {
+        if (typeof window === "undefined") return;
         window.localStorage.removeItem("token");
-        window.localStorage.removeItem("jwt-token");
         window.localStorage.removeItem("user");
         setLoggedIn(false);
         setMenuOpen(false);
+        window.dispatchEvent(new Event("auth-change"));
         navigate("/login", { replace: true });
     };
 
@@ -103,13 +106,20 @@ export function HeadBar() {
 
                         <div className="flex items-center justify-center gap-2 sm:col-start-3 sm:gap-4 sm:justify-self-end">
                             {loggedIn ? (
-                                <button
-                                    type="button"
-                                    onClick={handleLogout}
-                                    className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15"
-                                >
-                                    Déconnexion
-                                </button>
+                                <>
+                                    <NavLink to="/profile" end>
+                                        <p className="text-institutionnel px-5 py-2.5 text-xl font-medium hover:underline mr-2">
+                                            {user?.first_name}
+                                        </p>
+                                    </NavLink>
+                                    <button
+                                        type="button"
+                                        onClick={handleLogout}
+                                        className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15"
+                                    >
+                                        Déconnexion
+                                    </button>
+                                </>
                             ) : (
                                 <NavLink
                                     to="/login"
