@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { NavLink } from "react-router";
+import { NavLink     } from "react-router";
 import { Carousel } from "../components/application/carousel/carousel-base";
 import { HeadBar } from "../components/Headbar";
 

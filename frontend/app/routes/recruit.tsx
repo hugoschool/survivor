@@ -213,13 +213,13 @@ export default function Recruit() {
             <HeadBar />
 
             <main className="flex min-h-0 flex-1 flex-col">
-                <div className="border-y border-[#1B3A6B]/15 bg-white">
+                <div className="border-y border-institutionnel/15 bg-white">
                     <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
                         <div>
-                            <p className="mb-1 font-[Marianne] text-xs font-bold tracking-[0.16em] text-[#1B3A6B] uppercase">
+                            <p className="mb-1 font-[Marianne] text-xs font-bold tracking-[0.16em] text-institutionnel uppercase">
                                 Espace recruteur
                             </p>
-                            <h1 className="font-[Marianne] text-2xl font-bold tracking-tight text-[#1B3A6B] sm:text-3xl">
+                            <h1 className="font-[Marianne] text-2xl font-bold tracking-tight text-institutionnel sm:text-3xl">
                                 Découvrez les talents
                             </h1>
                         </div>
@@ -233,7 +233,7 @@ export default function Recruit() {
                                     <Button
                                         variant="outline"
                                         size="lg"
-                                        className="h-11 border-[#1B3A6B] bg-white px-4 font-[Marianne] font-bold text-[#1B3A6B] hover:bg-[#1B3A6B]/5 hover:text-[#1B3A6B]"
+                                        className="h-11 border-institutionnel bg-white px-4 font-[Marianne] font-bold text-institutionnel hover:bg-institutionnel/5 hover:text-institutionnel"
                                     />
                                 }
                             >
@@ -241,7 +241,7 @@ export default function Recruit() {
                                 <SlidersHorizontal data-icon="inline-end" />
                             </DrawerTrigger>
                             <DrawerContent
-                                className="w-full max-w-md rounded-none border-l border-[#1B3A6B]/20 bg-[#F7F9FC] font-[Spectral] text-[#172033]"
+                                className="w-full max-w-md rounded-none border-l border-institutionnel/20 bg-[#F7F9FC] font-[Spectral] text-[#172033]"
                                 style={{
                                     top: "0",
                                     right: 0,
@@ -251,8 +251,8 @@ export default function Recruit() {
                                     maxHeight: "none",
                                 }}
                             >
-                                <DrawerHeader className="border-b border-[#1B3A6B]/15 bg-white">
-                                    <DrawerTitle className="font-[Marianne] text-xl font-bold text-[#1B3A6B]">
+                                <DrawerHeader className="border-b border-institutionnel/15 bg-white">
+                                    <DrawerTitle className="font-[Marianne] text-xl font-bold text-institutionnel">
                                         Filtrer les profils
                                     </DrawerTitle>
                                     <DrawerDescription>
@@ -265,7 +265,7 @@ export default function Recruit() {
                                     <div className="flex flex-col gap-1.5">
                                         <label
                                             htmlFor="filter-query"
-                                            className="font-[Marianne] text-sm font-bold text-[#1B3A6B]"
+                                            className="font-[Marianne] text-sm font-bold text-institutionnel"
                                         >
                                             Compétence ou mot-clé
                                         </label>
@@ -273,7 +273,7 @@ export default function Recruit() {
                                             id="filter-query"
                                             placeholder="Ex. React, gestion de projet…"
                                             value={draftFilters.query}
-                                            className="h-11 rounded-none border-[#1B3A6B]/35 bg-white text-[#172033] shadow-none focus-visible:border-[#1B3A6B] focus-visible:ring-[#1B3A6B]/25 scheme-light"
+                                            className="h-11 rounded-none border-institutionnel/35 bg-white text-[#172033] shadow-none focus-visible:border-institutionnel focus-visible:ring-institutionnel/25 scheme-light"
                                             onChange={(e) =>
                                                 setDraftFilters((f) => ({
                                                     ...f,
@@ -286,7 +286,7 @@ export default function Recruit() {
                                     <div className="flex flex-col gap-1.5">
                                         <label
                                             htmlFor="filter-sector"
-                                            className="font-[Marianne] text-sm font-bold text-[#1B3A6B]"
+                                            className="font-[Marianne] text-sm font-bold text-institutionnel"
                                         >
                                             Secteur
                                         </label>
@@ -299,7 +299,7 @@ export default function Recruit() {
                                                     sector: event.target.value,
                                                 }))
                                             }
-                                            className="h-11 rounded-none border border-[#1B3A6B]/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-[#1B3A6B] focus:ring-2 focus:ring-[#1B3A6B]/20 [color-scheme:light]"
+                                            className="h-11 rounded-none border border-institutionnel/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-institutionnel focus:ring-2 focus:ring-institutionnel/20 [color-scheme:light]"
                                         >
                                             <option value="all">
                                                 Tous les secteurs
@@ -318,7 +318,7 @@ export default function Recruit() {
                                     <div className="flex flex-col gap-1.5">
                                         <label
                                             htmlFor="filter-location"
-                                            className="font-[Marianne] text-sm font-bold text-[#1B3A6B]"
+                                            className="font-[Marianne] text-sm font-bold text-institutionnel"
                                         >
                                             Localisation
                                         </label>
@@ -332,7 +332,7 @@ export default function Recruit() {
                                                         event.target.value,
                                                 }))
                                             }
-                                            className="h-11 rounded-none border border-[#1B3A6B]/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-[#1B3A6B] focus:ring-2 focus:ring-[#1B3A6B]/20 [color-scheme:light]"
+                                            className="h-11 rounded-none border border-institutionnel/35 bg-white px-3 text-sm text-[#172033] outline-none focus:border-institutionnel focus:ring-2 focus:ring-institutionnel/20 [color-scheme:light]"
                                         >
                                             <option value="all">
                                                 Toutes les villes
@@ -359,16 +359,16 @@ export default function Recruit() {
                                                         e.target.checked,
                                                 }))
                                             }
-                                            className="h-4 w-4 accent-[#1B3A6B]"
+                                            className="h-4 w-4 accent-institutionnel"
                                         />
                                         Certifiés uniquement
                                     </label>
                                 </div>
 
-                                <DrawerFooter className="border-t border-[#1B3A6B]/15 bg-white">
+                                <DrawerFooter className="border-t border-institutionnel/15 bg-white">
                                     <Button
                                         onClick={applyFilters}
-                                        className="h-11 rounded-none border-[#1B3A6B] bg-[#ffffff] font-[Marianne] font-bold text-[#1B3A6B] hover:bg-[#1B3A6B]/5"
+                                        className="h-11 rounded-none border-institutionnel bg-[#ffffff] font-[Marianne] font-bold text-institutionnel hover:bg-institutionnel/5"
                                     >
                                         Appliquer
                                     </Button>
@@ -377,7 +377,7 @@ export default function Recruit() {
                                             <Button
                                                 variant="outline"
                                                 onClick={resetFilters}
-                                                className="h-11 rounded-none border-[#1B3A6B] font-[Marianne] font-bold text-[#1B3A6B] hover:bg-[#1B3A6B]/5 hover:text-[#1B3A6B]"
+                                                className="h-11 rounded-none border-institutionnel font-[Marianne] font-bold text-institutionnel hover:bg-institutionnel/5 hover:text-institutionnel"
                                             />
                                         }
                                     >
@@ -391,7 +391,7 @@ export default function Recruit() {
 
                 {visibleVideos.length === 0 ? (
                     <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-                        <h2 className="font-[Marianne] text-xl font-bold text-[#1B3A6B]">
+                        <h2 className="font-[Marianne] text-xl font-bold text-institutionnel">
                             Aucun profil ne correspond à ces filtres
                         </h2>
                         <p className="text-base text-[#52627b]">
@@ -424,7 +424,7 @@ export default function Recruit() {
                                         {currentVideo.role}
                                     </p>
                                     <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
-                                        <span className="bg-white px-2.5 py-1 text-[#1B3A6B]">
+                                        <span className="bg-white px-2.5 py-1 text-institutionnel">
                                             {currentVideo.sector}
                                         </span>
                                         <span className="flex items-center gap-1 border border-white/50 px-2.5 py-1 text-white">
