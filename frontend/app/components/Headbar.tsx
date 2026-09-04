@@ -5,10 +5,7 @@ import { useAuth } from "~/lib/authContext";
 
 const isAuthenticated = () => {
     if (typeof window === "undefined") return false;
-    return Boolean(
-        window.localStorage.getItem("token") ||
-            window.localStorage.getItem("jwt-token"),
-    );
+    return Boolean(window.localStorage.getItem("token"));
 };
 
 export function HeadBar() {
