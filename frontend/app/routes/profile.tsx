@@ -42,7 +42,6 @@ const getSessionUser = (): SessionUser | null => {
     const rawUser = window.localStorage.getItem(AUTH_KEYS.user);
     if (!rawUser) return null;
 
-
     try {
         const parsed = JSON.parse(rawUser);
         return {
@@ -57,7 +56,7 @@ const getSessionUser = (): SessionUser | null => {
 
 const getDisplayName = (user: SessionUser | null) => {
     if (!user) return "Utilisateur connecté";
-    
+
     const fullName = `${user.firstName} ${user.lastName}`.trim();
     if (fullName) return fullName;
 
