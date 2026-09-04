@@ -642,6 +642,58 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/videos/link": {
+            "post": {
+                "description": "Upload a video link, must be direct links to files (.mp4)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Videos"
+                ],
+                "summary": "Upload a video link",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.videoLinkUploadBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Video"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -952,20 +1004,11 @@ const docTemplate = `{
         "models.Video": {
             "type": "object",
             "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
                 "link": {
                     "type": "string"
                 },
-                "updatedAt": {
-                    "type": "string"
+                "model": {
+                    "$ref": "#/definitions/gorm.Model"
                 },
                 "user_id": {
                     "type": "integer"
@@ -1089,6 +1132,17 @@ const docTemplate = `{
             "properties": {
                 "percentage": {
                     "type": "integer"
+                }
+            }
+        },
+        "routes.videoLinkUploadBody": {
+            "type": "object",
+            "required": [
+                "link"
+            ],
+            "properties": {
+                "link": {
+                    "type": "string"
                 }
             }
         }

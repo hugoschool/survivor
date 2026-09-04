@@ -199,16 +199,10 @@ definitions:
     type: object
   models.Video:
     properties:
-      createdAt:
-        type: string
-      deletedAt:
-        $ref: '#/definitions/gorm.DeletedAt'
-      id:
-        type: integer
       link:
         type: string
-      updatedAt:
-        type: string
+      model:
+        $ref: '#/definitions/gorm.Model'
       user_id:
         type: integer
     type: object
@@ -291,6 +285,13 @@ definitions:
     properties:
       percentage:
         type: integer
+    type: object
+  routes.videoLinkUploadBody:
+    properties:
+      link:
+        type: string
+    required:
+    - link
     type: object
 info:
   contact: {}
@@ -709,4 +710,38 @@ paths:
       summary: Get the current user's details
       tags:
       - Users
+  /videos/link:
+    post:
+      consumes:
+      - application/json
+      description: Upload a video link, must be direct links to files (.mp4)
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/routes.videoLinkUploadBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Video'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Upload a video link
+      tags:
+      - Videos
 swagger: "2.0"

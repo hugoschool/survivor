@@ -44,6 +44,9 @@ func main() {
 	// users.PUT("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserUpdateHandler)
 	users.DELETE("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserDeleteHandler)
 
+	videos := router.Group("/videos")
+	videos.POST("/link", middlewares.AuthMiddleware, routes.VideoLinkUploadHandler)
+
 	router.GET("/health", routes.HealthHandler)
 	router.GET("/ping", routes.PingHandler)
 	router.GET("/ping/auth", middlewares.AuthMiddleware, routes.PingHandler)
