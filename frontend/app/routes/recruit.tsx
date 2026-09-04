@@ -27,7 +27,7 @@ type CandidateVideo = VideoItem & {
     likes: number;
 };
 
-const videos: CandidateVideo[] = [
+const _testVideos: CandidateVideo[] = [
     {
         id: "intro",
         src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
@@ -126,49 +126,82 @@ const EMPTY_FILTERS: Filters = {
 };
 
 export default function Recruit() {
+    const [videos, setVideos] = useState<CandidateVideo[]>([]);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [likedVideos, setLikedVideos] = useState<Set<string>>(new Set());
     const [likeCounts, setLikeCounts] = useState<Record<string, number>>(() =>
         Object.fromEntries(videos.map((v) => [v.id, v.likes])),
     );
     const [draftFilters, setDraftFilters] = useState<Filters>(EMPTY_FILTERS);
-    const [appliedFilters, setAppliedFilters] =
+    const [_appliedFilters, setAppliedFilters] =
         useState<Filters>(EMPTY_FILTERS);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const sectors = useMemo(
         () => Array.from(new Set(videos.map((v) => v.sector))),
-        [],
+        [videos.map],
     );
     const locations = useMemo(
         () => Array.from(new Set(videos.map((v) => v.location))),
-        [],
+        [videos.map],
     );
 
     const visibleVideos = useMemo(() => {
-        return videos.filter((v) => {
-            const matchesQuery = appliedFilters.query
-                ? `${v.candidateName} ${v.role}`
-                      .toLowerCase()
-                      .includes(appliedFilters.query.toLowerCase())
-                : true;
-            const matchesSector =
-                appliedFilters.sector === "all" ||
-                v.sector === appliedFilters.sector;
-            const matchesLocation =
-                appliedFilters.location === "all" ||
-                v.location === appliedFilters.location;
-            const matchesCertified = appliedFilters.certifiedOnly
-                ? v.certified
-                : true;
-            return (
-                matchesQuery &&
-                matchesSector &&
-                matchesLocation &&
-                matchesCertified
+        const currentVideos: CandidateVideo[] = [];
+
+        fetch("http://localhost:8080/videos")
+            .then((res) => {
+                if (!res.ok) return [];
+                return res.json();
+            })
+            .then(
+                // biome-ignore lint: wip
+                (res: any) => {
+                    for (const video of res) {
+                        currentVideos.push({
+                            id: "intro",
+                            src: video.video.link,
+                            loop: true,
+                            candidateName: `${video.user.first_name} ${video.user.last_name}`,
+                            role: "Développeuse front-end",
+                            sector: "Tech",
+                            location: "Lyon",
+                            certified: true,
+                            likes: 42,
+                        });
+                    }
+                },
             );
-        });
-    }, [appliedFilters]);
+
+        setVideos(currentVideos);
+
+        return currentVideos;
+
+        // const filteredVideos = videos.filter((v: CandidateVideo) => {
+        //     const matchesQuery = appliedFilters.query
+        //         ? `${v.candidateName} ${v.role}`
+        //               .toLowerCase()
+        //               .includes(appliedFilters.query.toLowerCase())
+        //         : true;
+        //     const matchesSector =
+        //         appliedFilters.sector === "all" ||
+        //         v.sector === appliedFilters.sector;
+        //     const matchesLocation =
+        //         appliedFilters.location === "all" ||
+        //         v.location === appliedFilters.location;
+        //     const matchesCertified = appliedFilters.certifiedOnly
+        //         ? v.certified
+        //         : true;
+        //     return (
+        //         matchesQuery &&
+        //         matchesSector &&
+        //         matchesLocation &&
+        //         matchesCertified
+        //     );
+        // });
+
+        // return filteredVideos;
+    }, []);
 
     const currentVideo = visibleVideos[currentVideoIndex];
     const currentVideoId = currentVideo?.id;
