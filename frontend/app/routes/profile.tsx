@@ -18,7 +18,6 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 const AUTH_KEYS = {
     token: "token",
-    legacyToken: "jwt-token",
     user: "user",
 };
 
@@ -31,8 +30,7 @@ type SessionUser = {
 const isAuthenticated = () => {
     if (typeof window === "undefined") return false;
     return Boolean(
-        window.localStorage.getItem(AUTH_KEYS.token) ||
-            window.localStorage.getItem(AUTH_KEYS.legacyToken),
+        window.localStorage.getItem(AUTH_KEYS.token),
     );
 };
 
