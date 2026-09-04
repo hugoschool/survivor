@@ -29,9 +29,7 @@ type SessionUser = {
 
 const isAuthenticated = () => {
     if (typeof window === "undefined") return false;
-    return Boolean(
-        window.localStorage.getItem(AUTH_KEYS.token),
-    );
+    return Boolean(window.localStorage.getItem(AUTH_KEYS.token));
 };
 
 const getSessionUser = (): SessionUser | null => {
