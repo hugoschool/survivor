@@ -9,6 +9,11 @@ const (
 
 type VideoStatus uint
 
+type VideoLink struct {
+	ID   string `json:"id"`
+	Link string `json:"link"`
+}
+
 type Video struct {
 	gorm.Model `json:"model"`
 	UserID     uint        `json:"user_id"`

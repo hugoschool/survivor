@@ -202,10 +202,17 @@ definitions:
       model:
         $ref: '#/definitions/gorm.Model'
       status:
-        type: string
+        type: integer
       user_id:
         type: integer
       video_id:
+        type: string
+    type: object
+  models.VideoLink:
+    properties:
+      id:
+        type: string
+      link:
         type: string
     type: object
   routes.healthResponse:
@@ -740,6 +747,43 @@ paths:
           schema:
             $ref: '#/definitions/models.ApiError'
       summary: Get a feed of videos
+      tags:
+      - Videos
+  /videos/upload:
+    post:
+      consumes:
+      - application/json
+      description: Upload a file
+      parameters:
+      - description: Video file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.VideoLink'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "413":
+          description: Request Entity Too Large
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Upload a file
       tags:
       - Videos
 swagger: "2.0"
