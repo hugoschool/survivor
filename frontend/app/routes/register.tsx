@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
 import { useAuth } from "~/lib/authContext";
-import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -34,9 +33,8 @@ const persistSession = (token: string) => {
     window.localStorage.setItem(AUTH_KEYS.token, safeToken);
 };
 
-// biome-ignore lint: params not used but is mandatory for func
-export async function loader({ params }: Route.LoaderArgs) {
-    return { message: "Register" };
+export function meta() {
+    return [{ title: "Inscription" }];
 }
 
 export default function Register() {

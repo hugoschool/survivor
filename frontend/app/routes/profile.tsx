@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
-import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -11,9 +10,8 @@ import {
     CardTitle,
 } from "../components/ui/card";
 
-// biome-ignore lint: params not used but is mandatory for func
-export async function loader({ params }: Route.LoaderArgs) {
-    return { message: "Administration" };
+export function meta() {
+    return [{ title: "Profile" }];
 }
 
 const AUTH_KEYS = {

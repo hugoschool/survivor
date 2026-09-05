@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
 import { useAuth } from "~/lib/authContext";
-import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -19,6 +18,10 @@ import { Label } from "../components/ui/label";
 const AUTH_KEYS = {
     token: "token",
 };
+
+export function meta() {
+    return [{ title: "Connexion" }];
+}
 
 const persistSession = (token: string) => {
     if (typeof window === "undefined") return;
