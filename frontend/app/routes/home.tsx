@@ -5,10 +5,7 @@ import { Carousel } from "../components/application/carousel/carousel-base";
 import { HeadBar } from "../components/Headbar";
 
 export function meta() {
-    return [
-        { title: "Home" },
-        { name: "description", content: "Welcome to React Router!" },
-    ];
+    return [{ title: "JibJob" }, { name: "description", content: "Accueil" }];
 }
 
 export const CarouselLg = () => {

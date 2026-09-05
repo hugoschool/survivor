@@ -28,6 +28,10 @@ const NAV_ITEMS = [
     },
 ] as const;
 
+export function meta() {
+    return [{ title: "Administration" }];
+}
+
 export default function Administration() {
     return (
         <div>

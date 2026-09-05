@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
 import { useAuth } from "~/lib/authContext";
-import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -34,9 +33,8 @@ const persistSession = (token: string) => {
     window.localStorage.setItem(AUTH_KEYS.token, safeToken);
 };
 
-// biome-ignore lint: params not used but is mandatory for func
-export async function loader({ params }: Route.LoaderArgs) {
-    return { message: "Register" };
+export function meta() {
+    return [{ title: "Inscription" }];
 }
 
 export default function Register() {
@@ -44,7 +42,7 @@ export default function Register() {
     const { user, refetch } = useAuth();
 
     const roleOptions = [
-        { value: 0, label: "Rechercheur d'emploi" },
+        { value: 0, label: "Chercheur d'emploi" },
         { value: 1, label: "Recruteur" },
     ];
 
@@ -81,7 +79,7 @@ export default function Register() {
         if (name === "age") {
             setForm((prev) => ({
                 ...prev,
-                age: value === "" ? "" : Number(value),
+                age: value === "" ? "" : value,
             }));
             return;
         }
@@ -98,7 +96,7 @@ export default function Register() {
         setError(null);
 
         if (form.password !== confirmPassword) {
-            alert("wrong pwd");
+            alert("Mot de passe incorrect");
             return;
         }
 
@@ -158,8 +156,7 @@ export default function Register() {
                     <CardHeader>
                         <CardTitle>Inscription</CardTitle>
                         <CardDescription className="flex items-center font-spectral">
-                            Remplis toute les informations pour t'inscrire sur
-                            JibJob
+                            Remplissez les informations pour créer un compte
                         </CardDescription>
                         <CardAction>
                             <NavLink
@@ -167,7 +164,7 @@ export default function Register() {
                                 className="hover:underline"
                                 end
                             >
-                                Connexion●●
+                                Connexion
                             </NavLink>
                         </CardAction>
                     </CardHeader>
@@ -251,7 +248,7 @@ export default function Register() {
                                                         option.value ===
                                                         form.role,
                                                 )?.label ??
-                                                    "Rechercheur d'emploi"}
+                                                    "Chercheur d'emploi"}
                                                 <span aria-hidden="true">
                                                     ▾
                                                 </span>
@@ -296,7 +293,7 @@ export default function Register() {
                                         htmlFor="confirmPassword"
                                         className="mt-4"
                                     >
-                                        Confirmé le Mot de passe
+                                        Confirmez le mot de passe
                                     </label>
                                     <Input
                                         id="confirmPassword"
