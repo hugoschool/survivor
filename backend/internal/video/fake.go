@@ -34,7 +34,7 @@ func (FakeVideoUploader) Store(_ any) (string, error) {
 }
 
 func (FakeVideoUploader) Status(id string) (models.VideoStatus, error) {
-	return models.VideoStatus(models.VideoStatusExists), nil
+	return models.VideoStatus(models.VideoStatusValidated), nil
 }
 
 func (FakeVideoUploader) PlaybackURL(id string) (string, error) {

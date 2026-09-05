@@ -136,7 +136,7 @@ func VideoUploadHandler(c *gin.Context) {
 	video := models.Video{
 		UserID:  user.ID,
 		VideoID: videoLink.ID,
-		Status:  models.VideoStatus(models.VideoStatusExists),
+		Status:  models.VideoStatus(models.VideoStatusAwaitingModeration),
 	}
 
 	ctx := context.Background()

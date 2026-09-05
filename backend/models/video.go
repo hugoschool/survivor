@@ -3,8 +3,10 @@ package models
 import "gorm.io/gorm"
 
 const (
-	VideoStatusMissing uint = 0
-	VideoStatusExists  uint = 1
+	VideoStatusMissing            uint = 0
+	VideoStatusValidated          uint = 1
+	VideoStatusInTreatment        uint = 2
+	VideoStatusAwaitingModeration uint = 3
 )
 
 type VideoStatus uint

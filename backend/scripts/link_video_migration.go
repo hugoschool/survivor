@@ -61,7 +61,7 @@ func main() {
 			Model:   video.Model,
 			UserID:  video.UserID,
 			VideoID: id,
-			Status:  models.VideoStatus(models.VideoStatusExists),
+			Status:  models.VideoStatus(models.VideoStatusAwaitingModeration),
 		}
 		err = database.DB.Save(&newVideo).Error
 		if err != nil {
