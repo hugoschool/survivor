@@ -300,7 +300,7 @@ definitions:
       user:
         $ref: '#/definitions/models.User'
       video:
-        $ref: '#/definitions/models.Video'
+        $ref: '#/definitions/models.VideoLink'
     type: object
 info:
   contact: {}

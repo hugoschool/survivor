@@ -18,8 +18,8 @@ const (
 )
 
 type videoPaginatedResponse struct {
-	Video models.Video `json:"video"`
-	User  models.User  `json:"user"`
+	Video models.VideoLink `json:"video"`
+	User  models.User      `json:"user"`
 }
 
 // VideoPaginatedGet godoc
@@ -39,7 +39,9 @@ func VideosPaginatedHandler(c *gin.Context) {
 	var videos []models.Video
 	page, _ := strconv.Atoi(c.Query("page"))
 
-	err := database.DB.Scopes(database.Paginate(page, UsersPageSize)).Find(&videos).Error
+	err := database.DB.Scopes(database.Paginate(page, UsersPageSize)).
+		Where("status = ?", models.VideoStatusValidated).
+		Find(&videos).Error
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
@@ -47,6 +49,12 @@ func VideosPaginatedHandler(c *gin.Context) {
 	}
 
 	var response []videoPaginatedResponse
+
+	videoUploader, err := internal.GetCurrentVideoUploader()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
 
 	for _, video := range videos {
 		user, err := database.GetSimpleUserById(video.UserID)
@@ -56,9 +64,18 @@ func VideosPaginatedHandler(c *gin.Context) {
 			return
 		}
 
+		url, err := videoUploader.PlaybackURL(video.VideoID)
+
+		if err != nil {
+			continue
+		}
+
 		response = append(response, videoPaginatedResponse{
-			Video: video,
-			User:  user,
+			Video: models.VideoLink{
+				ID:   video.VideoID,
+				Link: url,
+			},
+			User: user,
 		})
 	}
 

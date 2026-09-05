@@ -1206,7 +1206,7 @@ const docTemplate = `{
                     "$ref": "#/definitions/models.User"
                 },
                 "video": {
-                    "$ref": "#/definitions/models.Video"
+                    "$ref": "#/definitions/models.VideoLink"
                 }
             }
         }
