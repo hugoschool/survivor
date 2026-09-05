@@ -1,4 +1,4 @@
-module github.com/hugoarnal/survivor
+module github.com/hugoschool/survivor
 
 go 1.26.6
 

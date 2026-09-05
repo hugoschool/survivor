@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/models"
 	"gorm.io/gorm"
 )
 

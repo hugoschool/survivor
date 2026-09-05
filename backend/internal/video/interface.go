@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/models"
 )
 
 const (

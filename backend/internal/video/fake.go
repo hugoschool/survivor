@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/models"
 )
 
 var (

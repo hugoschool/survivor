@@ -7,9 +7,9 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hugoarnal/survivor/database"
-	internal "github.com/hugoarnal/survivor/internal/video"
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/database"
+	internal "github.com/hugoschool/survivor/internal/video"
+	"github.com/hugoschool/survivor/models"
 	"gorm.io/gorm"
 )
 

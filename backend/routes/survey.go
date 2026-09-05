@@ -9,8 +9,8 @@ import (
 	"slices"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hugoarnal/survivor/database"
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/database"
+	"github.com/hugoschool/survivor/models"
 	"gorm.io/gorm"
 )
 

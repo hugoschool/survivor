@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/models"
 )
 
 // Ping godoc

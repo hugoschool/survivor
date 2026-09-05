@@ -4,12 +4,12 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hugoarnal/survivor/database"
-	"github.com/hugoarnal/survivor/middlewares"
-	"github.com/hugoarnal/survivor/routes"
+	"github.com/hugoschool/survivor/database"
+	"github.com/hugoschool/survivor/middlewares"
+	"github.com/hugoschool/survivor/routes"
 
 	cors "github.com/gin-contrib/cors"
-	_ "github.com/hugoarnal/survivor/docs"
+	_ "github.com/hugoschool/survivor/docs"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
