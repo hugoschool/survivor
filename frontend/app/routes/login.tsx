@@ -27,15 +27,6 @@ const persistSession = (token: string) => {
     window.localStorage.setItem(AUTH_KEYS.token, safeToken);
 };
 
-// biome-ignore lint: params not used but is mandatory for func
-export async function loader({ params }: Route.LoaderArgs) {
-    return { message: "login" };
-}
-
-function Alert() {
-    return alert("This Functionnality is currently not supported");
-}
-
 export default function Login() {
     const navigate = useNavigate();
     const { user, refetch } = useAuth();
@@ -98,7 +89,7 @@ export default function Login() {
             <div className="flex min-h-screen items-center justify-center p-4 font-marianne">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
-                        <CardTitle>Connection</CardTitle>
+                        <CardTitle>Connexion</CardTitle>
                         <CardDescription className="flex items-center font-spectral">
                             Entre ton email pour te connecter a ton compte
                         </CardDescription>
@@ -127,13 +118,13 @@ export default function Login() {
                                         <Label htmlFor="password">
                                             Mot de passe
                                         </Label>
-                                        <button
+                                        {/* <button
                                             type="button"
                                             onClick={Alert}
                                             className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                                         >
                                             Mot de passe oublié ?
-                                        </button>
+                                        </button> */}
                                     </div>
                                     <Input
                                         id="password"
