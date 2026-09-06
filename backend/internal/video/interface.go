@@ -9,12 +9,19 @@ import (
 )
 
 const (
-	VideoUploaderEnv string = "BACKEND_VIDEO_UPLOADER"
+	BaseURLEnv                string = "BACKEND_BASE_URL"
+	VideoUploaderEnv          string = "BACKEND_VIDEO_UPLOADER"
+	VideoUploaderLocalPathEnv string = "BACKEND_VIDEO_UPLOADER_LOCAL_PATH"
 )
 
 var (
 	ErrVideoUploaderNotFound error = fmt.Errorf("no video uploader found in %s", VideoUploaderEnv)
 	ErrVideoLinkNotFound     error = fmt.Errorf("no link found")
+	ErrMissingEnv            error = fmt.Errorf("missing env var")
+	ErrCannotConvertFile     error = fmt.Errorf("cannot convert file to the right interface")
+
+	BaseURL                string = os.Getenv(BaseURLEnv)
+	VideoUploaderLocalPath string = os.Getenv(VideoUploaderLocalPathEnv)
 )
 
 type VideoUploader interface {
@@ -33,6 +40,15 @@ func GetCurrentVideoUploader() (VideoUploader, error) {
 
 	if videoUploader == "fake" {
 		return FakeVideoUploader{}, nil
+	}
+	if videoUploader == "local" {
+		if BaseURL == "" || VideoUploaderLocalPath == "" {
+			return nil, ErrMissingEnv
+		}
+		return LocalVideoUploader{
+			BaseURL:     BaseURL,
+			StoragePath: VideoUploaderLocalPath,
+		}, nil
 	}
 	return FakeVideoUploader{}, nil
 }

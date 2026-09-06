@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/hugoschool/survivor/database"
+	internal "github.com/hugoschool/survivor/internal/video"
 	"github.com/hugoschool/survivor/middlewares"
 	"github.com/hugoschool/survivor/routes"
 
@@ -55,6 +56,9 @@ func main() {
 	videos := router.Group("/videos")
 	videos.GET("", routes.VideosPaginatedHandler)
 	videos.POST("/upload", middlewares.AuthMiddleware, routes.VideoUploadHandler)
+	if internal.VideoUploaderLocalPath != "" {
+		videos.Static("/storage", internal.VideoUploaderLocalPath)
+	}
 
 	router.GET("/health", routes.HealthHandler)
 	router.GET("/ping", routes.PingHandler)
