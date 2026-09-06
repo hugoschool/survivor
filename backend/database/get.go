@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/models"
 	"gorm.io/gorm"
 )
 
@@ -20,6 +20,14 @@ func GetUserById(userId uint) (models.User, error) {
 	var user models.User
 
 	tx := GetUserTX().Where("id = ?", userId).First(&user)
+	return user, tx.Error
+}
+
+// Gets without fetching most tables, only the first one
+func GetSimpleUserById(userId uint) (models.User, error) {
+	var user models.User
+
+	tx := DB.Model(&user).Where("id = ?", userId).First(&user)
 	return user, tx.Error
 }
 

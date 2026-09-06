@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hugoarnal/survivor/models"
+	"github.com/hugoschool/survivor/models"
 )
 
 func Migrate() {
