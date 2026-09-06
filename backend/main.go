@@ -42,7 +42,6 @@ func main() {
 
 	survey := router.Group("/survey")
 	survey.GET("", middlewares.AuthMiddleware, routes.SurveyGetHandler)
-	survey.POST("", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.SurveyPostHandler)
 	survey.PUT("", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.SurveyPutHandler)
 	survey.POST("/submit", middlewares.AuthMiddleware, routes.SurveySubmitHandler)
 

@@ -70,51 +70,6 @@ func SurveyGetHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, survey)
 }
 
-// SurveyPost godoc
-// @Summary Initialize the first survey
-// @Schemes
-// @Description Initialize the first survey
-// @Tags Survey
-// @Accept json
-// @Produce json
-// @Param request body models.Survey true "Request body"
-// @Success 200 {object} models.Survey
-// @Failure 400 {object} models.ApiError
-// @Failure 404 {object} models.ApiError
-// @Failure 500 {object} models.ApiError
-// @Router /survey [post]
-func SurveyPostHandler(c *gin.Context) {
-	var body models.Survey
-
-	if err := c.ShouldBindJSON(&body); err != nil {
-		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect body"})
-		return
-	}
-
-	ctx := context.Background()
-	_, err := gorm.G[models.Survey](database.DB).Last(ctx)
-
-	if err == nil {
-		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Survey already exists, use PUT instead"})
-		return
-	}
-
-	if !errors.Is(err, gorm.ErrRecordNotFound) {
-		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
-		return
-	}
-
-	ctx = context.Background()
-	err = gorm.G[models.Survey](database.DB).Create(ctx, &body)
-
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
-		return
-	}
-
-	c.JSON(http.StatusOK, models.ApiMessage{Message: "Success"})
-}
-
 // SurveyPut godoc
 // @Summary Modify the survey
 // @Schemes
