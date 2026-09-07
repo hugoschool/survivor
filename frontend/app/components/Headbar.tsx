@@ -34,6 +34,12 @@ export function HeadBar() {
 
     return (
         <header className="relative bg-white text-black font-main">
+            <div className="text-center bg-black/10">
+                <h5>
+                    Aucune donnée de ce service n'est utilisée pour déterminer
+                    vos droits ni le montant de vos allocations
+                </h5>
+            </div>
             <div className="mx-auto flex max-w-7xl items-center justify-center px-4 sm:px-6">
                 <div className="relative flex w-full items-center py-4 sm:grid sm:grid-cols-3">
                     <div className="flex w-full items-center justify-between sm:w-auto sm:justify-self-start">
