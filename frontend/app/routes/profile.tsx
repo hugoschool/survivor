@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 import { clearSession } from "~/lib/auth";
 import { Button } from "../components/ui/button";
@@ -154,6 +155,7 @@ export default function Profile() {
                     </CardContent>
                 </Card>
             </div>
+            <Footer />
         </div>
     );
 }
