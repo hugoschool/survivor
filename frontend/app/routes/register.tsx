@@ -79,7 +79,7 @@ export default function Register() {
         if (name === "age") {
             setForm((prev) => ({
                 ...prev,
-                age: value === "" ? "" : value,
+                age: value === "" ? "" : Number(value),
             }));
             return;
         }
@@ -142,7 +142,6 @@ export default function Register() {
             navigate("/", { replace: true });
             // biome-ignore lint: any type for the moment
         } catch (err: any) {
-            alert("failed");
             setError(err.message);
         } finally {
             setLoading(false);
