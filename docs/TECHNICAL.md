@@ -1,6 +1,6 @@
 # Documentation technique
 
-Le projet JibJob est composé de différentes parties:
+Le projet ProfilsActifs est composé de différentes parties:
 
 - Partie backend
 - Partie frontend

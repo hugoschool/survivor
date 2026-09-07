@@ -6,7 +6,7 @@ import { Carousel } from "../components/application/carousel/carousel-base";
 import { HeadBar } from "../components/Headbar";
 
 export function meta() {
-    return [{ title: "JibJob" }, { name: "description", content: "Accueil" }];
+    return [{ title: "ProfilsActifs" }, { name: "description", content: "Accueil" }];
 }
 
 export const CarouselLg = () => {
@@ -73,13 +73,12 @@ export default function Home() {
                 <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-12 xl:gap-16">
                     <div className="lg:flex-1 max-w-2xl">
                         <div className="font-main font-bold text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-institutionnel">
-                            JibJob
+                            ProfilsActifs
                         </div>
                         <div className="font-secondary text-lg sm:text-xl lg:text-2xl text-institutionnel">
                             <p className="pt-3">
                                 La plateforme de référence pour la recherche
-                                d'emploi basée sur la publication de vidéos
-                                propulsée par le ministère du Job et du Bonheur.
+                                d'emploi qui valorise les compétences à l'aide de vidéos.
                             </p>
                         </div>
                         <div className="font-main font-bold text-2xl sm:text-3xl lg:text-4xl text-institutionnel pt-8 sm:pt-10">

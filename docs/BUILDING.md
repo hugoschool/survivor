@@ -1,6 +1,6 @@
 # Building
 
-Cet documentation concerne le développement en local de l'application JibJob.
+Cet documentation concerne le développement en local de l'application ProfilsActifs.
 
 ## Prérequis
 

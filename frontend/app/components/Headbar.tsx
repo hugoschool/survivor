@@ -39,7 +39,7 @@ export function HeadBar() {
                     <div className="flex w-full items-center justify-between sm:w-auto sm:justify-self-start">
                         <NavLink to="/" end>
                             <p className="text-2xl font-medium sm:text-left text-institutionnel">
-                                JibJob
+                                ProfilsActifs
                             </p>
                         </NavLink>
                         <button
