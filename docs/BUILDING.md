@@ -19,3 +19,24 @@ docker compose up --build
 Le frontend sera disponible sur `http://localhost:3000`.
 
 Le backend sera disponible sur `http://localhost:8080`.
+
+### Database
+
+Si vous souhaitez lancer seulement la base de donnée:
+```sh
+docker compose up postgres
+```
+
+## Local
+
+Il faudra probablement injecter les valeurs du `.env` dans votre shell.
+
+Dans un shell type ZSH: `set -o allexport && source .env && set +o allexport`
+
+Lancez ensuite la DB, il est recommandé d'utiliser Docker pour initialiser et lancer la BDD postgres.
+(Réferez vous à la partie Database du Docker)
+
+Une fois effectué, vous pouvez lancer les différents services:
+
+- backend avec `go run main.go`
+- frontend avec `pnpm dev`
