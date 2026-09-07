@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { NavLink } from "react-router";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
-import type { Route } from "../+types/root";
+import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -22,14 +22,27 @@ import { Input } from "../components/ui/input";
 
 const MIN_AGE = 16;
 
-// biome-ignore lint: params not used but is mandatory for func
-export async function loader({ params }: Route.LoaderArgs) {
-    return { message: "Register" };
+const AUTH_KEYS = {
+    token: "token",
+};
+
+const persistSession = (token: string) => {
+    if (typeof window === "undefined") return;
+
+    const safeToken = token || `local-${Date.now()}`;
+    window.localStorage.setItem(AUTH_KEYS.token, safeToken);
+};
+
+export function meta() {
+    return [{ title: "Inscription" }];
 }
 
 export default function Register() {
+    const navigate = useNavigate();
+    const { user, refetch } = useAuth();
+
     const roleOptions = [
-        { value: 0, label: "Rechercheur d'emploi" },
+        { value: 0, label: "Chercheur d'emploi" },
         { value: 1, label: "Recruteur" },
     ];
 
@@ -41,11 +54,18 @@ export default function Register() {
         mail: "",
         password: "",
     });
+
     // biome-ignore lint: usefull later
     const [error, setError] = useState(null);
     // biome-ignore lint: usefull later
     const [loading, setLoading] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    useEffect(() => {
+        if (user) {
+            navigate("/", { replace: true });
+        }
+    }, [user, navigate]);
 
     // biome-ignore lint: any type for the moment
     const handleConfirmPasswordChange = (e: any) => {
@@ -59,7 +79,7 @@ export default function Register() {
         if (name === "age") {
             setForm((prev) => ({
                 ...prev,
-                age: value === "" ? "" : Number(value),
+                age: value === "" ? "" : value,
             }));
             return;
         }
@@ -76,7 +96,7 @@ export default function Register() {
         setError(null);
 
         if (form.password !== confirmPassword) {
-            alert("wrong pwd");
+            alert("Mot de passe incorrect");
             return;
         }
 
@@ -99,6 +119,27 @@ export default function Register() {
                 throw new Error(data?.error || "Inscription error");
             }
 
+            const loginForm = {
+                mail: form.mail,
+                password: form.password,
+            };
+            const resLog = await fetch("http://localhost:8080/account/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(loginForm),
+            });
+            const loginData = await resLog.json().catch(() => ({}));
+
+            if (!resLog.ok) {
+                throw new Error(loginData?.error || "Connection error");
+            }
+
+            const token = loginData?.token || `local-${Date.now()}`;
+            persistSession(token);
+
+            await refetch();
+
+            navigate("/", { replace: true });
             // biome-ignore lint: any type for the moment
         } catch (err: any) {
             alert("failed");
@@ -115,8 +156,7 @@ export default function Register() {
                     <CardHeader>
                         <CardTitle>Inscription</CardTitle>
                         <CardDescription className="flex items-center font-spectral">
-                            Remplis toute les informations pour t'inscrire sur
-                            JibJob
+                            Remplissez les informations pour créer un compte
                         </CardDescription>
                         <CardAction>
                             <NavLink
@@ -208,7 +248,7 @@ export default function Register() {
                                                         option.value ===
                                                         form.role,
                                                 )?.label ??
-                                                    "Rechercheur d'emploi"}
+                                                    "Chercheur d'emploi"}
                                                 <span aria-hidden="true">
                                                     ▾
                                                 </span>
@@ -253,7 +293,7 @@ export default function Register() {
                                         htmlFor="confirmPassword"
                                         className="mt-4"
                                     >
-                                        Confirmé le Mot de passe
+                                        Confirmez le mot de passe
                                     </label>
                                     <Input
                                         id="confirmPassword"

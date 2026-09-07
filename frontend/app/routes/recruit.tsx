@@ -85,6 +85,10 @@ const videos: CandidateVideo[] = [
     },
 ];
 
+export function meta() {
+    return [{ title: "Recrutement" }];
+}
+
 function LikeButton({
     liked,
     onClick,

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hugoarnal/survivor/database"
+	"github.com/hugoschool/survivor/database"
 )
 
 const (

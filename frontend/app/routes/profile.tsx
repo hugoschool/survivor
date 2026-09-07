@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { HeadBar } from "~/components/Headbar";
-import type { Route } from "../+types/root";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -11,14 +10,12 @@ import {
     CardTitle,
 } from "../components/ui/card";
 
-// biome-ignore lint: params not used but is mandatory for func
-export async function loader({ params }: Route.LoaderArgs) {
-    return { message: "Administration" };
+export function meta() {
+    return [{ title: "Profile" }];
 }
 
 const AUTH_KEYS = {
     token: "token",
-    legacyToken: "jwt-token",
     user: "user",
 };
 
@@ -30,10 +27,7 @@ type SessionUser = {
 
 const isAuthenticated = () => {
     if (typeof window === "undefined") return false;
-    return Boolean(
-        window.localStorage.getItem(AUTH_KEYS.token) ||
-            window.localStorage.getItem(AUTH_KEYS.legacyToken),
-    );
+    return Boolean(window.localStorage.getItem(AUTH_KEYS.token));
 };
 
 const getSessionUser = (): SessionUser | null => {

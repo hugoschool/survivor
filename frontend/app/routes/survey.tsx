@@ -16,6 +16,10 @@ import {
     QuestionnaireTitle,
 } from "~/components/ui/questionnaire";
 
+export function meta() {
+    return [{ title: "Questionnaire" }];
+}
+
 const PASSING_SCORE = 12;
 
 const items = [

@@ -1,13 +1,11 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NavLink } from "react-router";
+import { useAuth } from "~/lib/authContext";
 import { Carousel } from "../components/application/carousel/carousel-base";
 import { HeadBar } from "../components/Headbar";
 
 export function meta() {
-    return [
-        { title: "Home" },
-        { name: "description", content: "Welcome to React Router!" },
-    ];
+    return [{ title: "JibJob" }, { name: "description", content: "Accueil" }];
 }
 
 export const CarouselLg = () => {
@@ -65,6 +63,8 @@ export const CarouselLg = () => {
 };
 
 export default function Home() {
+    const user = useAuth();
+
     return (
         <div>
             <HeadBar />
@@ -85,16 +85,26 @@ export default function Home() {
                             Montrez votre talent en une vidéo :
                         </div>
                         <div className="flex flex-wrap gap-4 pt-4">
-                            <NavLink to="/login" end>
-                                <p className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15 font-marianne">
-                                    Connexion
-                                </p>
-                            </NavLink>
-                            <NavLink to="/register" end>
-                                <p className="rounded-md bg-institutionnel/50 px-5 py-2.5 text-white font-marianne font-medium hover:bg-institutionnel/15 hover:text-institutionnel">
-                                    Inscription
-                                </p>
-                            </NavLink>
+                            {!user.user ? (
+                                <>
+                                    <NavLink to="/login" end>
+                                        <p className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15 font-marianne">
+                                            Connexion
+                                        </p>
+                                    </NavLink>
+                                    <NavLink to="/register" end>
+                                        <p className="rounded-md bg-institutionnel/50 px-5 py-2.5 text-white font-marianne font-medium hover:bg-institutionnel/15 hover:text-institutionnel">
+                                            Inscription
+                                        </p>
+                                    </NavLink>
+                                </>
+                            ) : (
+                                <NavLink to="/profile" end>
+                                    <p className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15 font-marianne">
+                                        Votre profil
+                                    </p>
+                                </NavLink>
+                            )}
                         </div>
                     </div>
 
