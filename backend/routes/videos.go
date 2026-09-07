@@ -22,25 +22,12 @@ type videoPaginatedResponse struct {
 	User  models.User      `json:"user"`
 }
 
-// VideoPaginatedGet godoc
-// @Summary Get a feed of videos
-// @Schemes
-// @Description Get a feed of videos
-// @Tags Videos
-// @Accept json
-// @Produce json
-// @Param page query int true "Page"
-// @Success 200 {object} []videoPaginatedResponse
-// @Failure 400 {object} models.ApiError
-// @Failure 401 {object} models.ApiError
-// @Failure 500 {object} models.ApiError
-// @Router /videos [get]
-func VideosPaginatedHandler(c *gin.Context) {
+func VideosPaginatedFeed(c *gin.Context, status models.VideoStatus) {
 	var videos []models.Video
 	page, _ := strconv.Atoi(c.Query("page"))
 
 	err := database.DB.Scopes(database.Paginate(page, UsersPageSize)).
-		Where("status = ?", models.VideoStatusValidated).
+		Where("status = ?", status).
 		Find(&videos).Error
 
 	if err != nil {
@@ -80,6 +67,40 @@ func VideosPaginatedHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, response)
+}
+
+// VideoPaginatedGet godoc
+// @Summary Get a feed of videos
+// @Schemes
+// @Description Get a feed of videos
+// @Tags Videos
+// @Accept json
+// @Produce json
+// @Param page query int true "Page"
+// @Success 200 {object} []videoPaginatedResponse
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /videos [get]
+func VideosPaginatedHandler(c *gin.Context) {
+	VideosPaginatedFeed(c, models.VideoStatus(models.VideoStatusValidated))
+}
+
+// VideoGetReview godoc
+// @Summary Get a feed of videos to be reviewed
+// @Schemes
+// @Description Get a feed of videos to be reviewed
+// @Tags Videos
+// @Accept json
+// @Produce json
+// @Param page query int true "Page"
+// @Success 200 {object} []videoPaginatedResponse
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /videos/review [get]
+func VideosPaginatedReviewHandler(c *gin.Context) {
+	VideosPaginatedFeed(c, models.VideoStatus(models.VideoStatusAwaitingModeration))
 }
 
 // VideoUpload godoc

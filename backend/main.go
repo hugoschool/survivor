@@ -55,6 +55,7 @@ func main() {
 
 	videos := router.Group("/videos")
 	videos.GET("", routes.VideosPaginatedHandler)
+	videos.GET("/review", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.VideosPaginatedReviewHandler)
 	videos.POST("/upload", middlewares.AuthMiddleware, routes.VideoUploadHandler)
 	if internal.VideoUploaderLocalPath != "" {
 		videos.Static("/storage", internal.VideoUploaderLocalPath)
