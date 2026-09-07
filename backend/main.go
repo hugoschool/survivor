@@ -55,6 +55,7 @@ func main() {
 
 	videos := router.Group("/videos")
 	videos.GET("", routes.VideosPaginatedHandler)
+	videos.GET("/me", middlewares.AuthMiddleware, routes.VideosGetCurrentUserHandler)
 	videos.GET("/review", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.VideosPaginatedReviewHandler)
 	videos.PUT("/:id/review", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.VideosSetReviewStatusHandler)
 	videos.POST("/upload", middlewares.AuthMiddleware, routes.VideoUploadHandler)
