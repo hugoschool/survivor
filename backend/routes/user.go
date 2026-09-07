@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/hugoschool/survivor/database"
+	"github.com/hugoschool/survivor/internal/utils"
 	"github.com/hugoschool/survivor/models"
 	"gorm.io/gorm"
 )
@@ -147,6 +148,18 @@ func UserDeleteHandler(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Bad request"})
+		return
+	}
+
+	currentUser, err := models.GetUserFromContext(c)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	if !utils.CheckIdAdminOrSelf(currentUser, uint(id)) {
+		c.JSON(http.StatusUnauthorized, models.ApiError{Message: "You aren't authorized"})
 		return
 	}
 
