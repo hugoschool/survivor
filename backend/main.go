@@ -51,7 +51,7 @@ func main() {
 	users.GET("", routes.UsersPaginatedHandler)
 	users.GET("/me", middlewares.AuthMiddleware, routes.UserGetCurrentHandler)
 	// users.PUT("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserUpdateHandler)
-	users.DELETE("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserDeleteHandler)
+	users.DELETE("/:id", middlewares.AuthMiddleware, routes.UserDeleteHandler)
 
 	videos := router.Group("/videos")
 	videos.GET("", routes.VideosPaginatedHandler)
