@@ -5,6 +5,7 @@ import {
     Users,
 } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
+import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 
 const NAV_ITEMS = [
@@ -65,6 +66,7 @@ export default function Administration() {
                     <Outlet />
                 </main>
             </div>
+            <Footer />
         </div>
     );
 }

@@ -223,12 +223,12 @@ function QuestionnairePrevious({
             data-variant={variant}
             className={cn(
                 buttonVariants({ size, variant }),
-                "col-start-1 row-start-1 min-h-11 justify-self-start sm:min-h-0",
+                "col-start-1 row-start-1 min-h-11 justify-self-start sm:min-h-0 hover:text-institutionnel/50",
                 className,
             )}
             {...props}
         >
-            {children ?? "Previous"}
+            {children ?? "Précédent"}
         </QuestionnairePrimitive.Previous>
     );
 }
@@ -273,12 +273,12 @@ function QuestionnaireNext({
             data-variant={variant}
             className={cn(
                 buttonVariants({ size, variant }),
-                "col-start-3 row-start-1 min-h-11 justify-self-end sm:min-h-0",
+                "col-start-3 row-start-1 min-h-11 justify-self-end sm:min-h-0 bg-institutionnel hover:bg-institutionnel/50",
                 className,
             )}
             {...props}
         >
-            {children ?? "Next"}
+            {children ?? "Prochain"}
         </QuestionnairePrimitive.Next>
     );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
@@ -79,7 +80,7 @@ export default function Register() {
         if (name === "age") {
             setForm((prev) => ({
                 ...prev,
-                age: value === "" ? "" : value,
+                age: value === "" ? "" : Number(value),
             }));
             return;
         }
@@ -142,7 +143,6 @@ export default function Register() {
             navigate("/", { replace: true });
             // biome-ignore lint: any type for the moment
         } catch (err: any) {
-            alert("failed");
             setError(err.message);
         } finally {
             setLoading(false);
@@ -151,17 +151,19 @@ export default function Register() {
     return (
         <div>
             <HeadBar />
-            <div className="flex min-h-screen items-center justify-center p-4 font-marianne">
+            <div className="flex min-h-screen items-center justify-center p-4 font-main">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
-                        <CardTitle>Inscription</CardTitle>
-                        <CardDescription className="flex items-center font-spectral">
+                        <CardTitle className="text-institutionnel">
+                            Inscription
+                        </CardTitle>
+                        <CardDescription className="flex items-center font-secondary">
                             Remplissez les informations pour créer un compte
                         </CardDescription>
                         <CardAction>
                             <NavLink
                                 to="/login"
-                                className="hover:underline"
+                                className="hover:underline text-institutionnel"
                                 end
                             >
                                 Connexion
@@ -174,7 +176,7 @@ export default function Register() {
                                 <div className="grid gap-2 ">
                                     <label
                                         htmlFor="first_name"
-                                        className="mt-4"
+                                        className="mt-4 text-institutionnel"
                                     >
                                         Prénom
                                     </label>
@@ -190,7 +192,10 @@ export default function Register() {
                             </div>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
-                                    <label htmlFor="last_name" className="mt-4">
+                                    <label
+                                        htmlFor="last_name"
+                                        className="mt-4 text-institutionnel"
+                                    >
                                         Nom
                                     </label>
                                     <Input
@@ -205,7 +210,10 @@ export default function Register() {
                             </div>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
-                                    <label htmlFor="age" className="mt-4">
+                                    <label
+                                        htmlFor="age"
+                                        className="mt-4 text-institutionnel"
+                                    >
                                         Age
                                     </label>
                                     <Input
@@ -220,7 +228,10 @@ export default function Register() {
                             </div>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
-                                    <label htmlFor="mail" className="mt-4">
+                                    <label
+                                        htmlFor="mail"
+                                        className="mt-4 text-institutionnel"
+                                    >
                                         Email
                                     </label>
                                     <Input
@@ -235,7 +246,9 @@ export default function Register() {
                             </div>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
-                                    <div className="mt-4">Rôle</div>
+                                    <div className="mt-4 text-institutionnel">
+                                        Rôle
+                                    </div>
                                     <DropdownMenu>
                                         <DropdownMenuTrigger>
                                             <Button
@@ -274,7 +287,10 @@ export default function Register() {
                             </div>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
-                                    <label htmlFor="password" className="mt-4">
+                                    <label
+                                        htmlFor="password"
+                                        className="mt-4 text-institutionnel"
+                                    >
                                         Mot de passe
                                     </label>
                                     <Input
@@ -291,7 +307,7 @@ export default function Register() {
                                 <div className="grid gap-2">
                                     <label
                                         htmlFor="confirmPassword"
-                                        className="mt-4"
+                                        className="mt-4 text-institutionnel"
                                     >
                                         Confirmez le mot de passe
                                     </label>
@@ -317,6 +333,7 @@ export default function Register() {
                     </CardContent>
                 </Card>
             </div>
+            <Footer />
         </div>
     );
 }

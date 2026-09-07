@@ -12,4 +12,5 @@ export default [
     route("survey", "./routes/survey.tsx"),
     route("register", "./routes/register.tsx"),
     route("profile", "./routes/profile.tsx"),
+    route("upload", "./routes/upload.tsx"),
 ] satisfies RouteConfig;
