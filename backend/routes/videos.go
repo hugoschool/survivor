@@ -109,6 +109,40 @@ func VideosPaginatedReviewHandler(c *gin.Context) {
 	VideosPaginatedFeed(c, models.VideoStatus(models.VideoStatusAwaitingModeration))
 }
 
+// VideoGetCurrent godoc
+// @Summary Get the current user videos
+// @Schemes
+// @Description Get the current user videos
+// @Tags Videos
+// @Accept json
+// @Produce json
+// @Success 200 {object} []models.Video
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /videos/me [get]
+func VideosGetCurrentUserHandler(c *gin.Context) {
+	user, err := models.GetUserFromContext(c)
+
+	if err != nil {
+		c.JSON(http.StatusNotFound, models.ApiError{Message: "User not found"})
+		return
+	}
+
+	var videos []models.Video
+	err = database.DB.Where("user_id = ?", user.ID).Find(&videos).Error
+
+	fmt.Println(videos, err)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	c.JSON(http.StatusOK, videos)
+}
+
 // VideoUpload godoc
 // @Summary Upload a file
 // @Schemes
