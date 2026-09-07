@@ -2,6 +2,7 @@ package routes
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -20,6 +21,11 @@ const (
 type videoPaginatedResponse struct {
 	Video models.VideoLink `json:"video"`
 	User  models.User      `json:"user"`
+}
+
+type videoSetReviewStatusBody struct {
+	Status  models.VideoStatus `json:"status" binding:"required"`
+	Message string             `json:"message" binding:"required"`
 }
 
 func VideosPaginatedFeed(c *gin.Context, status models.VideoStatus) {
@@ -186,4 +192,61 @@ func VideoUploadHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, videoLink)
+}
+
+// VideoSetReviewStatus godoc
+// @Summary Set video review status
+// @Schemes
+// @Description Set video review status
+// @Tags Videos
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Param request body videoSetReviewStatusBody true "Request body"
+// @Success 200 {object} models.ApiMessage
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /videos/:id/review [put]
+func VideosSetReviewStatusHandler(c *gin.Context) {
+	// The ID given is the VideoID field inside the models.Video
+	id := c.Param("id")
+
+	if id == "" {
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect body"})
+		return
+	}
+
+	var body videoSetReviewStatusBody
+
+	if err := c.ShouldBindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect body"})
+		return
+	}
+
+	ctx := context.Background()
+	video, err := gorm.G[models.Video](database.DB).Where("video_id = ?", id).First(ctx)
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "Incorrect body"})
+			return
+		}
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	video.Status = body.Status
+	video.StatusReason = body.Message
+
+	err = database.DB.Save(&video).Error
+
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	c.JSON(http.StatusOK, models.ApiMessage{Message: "Success"})
 }

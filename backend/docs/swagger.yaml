@@ -203,6 +203,8 @@ definitions:
         $ref: '#/definitions/gorm.Model'
       status:
         type: integer
+      status_reason:
+        type: string
       user_id:
         type: integer
       video_id:
@@ -301,6 +303,16 @@ definitions:
         $ref: '#/definitions/models.User'
       video:
         $ref: '#/definitions/models.VideoLink'
+    type: object
+  routes.videoSetReviewStatusBody:
+    properties:
+      message:
+        type: string
+      status:
+        type: integer
+    required:
+    - message
+    - status
     type: object
 info:
   contact: {}
@@ -747,6 +759,45 @@ paths:
           schema:
             $ref: '#/definitions/models.ApiError'
       summary: Get a feed of videos
+      tags:
+      - Videos
+  /videos/:id/review:
+    put:
+      consumes:
+      - application/json
+      description: Set video review status
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/routes.videoSetReviewStatusBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ApiMessage'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Set video review status
       tags:
       - Videos
   /videos/review:
