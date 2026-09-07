@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
+import { clearSession } from "~/lib/auth";
+import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -20,54 +22,15 @@ const AUTH_KEYS = {
     user: "user",
 };
 
-type SessionUser = {
-    firstName: string;
-    lastName: string;
-    email: string;
-};
-
 const isAuthenticated = () => {
     if (typeof window === "undefined") return false;
     return Boolean(window.localStorage.getItem(AUTH_KEYS.token));
 };
 
-const getSessionUser = (): SessionUser | null => {
-    if (typeof window === "undefined") return null;
-
-    const rawUser = window.localStorage.getItem(AUTH_KEYS.user);
-    if (!rawUser) return null;
-
-    try {
-        const parsed = JSON.parse(rawUser);
-        return {
-            firstName: (parsed.firstName ?? parsed.first_name ?? "").trim(),
-            lastName: (parsed.lastName ?? parsed.last_name ?? "").trim(),
-            email: (parsed.email ?? parsed.mail ?? "").trim(),
-        };
-    } catch {
-        return null;
-    }
-};
-
-const getDisplayName = (user: SessionUser | null) => {
-    if (!user) return "Utilisateur connecté";
-
-    const fullName = `${user.firstName} ${user.lastName}`.trim();
-    if (fullName) return fullName;
-
-    // peute etre a enlever -> quand le nom est vide on parse l'email
-    const emailPart = user.email.split("@")[0];
-    return emailPart
-        .split(/[._-]+/)
-        .filter(Boolean)
-        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-        .join(" ");
-};
-
 export default function Profile() {
+    const { user, refetch } = useAuth();
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState<boolean>(isAuthenticated);
-    const [user, setUser] = useState<SessionUser | null>(getSessionUser);
 
     useEffect(() => {
         if (!loggedIn) {
@@ -77,26 +40,48 @@ export default function Profile() {
 
     useEffect(() => {
         const syncAuth = () => setLoggedIn(isAuthenticated());
-        const syncUser = () => setUser(getSessionUser());
 
         syncAuth();
-        syncUser();
         window.addEventListener("storage", syncAuth);
-        window.addEventListener("storage", syncUser);
 
         return () => {
             window.removeEventListener("storage", syncAuth);
-            window.removeEventListener("storage", syncUser);
         };
     }, []);
+
+    useEffect(() => {
+        if (!loggedIn) return;
+
+        void refetch();
+        const intervalId = window.setInterval(() => {
+            void refetch();
+        }, 15000);
+
+        const handleFocus = () => {
+            void refetch();
+        };
+        window.addEventListener("focus", handleFocus);
+
+        return () => {
+            window.clearInterval(intervalId);
+            window.removeEventListener("focus", handleFocus);
+        };
+    }, [loggedIn, refetch]);
 
     if (!loggedIn) {
         return null;
     }
 
-    const email = user?.email || "Utilisateur connecté";
-    const displayName = getDisplayName(user);
+    const survey_score = user?.survey_score ?? 0;
+    const displayName =
+        `${user?.first_name ?? ""} ${user?.last_name ?? ""}`.trim() ||
+        "Utilisateur connecté";
     const likesCount = 0;
+    const handleDeleteAccountClick = () => {
+        clearSession();
+        setLoggedIn(false);
+        navigate("/login", { replace: true });
+    };
 
     return (
         <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(27,58,107,0.08),transparent_42%),linear-gradient(to_bottom,#ffffff,#f7f9fc)]">
@@ -115,7 +100,7 @@ export default function Profile() {
                     <CardContent className="grid gap-5 p-6 sm:grid-cols-2">
                         <div className="rounded-2xl border border-border/70 bg-white p-5">
                             <p className="text-base font-medium text-ink/60">
-                                Nom prénom
+                                Utilisateur
                             </p>
                             <p className="mt-2 truncate text-2xl font-medium text-institutionnel">
                                 {displayName}
@@ -123,10 +108,10 @@ export default function Profile() {
                         </div>
                         <div className="rounded-2xl border border-border/70 bg-white p-5">
                             <p className="text-base font-medium text-ink/60">
-                                Adresse email
+                                Score au questionnaire
                             </p>
                             <p className="mt-2 truncate text-2xl font-medium text-institutionnel">
-                                {email}
+                                {survey_score}
                             </p>
                         </div>
                         <div className="rounded-2xl border border-border/70 bg-white p-5">
@@ -137,11 +122,26 @@ export default function Profile() {
                                 {likesCount}
                             </p>
                         </div>
+                        <div className="rounded-2xl border border-border/70 bg-white p-5">
+                            <p className="text-base font-medium text-ink/60">
+                                Ma video
+                            </p>
+                            <p className="mt-2 text-2xl font-medium text-institutionnel">
+                                <button
+                                    type="button"
+                                    onClick={() => navigate("/upload")}
+                                    className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15"
+                                >
+                                    Mettre a jour ma vidéo
+                                </button>
+                            </p>
+                        </div>
                         <div className="flex flex-wrap items-end gap-3 sm:col-span-2">
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="h-11 border-red-900 bg-white px-4 font-main font-bold text-red-900 hover:border-red-900 hover:border-b-4 hover:text-red-900"
+                                className="h-11 border-red-900 bg-white px-4 font-[Marianne] font-bold text-red-900 hover:border-red-900 hover:border-b-4 hover:text-red-900"
+                                onClick={handleDeleteAccountClick}
                             >
                                 Supprimer mon compte
                             </Button>

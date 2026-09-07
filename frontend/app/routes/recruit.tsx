@@ -1,11 +1,12 @@
 "use client";
 
 import { BadgeCheck, Heart, MapPin, SlidersHorizontal } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { VerticalFeed, type VideoItem } from "react-vertical-feed";
 import { HeadBar } from "~/components/Headbar";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { API_URL } from "~/lib/auth";
 import "@codegouvfr/react-dsfr/dsfr/fonts/index.css";
 import { Footer } from "~/components/Footer";
 import {
@@ -22,69 +23,33 @@ import {
 type CandidateVideo = VideoItem & {
     candidateName: string;
     role: string;
-    sector: string;
-    location: string;
+    sector?: string;
+    location?: string;
     certified: boolean;
-    likes: number;
 };
 
-const videos: CandidateVideo[] = [
-    {
-        id: "intro",
-        src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-        loop: true,
-        candidateName: "Camille R.",
-        role: "Développeuse front-end",
-        sector: "Tech",
-        location: "Lyon",
-        certified: true,
-        likes: 42,
-    },
-    {
-        id: "demo",
-        src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
-        loop: true,
-        candidateName: "Yanis B.",
-        role: "Chef de projet",
-        sector: "Tech",
-        location: "Paris",
-        certified: false,
-        likes: 128,
-    },
-    {
-        id: "design",
-        src: "https://media.w3.org/2010/05/sintel/trailer.mp4",
-        loop: true,
-        candidateName: "Sarah M.",
-        role: "Designer produit",
-        sector: "Design",
-        location: "Bordeaux",
-        certified: true,
-        likes: 7,
-    },
-    {
-        id: "data",
-        src: "https://media.w3.org/2010/05/bunny/trailer.mp4",
-        loop: true,
-        candidateName: "Lina D.",
-        role: "Data analyst",
-        sector: "Tech",
-        location: "Lille",
-        certified: true,
-        likes: 63,
-    },
-    {
-        id: "marketing",
-        src: "https://media.w3.org/2010/05/video/movie_300.mp4",
-        loop: true,
-        candidateName: "Thomas G.",
-        role: "Responsable marketing",
-        sector: "Marketing",
-        location: "Nantes",
-        certified: false,
-        likes: 31,
-    },
-];
+type VideosResponse = {
+    video: { id: string; link: string };
+    user: {
+        first_name: string;
+        last_name: string;
+        survey_score: number | null;
+    };
+};
+
+type Filters = {
+    query: string;
+    sector: string;
+    location: string;
+    certifiedOnly: boolean;
+};
+
+const EMPTY_FILTERS: Filters = {
+    query: "",
+    sector: "all",
+    location: "all",
+    certifiedOnly: false,
+};
 
 export function meta() {
     return [{ title: "Recrutement" }];
@@ -116,38 +81,57 @@ function LikeButton({
     );
 }
 
-type Filters = {
-    query: string;
-    sector: string;
-    location: string;
-    certifiedOnly: boolean;
-};
-
-const EMPTY_FILTERS: Filters = {
-    query: "",
-    sector: "all",
-    location: "all",
-    certifiedOnly: false,
-};
-
 export default function Recruit() {
+    const [videos, setVideos] = useState<CandidateVideo[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadError, setLoadError] = useState<string | null>(null);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [likedVideos, setLikedVideos] = useState<Set<string>>(new Set());
-    const [likeCounts, setLikeCounts] = useState<Record<string, number>>(() =>
-        Object.fromEntries(videos.map((v) => [v.id, v.likes])),
-    );
     const [draftFilters, setDraftFilters] = useState<Filters>(EMPTY_FILTERS);
     const [appliedFilters, setAppliedFilters] =
         useState<Filters>(EMPTY_FILTERS);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
+    useEffect(() => {
+        const loadVideos = async () => {
+            try {
+                const response = await fetch(`${API_URL}/videos?page=0`);
+                if (!response.ok) {
+                    throw new Error("Impossible de charger les vidéos.");
+                }
+
+                const payload = (await response.json()) as VideosResponse[];
+                setVideos(
+                    payload.map(({ video, user }) => ({
+                        id: video.id,
+                        src: video.link,
+                        loop: true,
+                        candidateName:
+                            `${user.first_name} ${user.last_name}`.trim() ||
+                            "Candidat",
+                        role: "Candidat",
+                        certified: user.survey_score !== null,
+                    })),
+                );
+            } catch {
+                setLoadError(
+                    "Impossible de charger les vidéos pour le moment.",
+                );
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        void loadVideos();
+    }, []);
+
     const sectors = useMemo(
-        () => Array.from(new Set(videos.map((v) => v.sector))),
-        [],
+        () => [...new Set(videos.map((v) => v.sector).filter(Boolean))],
+        [videos],
     );
     const locations = useMemo(
-        () => Array.from(new Set(videos.map((v) => v.location))),
-        [],
+        () => [...new Set(videos.map((v) => v.location).filter(Boolean))],
+        [videos],
     );
 
     const visibleVideos = useMemo(() => {
@@ -173,7 +157,7 @@ export default function Recruit() {
                 matchesCertified
             );
         });
-    }, [appliedFilters]);
+    }, [videos, appliedFilters]);
 
     const currentVideo = visibleVideos[currentVideoIndex];
     const currentVideoId = currentVideo?.id;
@@ -181,26 +165,10 @@ export default function Recruit() {
     const toggleLike = (videoId: string) => {
         setLikedVideos((prev) => {
             const next = new Set(prev);
-            const alreadyLiked = next.has(videoId);
-
-            if (alreadyLiked) {
-                next.delete(videoId);
-            } else {
-                next.add(videoId);
-            }
-
-            setLikeCounts((counts) => ({
-                ...counts,
-                [videoId]: (counts[videoId] ?? 0) + (alreadyLiked ? -1 : 1),
-            }));
-
+            next.has(videoId) ? next.delete(videoId) : next.add(videoId);
             return next;
         });
     };
-
-    const _currentLikeCount = currentVideoId
-        ? (likeCounts[currentVideoId] ?? 0)
-        : 0;
 
     const applyFilters = () => {
         setAppliedFilters(draftFilters);
@@ -394,9 +362,22 @@ export default function Recruit() {
                     </div>
                 </div>
 
-                {visibleVideos.length === 0 ? (
+                {isLoading ? (
+                    <div className="flex flex-1 items-center justify-center px-8 text-center">
+                        <p className="text-base text-[#52627b]">
+                            Chargement des vidéos…
+                        </p>
+                    </div>
+                ) : loadError ? (
                     <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-                        <h2 className="font-main text-xl font-bold text-institutionnel">
+                        <h2 className="font-[Marianne] text-xl font-bold text-institutionnel">
+                            Les vidéos sont indisponibles
+                        </h2>
+                        <p className="text-base text-[#52627b]">{loadError}</p>
+                    </div>
+                ) : visibleVideos.length === 0 ? (
+                    <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
+                        <h2 className="font-[Marianne] text-xl font-bold text-institutionnel">
                             Aucun profil ne correspond à ces filtres
                         </h2>
                         <p className="text-base text-[#52627b]">
@@ -428,15 +409,22 @@ export default function Recruit() {
                                     <p className="text-sm text-white/95">
                                         {currentVideo.role}
                                     </p>
-                                    <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
-                                        <span className="bg-white px-2.5 py-1 text-institutionnel">
-                                            {currentVideo.sector}
-                                        </span>
-                                        <span className="flex items-center gap-1 border border-white/50 px-2.5 py-1 text-white">
-                                            <MapPin className="h-3.5 w-3.5" />
-                                            {currentVideo.location}
-                                        </span>
-                                    </div>
+                                    {(currentVideo.sector ||
+                                        currentVideo.location) && (
+                                        <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
+                                            {currentVideo.sector && (
+                                                <span className="bg-white px-2.5 py-1 text-institutionnel">
+                                                    {currentVideo.sector}
+                                                </span>
+                                            )}
+                                            {currentVideo.location && (
+                                                <span className="flex items-center gap-1 border border-white/50 px-2.5 py-1 text-white">
+                                                    <MapPin className="h-3.5 w-3.5" />
+                                                    {currentVideo.location}
+                                                </span>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
@@ -452,7 +440,6 @@ export default function Recruit() {
                                         toggleLike(currentVideoId)
                                     }
                                 />
-                                <span className="font-main text-xs font-bold text-white"></span>
                             </div>
                         </div>
                     </div>
