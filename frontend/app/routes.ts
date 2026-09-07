@@ -6,6 +6,7 @@ export default [
         index("./routes/admin/overview.tsx"),
         route("questionnaire", "./routes/admin/questionnaire.tsx"),
         route("users", "./routes/admin/users.tsx"),
+        route("videos", "./routes/admin/videos.tsx"),
     ]),
     route("recruit", "./routes/recruit.tsx"),
     route("login", "./routes/login.tsx"),
