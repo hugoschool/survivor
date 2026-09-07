@@ -22,7 +22,7 @@
 @import "shadcn/tailwind.css";
 
 @theme {
-    --color-institutionnel: #1b3a6b;
+    --color-institutionnel: #000091;
     --color-institutionnel-light: #eaf0fa;
     --color-ink: #1a1a1a;
     --color-action: #1a1a1a;
@@ -131,7 +131,7 @@ body {
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.205 0 0);
     --popover-foreground: oklch(0.985 0 0);
-    --primary: #1b3a6b;
+    --primary: var(--color-institutionnel);
     --primary-foreground: #ffffff;
     --secondary: #1a1a1a;
     --secondary-foreground: #ffffff;
