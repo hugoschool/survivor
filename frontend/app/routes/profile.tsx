@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 import { Button } from "../components/ui/button";
 import {
@@ -140,7 +141,7 @@ export default function Profile() {
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="h-11 border-red-900 bg-white px-4 font-[Marianne] font-bold text-red-900 hover:border-red-900 hover:border-b-4 hover:text-red-900"
+                                className="h-11 border-red-900 bg-white px-4 font-main font-bold text-red-900 hover:border-red-900 hover:border-b-4 hover:text-red-900"
                             >
                                 Supprimer mon compte
                             </Button>
@@ -148,6 +149,7 @@ export default function Profile() {
                     </CardContent>
                 </Card>
             </div>
+            <Footer />
         </div>
     );
 }

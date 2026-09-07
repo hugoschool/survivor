@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { Footer } from "./components/Footer";
 import { AuthProvider } from "./lib/authContext";
 
 export const links: Route.LinksFunction = () => [];
@@ -67,6 +68,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
                     <code>{stack}</code>
                 </pre>
             )}
+            <Footer />
         </main>
     );
 }
