@@ -150,11 +150,11 @@ export default function Register() {
     return (
         <div>
             <HeadBar />
-            <div className="flex min-h-screen items-center justify-center p-4 font-marianne">
+            <div className="flex min-h-screen items-center justify-center p-4 font-main">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
                         <CardTitle>Inscription</CardTitle>
-                        <CardDescription className="flex items-center font-spectral">
+                        <CardDescription className="flex items-center font-secondary">
                             Remplissez les informations pour créer un compte
                         </CardDescription>
                         <CardAction>

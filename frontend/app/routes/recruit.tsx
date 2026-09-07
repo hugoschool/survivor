@@ -213,17 +213,17 @@ export default function Recruit() {
     };
 
     return (
-        <div className="flex h-dvh flex-col overflow-hidden bg-[#F7F9FC] font-[Spectral] text-[#172033] scheme-light">
+        <div className="flex h-dvh flex-col overflow-hidden bg-[#F7F9FC] font-secondary text-[#172033] scheme-light">
             <HeadBar />
 
             <main className="flex min-h-0 flex-1 flex-col">
                 <div className="border-y border-institutionnel/15 bg-white">
                     <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
                         <div>
-                            <p className="mb-1 font-[Marianne] text-xs font-bold tracking-[0.16em] text-institutionnel uppercase">
+                            <p className="mb-1 font-main text-xs font-bold tracking-[0.16em] text-institutionnel uppercase">
                                 Espace recruteur
                             </p>
-                            <h1 className="font-[Marianne] text-2xl font-bold tracking-tight text-institutionnel sm:text-3xl">
+                            <h1 className="font-main text-2xl font-bold tracking-tight text-institutionnel sm:text-3xl">
                                 Découvrez les talents
                             </h1>
                         </div>
@@ -237,7 +237,7 @@ export default function Recruit() {
                                     <Button
                                         variant="outline"
                                         size="lg"
-                                        className="h-11 border-institutionnel bg-white px-4 font-[Marianne] font-bold text-institutionnel hover:bg-institutionnel/5 hover:text-institutionnel"
+                                        className="h-11 border-institutionnel bg-white px-4 font-main font-bold text-institutionnel hover:bg-institutionnel/5 hover:text-institutionnel"
                                     />
                                 }
                             >
@@ -245,7 +245,7 @@ export default function Recruit() {
                                 <SlidersHorizontal data-icon="inline-end" />
                             </DrawerTrigger>
                             <DrawerContent
-                                className="w-full max-w-md rounded-none border-l border-institutionnel/20 bg-[#F7F9FC] font-[Spectral] text-[#172033]"
+                                className="w-full max-w-md rounded-none border-l border-institutionnel/20 bg-[#F7F9FC] font-secondary text-[#172033]"
                                 style={{
                                     top: "0",
                                     right: 0,
@@ -256,7 +256,7 @@ export default function Recruit() {
                                 }}
                             >
                                 <DrawerHeader className="border-b border-institutionnel/15 bg-white">
-                                    <DrawerTitle className="font-[Marianne] text-xl font-bold text-institutionnel">
+                                    <DrawerTitle className="font-main text-xl font-bold text-institutionnel">
                                         Filtrer les profils
                                     </DrawerTitle>
                                     <DrawerDescription>
@@ -269,7 +269,7 @@ export default function Recruit() {
                                     <div className="flex flex-col gap-1.5">
                                         <label
                                             htmlFor="filter-query"
-                                            className="font-[Marianne] text-sm font-bold text-institutionnel"
+                                            className="font-main text-sm font-bold text-institutionnel"
                                         >
                                             Compétence ou mot-clé
                                         </label>
@@ -290,7 +290,7 @@ export default function Recruit() {
                                     <div className="flex flex-col gap-1.5">
                                         <label
                                             htmlFor="filter-sector"
-                                            className="font-[Marianne] text-sm font-bold text-institutionnel"
+                                            className="font-main text-sm font-bold text-institutionnel"
                                         >
                                             Secteur
                                         </label>
@@ -322,7 +322,7 @@ export default function Recruit() {
                                     <div className="flex flex-col gap-1.5">
                                         <label
                                             htmlFor="filter-location"
-                                            className="font-[Marianne] text-sm font-bold text-institutionnel"
+                                            className="font-main text-sm font-bold text-institutionnel"
                                         >
                                             Localisation
                                         </label>
@@ -372,7 +372,7 @@ export default function Recruit() {
                                 <DrawerFooter className="border-t border-institutionnel/15 bg-white">
                                     <Button
                                         onClick={applyFilters}
-                                        className="h-11 rounded-none border-institutionnel bg-[#ffffff] font-[Marianne] font-bold text-institutionnel hover:bg-institutionnel/5"
+                                        className="h-11 rounded-none border-institutionnel bg-[#ffffff] font-main font-bold text-institutionnel hover:bg-institutionnel/5"
                                     >
                                         Appliquer
                                     </Button>
@@ -381,7 +381,7 @@ export default function Recruit() {
                                             <Button
                                                 variant="outline"
                                                 onClick={resetFilters}
-                                                className="h-11 rounded-none border-institutionnel font-[Marianne] font-bold text-institutionnel hover:bg-institutionnel/5 hover:text-institutionnel"
+                                                className="h-11 rounded-none border-institutionnel font-main font-bold text-institutionnel hover:bg-institutionnel/5 hover:text-institutionnel"
                                             />
                                         }
                                     >
@@ -395,7 +395,7 @@ export default function Recruit() {
 
                 {visibleVideos.length === 0 ? (
                     <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-                        <h2 className="font-[Marianne] text-xl font-bold text-institutionnel">
+                        <h2 className="font-main text-xl font-bold text-institutionnel">
                             Aucun profil ne correspond à ces filtres
                         </h2>
                         <p className="text-base text-[#52627b]">
@@ -414,7 +414,7 @@ export default function Recruit() {
                             {currentVideo && (
                                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-[#07142a]/95 via-[#07142a]/65 to-transparent p-5 pr-18">
                                     <div className="mb-2 flex items-center gap-2">
-                                        <h2 className="font-[Marianne] text-lg font-bold text-white">
+                                        <h2 className="font-main text-lg font-bold text-white">
                                             {currentVideo.candidateName}
                                         </h2>
                                         {currentVideo.certified && (
@@ -451,7 +451,7 @@ export default function Recruit() {
                                         toggleLike(currentVideoId)
                                     }
                                 />
-                                <span className="font-[Marianne] text-xs font-bold text-white"></span>
+                                <span className="font-main text-xs font-bold text-white"></span>
                             </div>
                         </div>
                     </div>

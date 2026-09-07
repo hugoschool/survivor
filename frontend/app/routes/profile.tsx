@@ -140,7 +140,7 @@ export default function Profile() {
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="h-11 border-red-900 bg-white px-4 font-[Marianne] font-bold text-red-900 hover:border-red-900 hover:border-b-4 hover:text-red-900"
+                                className="h-11 border-red-900 bg-white px-4 font-main font-bold text-red-900 hover:border-red-900 hover:border-b-4 hover:text-red-900"
                             >
                                 Supprimer mon compte
                             </Button>
