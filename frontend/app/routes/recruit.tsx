@@ -7,6 +7,7 @@ import { HeadBar } from "~/components/Headbar";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import "@codegouvfr/react-dsfr/dsfr/fonts/index.css";
+import { Footer } from "~/components/Footer";
 import {
     Drawer,
     DrawerClose,
@@ -457,6 +458,8 @@ export default function Recruit() {
                     </div>
                 )}
             </main>
+
+            <Footer />
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 import { Button } from "~/components/ui/button";
 import {
@@ -454,6 +455,7 @@ export default function Survey() {
                     </div>
                 )}
             </div>
+            <Footer />
         </div>
     );
 }

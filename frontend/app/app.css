@@ -166,10 +166,10 @@ body {
         @apply bg-background text-foreground;
     }
     html {
-        @apply font-secondary
+        @apply font-secondary;
     }
     body {
-        @apply font-secondary
+        @apply font-secondary;
     }
     h1,
     h2,

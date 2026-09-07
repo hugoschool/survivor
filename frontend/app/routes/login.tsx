@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
@@ -92,7 +93,9 @@ export default function Login() {
             <div className="flex min-h-screen items-center justify-center p-4 font-main">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
-                        <CardTitle className="text-institutionnel">Connexion</CardTitle>
+                        <CardTitle className="text-institutionnel">
+                            Connexion
+                        </CardTitle>
                         <CardDescription className="flex items-center font-secondary">
                             Entre ton email pour te connecter a ton compte
                         </CardDescription>
@@ -106,7 +109,12 @@ export default function Login() {
                         <form onSubmit={handleSubmit}>
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
-                                    <Label className="text-institutionnel" htmlFor="mail">Email</Label>
+                                    <Label
+                                        className="text-institutionnel"
+                                        htmlFor="mail"
+                                    >
+                                        Email
+                                    </Label>
                                     <Input
                                         id="mail"
                                         type="email"
@@ -118,7 +126,10 @@ export default function Login() {
                                 </div>
                                 <div className="grid gap-2">
                                     <div className="flex items-center">
-                                        <Label htmlFor="password" className="text-institutionnel">
+                                        <Label
+                                            htmlFor="password"
+                                            className="text-institutionnel"
+                                        >
                                             Mot de passe
                                         </Label>
                                         {/* <button
@@ -157,6 +168,7 @@ export default function Login() {
                     </CardContent>
                 </Card>
             </div>
+            <Footer />
         </div>
     );
 }

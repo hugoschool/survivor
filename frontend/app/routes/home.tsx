@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NavLink } from "react-router";
+import { Footer } from "~/components/Footer";
 import { useAuth } from "~/lib/authContext";
 import { Carousel } from "../components/application/carousel/carousel-base";
 import { HeadBar } from "../components/Headbar";
@@ -113,6 +114,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
