@@ -111,7 +111,6 @@ export default function Upload() {
 
             setUploadResult(payload as UploadResponse);
             setSelectedFile(null);
-
         } catch {
             setError("Impossible d'envoyer la vidéo pour le moment.");
         } finally {
@@ -155,7 +154,8 @@ export default function Upload() {
                             {uploadResult ? (
                                 <div className="grid gap-2">
                                     <p className="text-sm text-green-700">
-                                        Vidéo envoyée, elle sera publique une fois validée par l'Administration.
+                                        Vidéo envoyée, elle sera publique une
+                                        fois validée par l'Administration.
                                     </p>
                                     {uploadNotice ? (
                                         <p className="text-sm text-[#52627b]">

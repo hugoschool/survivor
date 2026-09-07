@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 import { clearSession } from "~/lib/auth";
+import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 import {
     Card,
@@ -11,7 +12,6 @@ import {
     CardHeader,
     CardTitle,
 } from "../components/ui/card";
-import { useAuth } from "~/lib/authContext";
 
 export function meta() {
     return [{ title: "Profile" }];
@@ -20,12 +20,6 @@ export function meta() {
 const AUTH_KEYS = {
     token: "token",
     user: "user",
-};
-
-type SessionUser = {
-    firstName: string;
-    lastName: string;
-    email: string;
 };
 
 const isAuthenticated = () => {
@@ -79,7 +73,9 @@ export default function Profile() {
     }
 
     const survey_score = user?.survey_score ?? 0;
-    const displayName = `${user?.first_name ?? ""} ${user?.last_name ?? ""}`.trim() || "Utilisateur connecté";
+    const displayName =
+        `${user?.first_name ?? ""} ${user?.last_name ?? ""}`.trim() ||
+        "Utilisateur connecté";
     const likesCount = 0;
     const handleDeleteAccountClick = () => {
         clearSession();
@@ -131,15 +127,13 @@ export default function Profile() {
                                 Ma video
                             </p>
                             <p className="mt-2 text-2xl font-medium text-institutionnel">
-
-                            <button
-                                type="button"
-                                onClick={() => navigate("/upload")}
-                                className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15"
-                            >
-                                Mettre a jour ma vidéo
-                            </button>
-
+                                <button
+                                    type="button"
+                                    onClick={() => navigate("/upload")}
+                                    className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15"
+                                >
+                                    Mettre a jour ma vidéo
+                                </button>
                             </p>
                         </div>
                         <div className="flex flex-wrap items-end gap-3 sm:col-span-2">
