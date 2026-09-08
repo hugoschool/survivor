@@ -152,6 +152,7 @@ func VideosGetCurrentUserHandler(c *gin.Context) {
 // @Produce json
 // @Success 200 {object} models.VideoLink
 // @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
 // @Failure 404 {object} models.ApiError
 // @Failure 500 {object} models.ApiError
 // @Router /videos/:id [get]
@@ -175,6 +176,11 @@ func VideoGetURLFromIdHandler(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 			return
 		}
+	}
+
+	if video.Status != models.VideoStatus(models.VideoStatusValidated) {
+		c.JSON(http.StatusUnauthorized, models.ApiError{Message: "Video not validated"})
+		return
 	}
 
 	videoUploader, err := internal.GetCurrentVideoUploader()
