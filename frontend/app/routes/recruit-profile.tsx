@@ -60,12 +60,16 @@ export default function RecruitProfile() {
         );
     }
 
-    const fullName = `${user.first_name} ${user.last_name}`.trim() || "Profil anonyme";
+    const fullName =
+        `${user.first_name} ${user.last_name}`.trim() || "Profil anonyme";
     const locations = user.locations?.map(({ content }) => content) ?? [];
     const sectors = user.sectors?.map(({ content }) => content) ?? [];
     const skills = user.skills?.map(({ content }) => content) ?? [];
-    const video = user.videos?.find(({ status }) => status === 1) ?? user.videos?.[0];
-    const videoUrl = video ? `${API_URL}/videos/storage/${video.video_id}.mp4` : null;
+    const video =
+        user.videos?.find(({ status }) => status === 1) ?? user.videos?.[0];
+    const videoUrl = video
+        ? `${API_URL}/videos/storage/${video.video_id}.mp4`
+        : null;
 
     return (
         <PageShell>
@@ -159,6 +163,12 @@ export default function RecruitProfile() {
                                 className="aspect-[9/16] max-h-[38rem] w-full bg-black object-contain"
                                 src={videoUrl}
                             >
+                                <track
+                                    kind="captions"
+                                    src="/captions.vtt"
+                                    srcLang="fr"
+                                    label="Français"
+                                />
                                 Votre navigateur ne prend pas en charge la
                                 lecture vidéo.
                             </video>

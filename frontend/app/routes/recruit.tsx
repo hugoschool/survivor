@@ -4,14 +4,12 @@ import {
     ArrowRight,
     BadgeCheck,
     BriefcaseBusiness,
-    Heart,
     MapPin,
     SlidersHorizontal,
     Sparkles,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
-import type { VideoItem } from "react-vertical-feed";
 import { HeadBar } from "~/components/Headbar";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -28,14 +26,6 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "../components/ui/drawer";
-
-type CandidateVideo = VideoItem & {
-    candidateName: string;
-    role: string;
-    sector?: string;
-    location?: string;
-    certified: boolean;
-};
 
 export type User = {
     first_name: string;
@@ -64,10 +54,6 @@ export type ProfileItem = {
 };
 
 type VideosResponse = {
-    video: {
-        id: string;
-        link: string;
-    };
     user: User;
 };
 
@@ -85,34 +71,11 @@ const EMPTY_FILTERS: Filters = {
     certifiedOnly: false,
 };
 
+const profileValues = (items: ProfileItem[] | null) =>
+    items?.map(({ content }) => content) ?? [];
+
 export function meta() {
     return [{ title: "Recrutement" }];
-}
-
-function LikeButton({
-    liked,
-    onClick,
-}: {
-    liked: boolean;
-    onClick: () => void;
-}) {
-    return (
-        <button
-            type="button"
-            onClick={onClick}
-            aria-pressed={liked}
-            aria-label={liked ? "Retirer le like" : "Aimer cette vidéo"}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm transition-transform hover:bg-white/25 active:scale-90"
-        >
-            <Heart
-                className={
-                    liked
-                        ? "h-6 w-6 fill-[#F6C343] text-[#F6C343] transition-colors"
-                        : "h-6 w-6 text-white transition-colors"
-                }
-            />
-        </button>
-    );
 }
 
 function ProfileCard({ user }: { user: User }) {
@@ -201,80 +164,67 @@ function ProfileCard({ user }: { user: User }) {
 }
 
 export default function Recruit() {
-    const [videos, setVideos] = useState<CandidateVideo[]>([]);
     const [users, setUsers] = useState<User[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [loadError, setLoadError] = useState<string | null>(null);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-    const [likedVideos, setLikedVideos] = useState<Set<string>>(new Set());
     const [draftFilters, setDraftFilters] = useState<Filters>(EMPTY_FILTERS);
     const [appliedFilters, setAppliedFilters] =
         useState<Filters>(EMPTY_FILTERS);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     useEffect(() => {
-        const loadVideos = async () => {
+        const loadProfiles = async () => {
             try {
                 const response = await fetch(`${API_URL}/videos?page=0`);
                 if (!response.ok) {
                     throw new Error("Impossible de charger les vidéos.");
                 }
-
                 const payload = (await response.json()) as VideosResponse[];
-                console.log("payload :", payload);
-                setVideos(
-                    payload.map(({ video, user }) => ({
-                        id: video.id,
-                        src: video.link,
-                        loop: true,
-                        candidateName:
-                            `${user.first_name} ${user.last_name}`.trim() ||
-                            "Candidat",
-                        role: "Candidat",
-                        certified: user.survey_score !== null,
-                    })),
-                );
                 const usersMap = new Map(
                     payload.map(({ user }) => [user.model.ID, user]),
                 );
                 setUsers(Array.from(usersMap.values()));
-                console.log("users :", Array.from(usersMap.values()));
             } catch {
-                setLoadError(
-                    "Impossible de charger les vidéos pour le moment.",
-                );
-            } finally {
-                setIsLoading(false);
+                setUsers([]);
             }
         };
 
-        void loadVideos();
+        void loadProfiles();
     }, []);
 
     const sectors = useMemo(
-        () => [...new Set(videos.map((v) => v.sector).filter(Boolean))],
-        [videos],
+        () => [
+            ...new Set(users.flatMap((user) => profileValues(user.sectors))),
+        ],
+        [users],
     );
     const locations = useMemo(
-        () => [...new Set(videos.map((v) => v.location).filter(Boolean))],
-        [videos],
+        () => [
+            ...new Set(users.flatMap((user) => profileValues(user.locations))),
+        ],
+        [users],
     );
 
-    const visibleVideos = useMemo(() => {
-        return videos.filter((v) => {
-            const matchesQuery = appliedFilters.query
-                ? `${v.candidateName} ${v.role}`
-                      .toLowerCase()
-                      .includes(appliedFilters.query.toLowerCase())
-                : true;
+    const visibleUsers = useMemo(() => {
+        return users.filter((user) => {
+            const profileSearchText = [
+                user.first_name,
+                user.last_name,
+                ...profileValues(user.skills),
+                ...profileValues(user.sectors),
+                ...profileValues(user.locations),
+            ]
+                .join(" ")
+                .toLowerCase();
+            const matchesQuery =
+                !appliedFilters.query ||
+                profileSearchText.includes(appliedFilters.query.toLowerCase());
             const matchesSector =
                 appliedFilters.sector === "all" ||
-                v.sector === appliedFilters.sector;
+                profileValues(user.sectors).includes(appliedFilters.sector);
             const matchesLocation =
                 appliedFilters.location === "all" ||
-                v.location === appliedFilters.location;
+                profileValues(user.locations).includes(appliedFilters.location);
             const matchesCertified = appliedFilters.certifiedOnly
-                ? v.certified
+                ? user.survey_score !== null
                 : true;
             return (
                 matchesQuery &&
@@ -283,22 +233,10 @@ export default function Recruit() {
                 matchesCertified
             );
         });
-    }, [videos, appliedFilters]);
-
-    const currentVideo = visibleVideos[currentVideoIndex];
-    const currentVideoId = currentVideo?.id;
-
-    const toggleLike = (videoId: string) => {
-        setLikedVideos((prev) => {
-            const next = new Set(prev);
-            next.has(videoId) ? next.delete(videoId) : next.add(videoId);
-            return next;
-        });
-    };
+    }, [users, appliedFilters]);
 
     const applyFilters = () => {
         setAppliedFilters(draftFilters);
-        setCurrentVideoIndex(0);
         setDrawerOpen(false);
     };
 
@@ -499,12 +437,13 @@ export default function Recruit() {
                             </p>
                         </div>
                         <span className="hidden rounded-full bg-institutionnel/8 px-3 py-1.5 text-sm font-bold text-institutionnel sm:block">
-                            {users.length} profil{users.length === 1 ? "" : "s"}
+                            {visibleUsers.length} profil
+                            {visibleUsers.length === 1 ? "" : "s"}
                         </span>
                     </div>
 
                     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                        {users.map((user) => (
+                        {visibleUsers.map((user) => (
                             <ProfileCard key={user.model.ID} user={user} />
                         ))}
                     </div>
