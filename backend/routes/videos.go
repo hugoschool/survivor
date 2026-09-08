@@ -133,8 +133,6 @@ func VideosGetCurrentUserHandler(c *gin.Context) {
 	var videos []models.Video
 	err = database.DB.Where("user_id = ?", user.ID).Find(&videos).Error
 
-	fmt.Println(videos, err)
-
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
