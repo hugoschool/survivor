@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
+import { API_URL } from "~/lib/auth";
 import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 import {
@@ -65,7 +66,7 @@ export default function Login() {
         setLoading(true);
 
         try {
-            const res = await fetch("http://localhost:8080/account/login", {
+            const res = await fetch(`${API_URL}/account/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),

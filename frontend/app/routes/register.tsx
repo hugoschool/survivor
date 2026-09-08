@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
+import { API_URL } from "~/lib/auth";
 import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 import {
@@ -109,7 +110,7 @@ export default function Register() {
         setLoading(true);
 
         try {
-            const res = await fetch("http://localhost:8080/account/register", {
+            const res = await fetch(`${API_URL}/account/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...form, age: Number(form.age) }),
@@ -124,7 +125,7 @@ export default function Register() {
                 mail: form.mail,
                 password: form.password,
             };
-            const resLog = await fetch("http://localhost:8080/account/login", {
+            const resLog = await fetch(`${API_URL}/account/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(loginForm),

@@ -1,7 +1,8 @@
-export const API_URL =
-    typeof window === "undefined"
-        ? "http://localhost:8080"
-        : `${window.location.protocol}//${window.location.hostname}:8080`;
+const DEV_API_URL = "http://localhost:8080";
+
+export const API_URL = import.meta.env.DEV
+    ? DEV_API_URL
+    : import.meta.env.VITE_BACKEND_URL;
 
 export const AUTH_KEYS = {
     token: "token",
