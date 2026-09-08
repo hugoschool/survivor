@@ -112,12 +112,12 @@ export default function Register() {
             const res = await fetch("http://localhost:8080/account/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
+                body: JSON.stringify({ ...form, age: Number(form.age) }),
             });
 
             if (!res.ok) {
                 const data = await res.json().catch(() => null);
-                throw new Error(data?.error || "Inscription error");
+                throw new Error(data?.message || "Inscription error");
             }
 
             const loginForm = {
@@ -132,7 +132,7 @@ export default function Register() {
             const loginData = await resLog.json().catch(() => ({}));
 
             if (!resLog.ok) {
-                throw new Error(loginData?.error || "Connection error");
+                throw new Error(loginData?.message || "Connection error");
             }
 
             const token = loginData?.token || `local-${Date.now()}`;
@@ -143,6 +143,7 @@ export default function Register() {
             navigate("/", { replace: true });
             // biome-ignore lint: any type for the moment
         } catch (err: any) {
+            alert(err.message);
             setError(err.message);
         } finally {
             setLoading(false);

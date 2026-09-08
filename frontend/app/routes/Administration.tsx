@@ -1,12 +1,9 @@
-import {
-    ClipboardList,
-    LayoutDashboard,
-    ShieldCheck,
-    Users,
-} from "lucide-react";
-import { NavLink, Outlet } from "react-router";
+import { ClipboardList, LayoutDashboard, Users, Video } from "lucide-react";
+import { Navigate, NavLink, Outlet } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
+import { ROLE } from "~/lib/auth";
+import { useAuth } from "~/lib/authContext";
 
 const NAV_ITEMS = [
     {
@@ -27,6 +24,12 @@ const NAV_ITEMS = [
         icon: Users,
         end: false,
     },
+    {
+        to: "/administration/videos",
+        label: "Vidéos",
+        icon: Video,
+        end: false,
+    },
 ] as const;
 
 export function meta() {
@@ -34,13 +37,32 @@ export function meta() {
 }
 
 export default function Administration() {
+    const { user, loading } = useAuth();
+
+    if (loading) {
+        return (
+            <div>
+                <HeadBar />
+                <div className="mx-auto flex min-h-screen w-full max-w-6xl px-4 py-20">
+                    <p className="text-sm text-muted-foreground">
+                        Vérification des accès…
+                    </p>
+                </div>
+                <Footer />
+            </div>
+        );
+    }
+
+    if (user?.role !== ROLE.admin) {
+        return <Navigate replace to="/" />;
+    }
+
     return (
         <div>
             <HeadBar />
             <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-4 py-10 md:flex-row">
-                <aside className="shrink-0 md:w-56">
-                    <p className="flex items-center gap-1.5 px-3 pb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                        <ShieldCheck className="size-3.5" />
+                <aside className="shrink-0 md:w-56 py-20">
+                    <p className=" font-heading font-mediumflex items-center gap-1.5 px-3 pb-3 text-l font-medium tracking-wide">
                         Administration
                     </p>
                     <nav className="flex gap-1 overflow-x-auto md:flex-col">

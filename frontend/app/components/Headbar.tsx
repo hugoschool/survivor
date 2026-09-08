@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+import { ROLE } from "~/lib/auth";
 import { useAuth } from "~/lib/authContext";
 
 const isAuthenticated = () => {
@@ -86,15 +87,16 @@ export function HeadBar() {
                                         Recrutement
                                     </p>
                                 </NavLink>
-                                {/* <NavLink
-                                    to="/administration"
-                                    end
-                                    onClick={() => setMenuOpen(false)}
-                                >
-                                    <p className="text-institutionnel transition hover:text-institutionnel/75 hover:underline">
-                                        Administration
-                                    </p>
-                                </NavLink> */}
+                                {user?.role === ROLE.admin && (
+                                    <NavLink
+                                        to="/administration"
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        <p className="text-institutionnel transition hover:text-institutionnel/75 hover:underline">
+                                            Administration
+                                        </p>
+                                    </NavLink>
+                                )}
                                 <NavLink
                                     to="/survey"
                                     end
