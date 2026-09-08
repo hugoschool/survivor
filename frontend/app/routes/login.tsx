@@ -16,6 +16,10 @@ import {
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 
+const LOGIN_ERRORS: Record<string, string> = {
+    "Incorrect body": "Adresse e-mail ou mot de passe incorrect.",
+};
+
 const AUTH_KEYS = {
     token: "token",
 };
@@ -70,7 +74,11 @@ export default function Login() {
             const data = await res.json().catch(() => ({}));
 
             if (!res.ok) {
-                throw new Error(data?.error || "Connection error");
+                throw new Error(
+                    LOGIN_ERRORS[data?.message] ??
+                        data?.message ??
+                        "Connexion impossible, réessayez plus tard.",
+                );
             }
 
             const token = data?.token || `local-${Date.now()}`;
@@ -81,7 +89,9 @@ export default function Login() {
             navigate("/", { replace: true });
             // biome-ignore lint: any type for the moment
         } catch (err: any) {
-            setError(err.message || "Connection error");
+            setError(
+                err.message || "Connexion impossible, réessayez plus tard.",
+            );
         } finally {
             setLoading(false);
         }
