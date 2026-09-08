@@ -715,6 +715,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/models.ApiError"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
