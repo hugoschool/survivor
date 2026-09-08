@@ -87,7 +87,7 @@ func UserGetCurrentHandler(c *gin.Context) {
 // UsersGet godoc
 // @Summary Get all users (paginated)
 // @Schemes
-// @Description Get all users (paginated). Users are filtered by their latest profile update then by their id.
+// @Description Get all users (paginated). Users are filtered by their latest profile update then by their id. Only job seekers are returned from this endpoint.
 // @Tags Users
 // @Accept json
 // @Produce json
@@ -107,6 +107,7 @@ func UsersPaginatedHandler(c *gin.Context) {
 		Preload("Videos").
 		Order("updated_at DESC").
 		Order("id ASC").
+		Where("role = ?", models.RoleJobSeeker).
 		Find(&users).Error
 
 	if err != nil {
