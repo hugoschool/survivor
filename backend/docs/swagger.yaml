@@ -570,7 +570,7 @@ paths:
       consumes:
       - application/json
       description: Get all users (paginated). Users are filtered by their latest profile
-        update then by their id.
+        update then by their id. Only job seekers are returned from this endpoint.
       parameters:
       - description: Page
         in: query
