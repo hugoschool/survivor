@@ -395,7 +395,7 @@ const docTemplate = `{
         },
         "/users": {
             "get": {
-                "description": "Get all users (paginated)",
+                "description": "Get all users (paginated). Users are filtered by their latest profile update then by their id.",
                 "consumes": [
                     "application/json"
                 ],

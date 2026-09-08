@@ -3,7 +3,6 @@ package routes
 import (
 	"context"
 	"errors"
-	"fmt"
 	"net/http"
 	"reflect"
 	"slices"
@@ -279,9 +278,6 @@ func SurveySubmitHandler(c *gin.Context) {
 
 	surveyAnswerMap := getSurveyCorrectAnswers(survey)
 	userAnswerMap := getUserCorrectAnswers(&body)
-
-	fmt.Println(surveyAnswerMap)
-	fmt.Println(userAnswerMap)
 
 	questionIds := getSurveyQuestionIds(survey)
 	answeredCorrectlyIds := make([]uint, 0)
