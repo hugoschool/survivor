@@ -1,8 +1,15 @@
 "use client";
 
-import { BadgeCheck, Heart, MapPin, SlidersHorizontal } from "lucide-react";
+import {
+    ArrowRight,
+    BadgeCheck,
+    BriefcaseBusiness,
+    MapPin,
+    SlidersHorizontal,
+    Sparkles,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { VerticalFeed, type VideoItem } from "react-vertical-feed";
+import { Link } from "react-router";
 import { HeadBar } from "~/components/Headbar";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -20,21 +27,34 @@ import {
     DrawerTrigger,
 } from "../components/ui/drawer";
 
-type CandidateVideo = VideoItem & {
-    candidateName: string;
-    role: string;
-    sector?: string;
-    location?: string;
-    certified: boolean;
+export type User = {
+    first_name: string;
+    last_name: string;
+    age: number;
+    role: number;
+    locations: ProfileItem[] | null;
+    sectors: ProfileItem[] | null;
+    skills: ProfileItem[] | null;
+    survey_score: number | null;
+    views: number;
+    videos: UserVideo[] | null;
+    model: {
+        ID: number;
+    };
+};
+
+export type UserVideo = {
+    video_id: string;
+    status: number;
+};
+
+export type ProfileItem = {
+    id: number;
+    content: string;
 };
 
 type VideosResponse = {
-    video: { id: string; link: string };
-    user: {
-        first_name: string;
-        last_name: string;
-        survey_score: number | null;
-    };
+    user: User;
 };
 
 type Filters = {
@@ -51,104 +71,160 @@ const EMPTY_FILTERS: Filters = {
     certifiedOnly: false,
 };
 
+const profileValues = (items: ProfileItem[] | null) =>
+    items?.map(({ content }) => content) ?? [];
+
 export function meta() {
     return [{ title: "Recrutement" }];
 }
 
-function LikeButton({
-    liked,
-    onClick,
-}: {
-    liked: boolean;
-    onClick: () => void;
-}) {
+function ProfileCard({ user }: { user: User }) {
+    const fullName =
+        `${user.first_name} ${user.last_name}`.trim() || "Profil anonyme";
+    const locations = user.locations?.map(({ content }) => content) ?? [];
+    const sectors = user.sectors?.map(({ content }) => content) ?? [];
+    const skills = user.skills?.map(({ content }) => content) ?? [];
+    const score = user.survey_score;
+
     return (
-        <button
-            type="button"
-            onClick={onClick}
-            aria-pressed={liked}
-            aria-label={liked ? "Retirer le like" : "Aimer cette vidéo"}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm transition-transform hover:bg-white/25 active:scale-90"
-        >
-            <Heart
-                className={
-                    liked
-                        ? "h-6 w-6 fill-[#F6C343] text-[#F6C343] transition-colors"
-                        : "h-6 w-6 text-white transition-colors"
-                }
-            />
-        </button>
+        <article className="group relative flex min-h-80 flex-col overflow-hidden rounded-2xl border border-institutionnel/10 bg-white p-5 shadow-[0_8px_30px_rgb(23,32,51,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-institutionnel/25 hover:shadow-[0_16px_36px_rgb(23,32,51,0.12)] sm:p-6">
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-institutionnel" />
+
+            <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                    <h2 className="truncate font-main text-lg font-bold text-institutionnel">
+                        {fullName}
+                    </h2>
+                    <p className="mt-0.5 text-sm text-[#526078]">
+                        {user.age ? `${user.age} ans` : "Âge non renseigné"}
+                    </p>
+                </div>
+                {score !== null && (
+                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[#e8f3ed] px-2.5 py-1 text-xs font-bold text-[#17623a]">
+                        <BadgeCheck className="h-3.5 w-3.5" />
+                        Questionnaire complété
+                    </span>
+                )}
+            </div>
+
+            <div className="mt-5 space-y-3 border-y border-institutionnel/10 py-4 text-sm">
+                <div className="flex items-start gap-2.5 text-[#526078]">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-institutionnel" />
+                    <span className="line-clamp-2">
+                        {locations.length
+                            ? locations.join(" · ")
+                            : "Localisation non renseignée"}
+                    </span>
+                </div>
+                <div className="flex items-start gap-2.5 text-[#526078]">
+                    <BriefcaseBusiness className="mt-0.5 h-4 w-4 shrink-0 text-institutionnel" />
+                    <span className="line-clamp-2">
+                        {sectors.length
+                            ? sectors.join(" · ")
+                            : "Secteur non renseigné"}
+                    </span>
+                </div>
+            </div>
+
+            <div className="mt-4">
+                <div className="mb-2 flex items-center gap-2 text-xs font-bold tracking-[0.12em] text-institutionnel uppercase">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Compétences
+                </div>
+                {skills.length ? (
+                    <div className="flex flex-wrap gap-1.5">
+                        {skills.slice(0, 3).map((skill) => (
+                            <span
+                                key={skill}
+                                className="rounded-md bg-[#edf3fb] px-2.5 py-1 text-xs font-medium text-institutionnel"
+                            >
+                                {skill}
+                            </span>
+                        ))}
+                        {skills.length > 3 && (
+                            <span className="rounded-md bg-[#f1f3f6] px-2.5 py-1 text-xs font-medium text-[#526078]">
+                                +{skills.length - 3}
+                            </span>
+                        )}
+                    </div>
+                ) : (
+                    <p className="text-sm text-[#7a8598]">Non renseignées</p>
+                )}
+            </div>
+
+            <Link
+                to={`/recruit/${user.model.ID}`}
+                className="mt-auto inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-institutionnel bg-white px-4 font-main text-sm font-bold text-institutionnel transition-colors hover:bg-institutionnel hover:text-white"
+            >
+                Voir le profil
+                <ArrowRight className="h-4 w-4" />
+            </Link>
+        </article>
     );
 }
 
 export default function Recruit() {
-    const [videos, setVideos] = useState<CandidateVideo[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [loadError, setLoadError] = useState<string | null>(null);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-    const [likedVideos, setLikedVideos] = useState<Set<string>>(new Set());
+    const [users, setUsers] = useState<User[]>([]);
     const [draftFilters, setDraftFilters] = useState<Filters>(EMPTY_FILTERS);
     const [appliedFilters, setAppliedFilters] =
         useState<Filters>(EMPTY_FILTERS);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     useEffect(() => {
-        const loadVideos = async () => {
+        const loadProfiles = async () => {
             try {
                 const response = await fetch(`${API_URL}/videos?page=0`);
                 if (!response.ok) {
                     throw new Error("Impossible de charger les vidéos.");
                 }
-
                 const payload = (await response.json()) as VideosResponse[];
-                setVideos(
-                    payload.map(({ video, user }) => ({
-                        id: video.id,
-                        src: video.link,
-                        loop: true,
-                        candidateName:
-                            `${user.first_name} ${user.last_name}`.trim() ||
-                            "Candidat",
-                        role: "Candidat",
-                        certified: user.survey_score !== null,
-                    })),
+                const usersMap = new Map(
+                    payload.map(({ user }) => [user.model.ID, user]),
                 );
+                setUsers(Array.from(usersMap.values()));
             } catch {
-                setLoadError(
-                    "Impossible de charger les vidéos pour le moment.",
-                );
-            } finally {
-                setIsLoading(false);
+                setUsers([]);
             }
         };
 
-        void loadVideos();
+        void loadProfiles();
     }, []);
 
     const sectors = useMemo(
-        () => [...new Set(videos.map((v) => v.sector).filter(Boolean))],
-        [videos],
+        () => [
+            ...new Set(users.flatMap((user) => profileValues(user.sectors))),
+        ],
+        [users],
     );
     const locations = useMemo(
-        () => [...new Set(videos.map((v) => v.location).filter(Boolean))],
-        [videos],
+        () => [
+            ...new Set(users.flatMap((user) => profileValues(user.locations))),
+        ],
+        [users],
     );
 
-    const visibleVideos = useMemo(() => {
-        return videos.filter((v) => {
-            const matchesQuery = appliedFilters.query
-                ? `${v.candidateName} ${v.role}`
-                      .toLowerCase()
-                      .includes(appliedFilters.query.toLowerCase())
-                : true;
+    const visibleUsers = useMemo(() => {
+        return users.filter((user) => {
+            const profileSearchText = [
+                user.first_name,
+                user.last_name,
+                ...profileValues(user.skills),
+                ...profileValues(user.sectors),
+                ...profileValues(user.locations),
+            ]
+                .join(" ")
+                .toLowerCase();
+            const matchesQuery =
+                !appliedFilters.query ||
+                profileSearchText.includes(appliedFilters.query.toLowerCase());
             const matchesSector =
                 appliedFilters.sector === "all" ||
-                v.sector === appliedFilters.sector;
+                profileValues(user.sectors).includes(appliedFilters.sector);
             const matchesLocation =
                 appliedFilters.location === "all" ||
-                v.location === appliedFilters.location;
+                profileValues(user.locations).includes(appliedFilters.location);
             const matchesCertified = appliedFilters.certifiedOnly
-                ? v.certified
+                ? user.survey_score !== null
                 : true;
             return (
                 matchesQuery &&
@@ -157,22 +233,10 @@ export default function Recruit() {
                 matchesCertified
             );
         });
-    }, [videos, appliedFilters]);
-
-    const currentVideo = visibleVideos[currentVideoIndex];
-    const currentVideoId = currentVideo?.id;
-
-    const toggleLike = (videoId: string) => {
-        setLikedVideos((prev) => {
-            const next = new Set(prev);
-            next.has(videoId) ? next.delete(videoId) : next.add(videoId);
-            return next;
-        });
-    };
+    }, [users, appliedFilters]);
 
     const applyFilters = () => {
         setAppliedFilters(draftFilters);
-        setCurrentVideoIndex(0);
         setDrawerOpen(false);
     };
 
@@ -185,7 +249,7 @@ export default function Recruit() {
         <div className="flex h-dvh flex-col overflow-hidden bg-[#F7F9FC] font-secondary text-[#172033] scheme-light">
             <HeadBar />
 
-            <main className="flex min-h-0 flex-1 flex-col">
+            <main className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 <div className="border-y border-institutionnel/15 bg-white">
                     <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
                         <div>
@@ -361,91 +425,30 @@ export default function Recruit() {
                         </Drawer>
                     </div>
                 </div>
-
-                {isLoading ? (
-                    <div className="flex flex-1 items-center justify-center px-8 text-center">
-                        <p className="text-base text-[#52627b]">
-                            Chargement des vidéos…
-                        </p>
-                    </div>
-                ) : loadError ? (
-                    <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-                        <h2 className="font-[Marianne] text-xl font-bold text-institutionnel">
-                            Les vidéos sont indisponibles
-                        </h2>
-                        <p className="text-base text-[#52627b]">{loadError}</p>
-                    </div>
-                ) : visibleVideos.length === 0 ? (
-                    <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-                        <h2 className="font-[Marianne] text-xl font-bold text-institutionnel">
-                            Aucun profil ne correspond à ces filtres
-                        </h2>
-                        <p className="text-base text-[#52627b]">
-                            Essayez d'élargir votre recherche.
-                        </p>
-                    </div>
-                ) : (
-                    <div className="flex min-h-0 flex-1 justify-center overflow-hidden px-4 py-4 sm:px-6 lg:px-8">
-                        <div className="relative aspect-9/16 h-full max-w-full overflow-hidden rounded-none border-4 border-white bg-black shadow-[0_12px_32px_rgba(27,58,107,0.22)]">
-                            <VerticalFeed
-                                items={visibleVideos}
-                                onCurrentItemChange={setCurrentVideoIndex}
-                                style={{ height: "100%", width: "100%" }}
-                            />
-
-                            {currentVideo && (
-                                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-[#07142a]/95 via-[#07142a]/65 to-transparent p-5 pr-18">
-                                    <div className="mb-2 flex items-center gap-2">
-                                        <h2 className="font-main text-lg font-bold text-white">
-                                            {currentVideo.candidateName}
-                                        </h2>
-                                        {currentVideo.certified && (
-                                            <BadgeCheck
-                                                className="h-5 w-5 shrink-0 text-[#F6C343]"
-                                                aria-label="Profil certifié"
-                                            />
-                                        )}
-                                    </div>
-                                    <p className="text-sm text-white/95">
-                                        {currentVideo.role}
-                                    </p>
-                                    {(currentVideo.sector ||
-                                        currentVideo.location) && (
-                                        <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
-                                            {currentVideo.sector && (
-                                                <span className="bg-white px-2.5 py-1 text-institutionnel">
-                                                    {currentVideo.sector}
-                                                </span>
-                                            )}
-                                            {currentVideo.location && (
-                                                <span className="flex items-center gap-1 border border-white/50 px-2.5 py-1 text-white">
-                                                    <MapPin className="h-3.5 w-3.5" />
-                                                    {currentVideo.location}
-                                                </span>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-
-                            <div className="absolute bottom-6 right-3 z-10 flex flex-col items-center gap-1">
-                                <LikeButton
-                                    liked={
-                                        currentVideoId
-                                            ? likedVideos.has(currentVideoId)
-                                            : false
-                                    }
-                                    onClick={() =>
-                                        currentVideoId &&
-                                        toggleLike(currentVideoId)
-                                    }
-                                />
-                            </div>
+                <section className="mx-auto w-full max-w-6xl px-4 py-7 sm:px-6 lg:px-8">
+                    <div className="mb-5 flex items-end justify-between gap-4">
+                        <div>
+                            <h2 className="font-main text-xl font-bold text-institutionnel">
+                                Profils disponibles
+                            </h2>
+                            <p className="mt-1 text-sm text-[#526078]">
+                                Consultez les informations essentielles avant de
+                                prendre contact.
+                            </p>
                         </div>
+                        <span className="hidden rounded-full bg-institutionnel/8 px-3 py-1.5 text-sm font-bold text-institutionnel sm:block">
+                            {visibleUsers.length} profil
+                            {visibleUsers.length === 1 ? "" : "s"}
+                        </span>
                     </div>
-                )}
-            </main>
 
+                    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                        {visibleUsers.map((user) => (
+                            <ProfileCard key={user.model.ID} user={user} />
+                        ))}
+                    </div>
+                </section>
+            </main>
             <Footer />
         </div>
     );
