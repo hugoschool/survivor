@@ -1,10 +1,10 @@
-# JibJob
+# ProfilsActifs
 
 Une plateforme de recherche d'emploi basée sur la publication de vidéos.
 
 ## Build
 
-Consultez [docs/BUILDING.md](./docs/BUILDING.md) pour lancer JibJob sur votre machine locale.
+Consultez [docs/BUILDING.md](./docs/BUILDING.md) pour lancer ProfilsActifs sur votre machine locale.
 
 ## Documentation technique
 
