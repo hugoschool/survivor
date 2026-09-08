@@ -1,7 +1,9 @@
 import { ClipboardList, LayoutDashboard, Users, Video } from "lucide-react";
-import { NavLink, Outlet } from "react-router";
+import { Navigate, NavLink, Outlet } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
+import { ROLE } from "~/lib/auth";
+import { useAuth } from "~/lib/authContext";
 
 const NAV_ITEMS = [
     {
@@ -35,6 +37,26 @@ export function meta() {
 }
 
 export default function Administration() {
+    const { user, loading } = useAuth();
+
+    if (loading) {
+        return (
+            <div>
+                <HeadBar />
+                <div className="mx-auto flex min-h-screen w-full max-w-6xl px-4 py-20">
+                    <p className="text-sm text-muted-foreground">
+                        Vérification des accès…
+                    </p>
+                </div>
+                <Footer />
+            </div>
+        );
+    }
+
+    if (user?.role !== ROLE.admin) {
+        return <Navigate replace to="/" />;
+    }
+
     return (
         <div>
             <HeadBar />

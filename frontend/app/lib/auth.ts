@@ -273,3 +273,41 @@ export async function reviewVideo(
         throw new Error("Impossible d'enregistrer la décision.");
     }
 }
+
+export type SurveySubmission = {
+    questions: {
+        id: number;
+        answers: { id: number; checked: boolean }[];
+    }[];
+};
+
+export class SurveyAlreadyCompletedError extends Error {}
+
+export async function submitSurvey(body: SurveySubmission): Promise<number> {
+    const response = await fetch(`${API_URL}/survey/submit`, {
+        method: "POST",
+        headers: { ...authHeaders(), "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+    });
+
+    const data = (await response.json().catch(() => null)) as {
+        percentage?: number;
+        message?: string;
+    } | null;
+
+    if (response.ok && typeof data?.percentage === "number") {
+        return data.percentage;
+    }
+
+    if (response.status === 400 && data?.message?.includes("already")) {
+        throw new SurveyAlreadyCompletedError(
+            "Vous avez déjà passé le questionnaire.",
+        );
+    }
+
+    if (response.status === 401) {
+        throw new Error("Session expirée, reconnectez-vous.");
+    }
+
+    throw new Error(data?.message ?? "Impossible d'envoyer vos réponses.");
+}
