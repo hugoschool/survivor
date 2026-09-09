@@ -133,14 +133,76 @@ func VideosGetCurrentUserHandler(c *gin.Context) {
 	var videos []models.Video
 	err = database.DB.Where("user_id = ?", user.ID).Find(&videos).Error
 
-	fmt.Println(videos, err)
-
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
 	c.JSON(http.StatusOK, videos)
+}
+
+// VideoGetURLFromId godoc
+// @Summary Get the video URL from its video ID
+// @Schemes
+// @Description Get the video URL from its video ID
+// @Tags Videos
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.VideoLink
+// @Failure 400 {object} models.ApiError
+// @Failure 401 {object} models.ApiError
+// @Failure 404 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /videos/:id [get]
+func VideoGetURLFromIdHandler(c *gin.Context) {
+	id := c.Param("id")
+
+	if id == "" {
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Incorrect ID"})
+		return
+	}
+
+	ctx := context.Background()
+	video, err := gorm.G[models.Video](database.DB).Where("video_id = ?", id).First(ctx)
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "Video not found"})
+			return
+		} else {
+			fmt.Println(err.Error())
+			c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+			return
+		}
+	}
+
+	if video.Status != models.VideoStatus(models.VideoStatusValidated) {
+		c.JSON(http.StatusUnauthorized, models.ApiError{Message: "Video not validated"})
+		return
+	}
+
+	videoUploader, err := internal.GetCurrentVideoUploader()
+
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	url, err := videoUploader.PlaybackURL(video.VideoID)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	videoLink := models.VideoLink{
+		ID:   video.VideoID,
+		Link: url,
+	}
+
+	c.JSON(http.StatusOK, videoLink)
 }
 
 // VideoUpload godoc

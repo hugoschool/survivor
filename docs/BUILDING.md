@@ -8,6 +8,12 @@ Il faut d'abord mettre en place les variables d'environnement.
 
 Un `.env.example` est fourni, il suffit de le copier dans un fichier `.env` et de rajouter des valeurs aux variables actuellement vides.
 
+## Informations générales
+
+Côté frontend, vous pouvez changer l'URL du backend à l'aide de la variable d'environement `VITE_BACKEND_URL`.
+
+En mode dev, sa valeur par défaut est `http://localhost:8080`.
+
 ## Docker
 
 En utilisant docker, il suffit de utiliser le docker compose.
