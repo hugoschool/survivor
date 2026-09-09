@@ -13,11 +13,43 @@ import { HeadBar } from "~/components/Headbar";
 import { API_URL } from "~/lib/auth";
 import type { User } from "./recruit";
 
+
+interface videoURLType {
+    "id": string,
+    "link": string,
+}
+
 export default function RecruitProfile() {
     const { id } = useParams();
     const [user, setUser] = useState<User | null>(null);
     const [error, setError] = useState(false);
     const [liked, setLiked] = useState(false);
+    const [videoURL, setVideoURL] = useState<videoURLType>();
+
+    useEffect(() => {
+        const getVideoLink = async () => {
+            const video = user?.videos?.find(({ status }) => status === 1);
+            if (!video) return;
+
+            try {
+                const res = await fetch(`${API_URL}/videos/${video.video_id}`, {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json",
+                    }
+                });
+
+                if (!res.ok) {
+                    throw new Error("Connection error");
+                }
+                const data = await res.json().catch(() => ({})) as videoURLType;
+                setVideoURL(data);
+            } catch (err: any) {
+                setError(err.message || "Connection error");
+            }
+        };
+        getVideoLink();
+    }, [user]);
 
     useEffect(() => {
         const loadUser = async () => {
@@ -65,11 +97,6 @@ export default function RecruitProfile() {
     const locations = user.locations?.map(({ content }) => content) ?? [];
     const sectors = user.sectors?.map(({ content }) => content) ?? [];
     const skills = user.skills?.map(({ content }) => content) ?? [];
-    const video =
-        user.videos?.find(({ status }) => status === 1) ?? user.videos?.[0];
-    const videoUrl = video
-        ? `${API_URL}/videos/storage/${video.video_id}.mp4`
-        : null;
 
     return (
         <PageShell>
@@ -157,26 +184,17 @@ export default function RecruitProfile() {
                     </section>
 
                     <aside className="overflow-hidden rounded-2xl border border-institutionnel/10 bg-[#172033] shadow-[0_12px_36px_rgb(23,32,51,0.16)]">
-                        {videoUrl ? (
+                        {videoURL ? (
                             <video
+                                src={videoURL?.link}
                                 controls
-                                className="aspect-[9/16] max-h-[38rem] w-full bg-black object-contain"
-                                src={videoUrl}
-                            >
-                                <track
-                                    kind="captions"
-                                    src="/captions.vtt"
-                                    srcLang="fr"
-                                    label="Français"
-                                />
-                                Votre navigateur ne prend pas en charge la
-                                lecture vidéo.
-                            </video>
+                                autoPlay
+                                muted
+                                loop
+                                className="block aspect-video w-full bg-black object-contain"
+                            />
                         ) : (
-                            <div className="flex aspect-[9/16] items-center justify-center p-8 text-center text-sm text-white/70">
-                                Aucune vidéo n&apos;est disponible pour ce
-                                profil.
-                            </div>
+                            <p>Aucune vidéo pour le moment</p>
                         )}
                         <div className="flex items-center justify-between gap-4 border-t border-white/10 p-4">
                             <p className="font-main text-sm font-bold text-white">
