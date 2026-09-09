@@ -13,7 +13,7 @@ import { Link } from "react-router";
 import { HeadBar } from "~/components/Headbar";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { API_URL } from "~/lib/auth";
+import { fetchUsers, type ProfileItem, type User } from "~/lib/auth";
 import "@codegouvfr/react-dsfr/dsfr/fonts/index.css";
 import { Footer } from "~/components/Footer";
 import {
@@ -27,35 +27,7 @@ import {
     DrawerTrigger,
 } from "../components/ui/drawer";
 
-export type User = {
-    first_name: string;
-    last_name: string;
-    age: number;
-    role: number;
-    locations: ProfileItem[] | null;
-    sectors: ProfileItem[] | null;
-    skills: ProfileItem[] | null;
-    survey_score: number | null;
-    views: number;
-    videos: UserVideo[] | null;
-    model: {
-        ID: number;
-    };
-};
-
-export type UserVideo = {
-    video_id: string;
-    status: number;
-};
-
-export type ProfileItem = {
-    id: number;
-    content: string;
-};
-
-type VideosResponse = {
-    user: User;
-};
+export type { User } from "~/lib/auth";
 
 type Filters = {
     query: string;
@@ -173,15 +145,7 @@ export default function Recruit() {
     useEffect(() => {
         const loadProfiles = async () => {
             try {
-                const response = await fetch(`${API_URL}/videos?page=0`);
-                if (!response.ok) {
-                    throw new Error("Impossible de charger les vidéos.");
-                }
-                const payload = (await response.json()) as VideosResponse[];
-                const usersMap = new Map(
-                    payload.map(({ user }) => [user.model.ID, user]),
-                );
-                setUsers(Array.from(usersMap.values()));
+                setUsers(await fetchUsers(0));
             } catch {
                 setUsers([]);
             }
