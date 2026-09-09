@@ -10,17 +10,22 @@ import { type ReactNode, useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
-import { API_URL } from "~/lib/auth";
+import { API_URL, VIDEO_STATUS } from "~/lib/auth";
 import type { User } from "./recruit";
 
 interface videoURLType {
     id: string;
     link: string;
 }
+type VideoLink = {
+    id: string;
+    link: string;
+};
 
 export default function RecruitProfile() {
     const { id } = useParams();
     const [user, setUser] = useState<User | null>(null);
+    const [videoUrl, setVideoUrl] = useState<string | null>(null);
     const [error, setError] = useState(false);
     const [liked, setLiked] = useState(false);
     const [videoURL, setVideoURL] = useState<videoURLType>();
@@ -67,7 +72,29 @@ export default function RecruitProfile() {
                     return;
                 }
 
-                setUser((await response.json()) as User);
+                const loadedUser = (await response.json()) as User;
+                setUser(loadedUser);
+
+                const video = loadedUser.videos?.find(
+                    ({ status }) => status === VIDEO_STATUS.validated,
+                );
+
+                if (!video) {
+                    setVideoUrl(null);
+                    return;
+                }
+
+                const videoResponse = await fetch(
+                    `${API_URL}/videos/${encodeURIComponent(video.video_id)}`,
+                );
+
+                if (!videoResponse.ok) {
+                    setVideoUrl(null);
+                    return;
+                }
+
+                const { link } = (await videoResponse.json()) as VideoLink;
+                setVideoUrl(link);
             } catch {
                 setError(true);
             }
@@ -99,7 +126,6 @@ export default function RecruitProfile() {
     const locations = user.locations?.map(({ content }) => content) ?? [];
     const sectors = user.sectors?.map(({ content }) => content) ?? [];
     const skills = user.skills?.map(({ content }) => content) ?? [];
-
     return (
         <PageShell>
             <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
@@ -113,7 +139,7 @@ export default function RecruitProfile() {
 
                 <div className="mt-6 grid gap-7 lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)]">
                     <section className="overflow-hidden rounded-2xl border border-institutionnel/10 bg-white shadow-[0_12px_36px_rgb(23,32,51,0.08)]">
-                        <div className="h-1 bg-gradient-to-r from-institutionnel" />
+                        <div className="h-1 bg-linear-to-r from-institutionnel" />
                         <div className="p-6 sm:p-8">
                             <div className="flex flex-wrap items-start justify-between gap-4">
                                 <div>

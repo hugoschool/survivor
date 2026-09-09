@@ -19,6 +19,13 @@ func GetUserTX() *gorm.DB {
 func GetUserById(userId uint) (models.User, error) {
 	var user models.User
 
+	tx := GetUserTX().Where("hidden = false").Where("id = ?", userId).First(&user)
+	return user, tx.Error
+}
+
+func GetUserByIdEvenIfHidden(userId uint) (models.User, error) {
+	var user models.User
+
 	tx := GetUserTX().Where("id = ?", userId).First(&user)
 	return user, tx.Error
 }
@@ -27,8 +34,19 @@ func GetUserById(userId uint) (models.User, error) {
 func GetSimpleUserById(userId uint) (models.User, error) {
 	var user models.User
 
-	tx := DB.Model(&user).Where("id = ?", userId).First(&user)
+	tx := DB.Model(&user).Where("hidden = false").Where("id = ?", userId).First(&user)
 	return user, tx.Error
+}
+
+func GetSurveyById(surveyId uint) (models.Survey, error) {
+	var survey models.Survey
+
+	tx := DB.Model(&survey).
+		Preload("Questions").
+		Preload("Questions.Answers").
+		Where("id = ?", surveyId).
+		Last(&survey)
+	return survey, tx.Error
 }
 
 func GetLastSurvey() (models.Survey, error) {
