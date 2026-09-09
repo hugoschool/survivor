@@ -1157,6 +1157,9 @@ const docTemplate = `{
         "models.Survey": {
             "type": "object",
             "properties": {
+                "model": {
+                    "$ref": "#/definitions/gorm.Model"
+                },
                 "obtention_rate": {
                     "type": "integer"
                 },
@@ -1176,6 +1179,9 @@ const docTemplate = `{
                 },
                 "first_name": {
                     "type": "string"
+                },
+                "hidden": {
+                    "type": "boolean"
                 },
                 "last_name": {
                     "type": "string"
@@ -1434,6 +1440,9 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/routes.userSubmitQuestion"
                     }
+                },
+                "survey_id": {
+                    "type": "integer"
                 }
             }
         },

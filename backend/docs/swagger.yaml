@@ -101,6 +101,8 @@ definitions:
     type: object
   models.Survey:
     properties:
+      model:
+        $ref: '#/definitions/gorm.Model'
       obtention_rate:
         type: integer
       questions:
@@ -114,6 +116,8 @@ definitions:
         type: integer
       first_name:
         type: string
+      hidden:
+        type: boolean
       last_name:
         type: string
       locations:
@@ -282,6 +286,8 @@ definitions:
         items:
           $ref: '#/definitions/routes.userSubmitQuestion'
         type: array
+      survey_id:
+        type: integer
     required:
     - questions
     type: object

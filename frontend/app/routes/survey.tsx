@@ -84,6 +84,7 @@ export default function Survey() {
     const [items, setItems] = useState<Item[]>([]);
     const [obtentionRate, setObtentionRate] = useState<number | null>(null);
     const [score, setScore] = useState<number | null>(null);
+    const [surveyId, setSurveyId] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -106,6 +107,7 @@ export default function Survey() {
 
                 setItems(toItems(survey));
                 setObtentionRate(survey.obtention_rate);
+                setSurveyId(survey.model.ID);
             })
             .catch((err: unknown) => {
                 if (!cancelled) {
@@ -130,8 +132,14 @@ export default function Survey() {
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
+        if (surveyId === null) {
+            setError("Cannot send the survey, no ID found");
+            return;
+        }
+
         const formData = new FormData(event.currentTarget);
         const submission = {
+            survey_id: surveyId,
             questions: items.map((item) => {
                 const selected = formData.getAll(item.name).map(String);
 

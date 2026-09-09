@@ -8,7 +8,7 @@ type SurveyInput struct {
 }
 
 type Survey struct {
-	gorm.Model    `json:"-"`
+	gorm.Model    `json:"model"`
 	ObtentionRate uint       `json:"obtention_rate"`
 	Questions     []Question `json:"questions"`
 }
