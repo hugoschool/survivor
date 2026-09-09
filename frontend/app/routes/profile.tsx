@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
-import { API_URL, clearSession, fetchCurrentUser, getToken } from "~/lib/auth";
+import { API_URL, clearSession } from "~/lib/auth";
 import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 
@@ -121,7 +121,6 @@ export default function Profile() {
     const [showConfirm, setShowConfirm] = useState(false);
     const [countdown, setCountdown] = useState(5);
     const [videoURL, setVideoURL] = useState<videoURLType>();
-    const [hiddenState, setHiddenState] = useState<boolean>(false);
 
     useEffect(() => {
         if (!loggedIn) {
@@ -215,14 +214,6 @@ export default function Profile() {
     }, []);
 
     useEffect(() => {
-        fetchCurrentUser().then((user) => {
-            if (user) {
-                setHiddenState(user?.hidden);
-            }
-        });
-    }, []);
-
-    useEffect(() => {
         if (!loggedIn) return;
 
         void refetch();
@@ -282,31 +273,6 @@ export default function Profile() {
             // biome-ignore lint: any type for the moment
         } catch (err: any) {
             setError(err.message || "Connection error");
-        }
-    };
-    // biome-ignore lint: any type allowed
-    const switchHiddenState = async (e: any) => {
-        e.preventDefault();
-
-        const token = getToken();
-
-        try {
-            const response = await fetch(`${API_URL}/users/me/hidden`, {
-                method: "PUT",
-                headers: token
-                    ? { Authorization: `Bearer ${token}` }
-                    : undefined,
-            });
-
-            if (!response.ok) {
-                return;
-            }
-
-            const json = await response.json();
-
-            setHiddenState(json.state);
-        } catch {
-            console.error("Hidden state cannot be retrieved");
         }
     };
 

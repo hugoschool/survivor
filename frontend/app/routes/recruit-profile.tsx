@@ -10,22 +10,17 @@ import { type ReactNode, useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
-import { API_URL, VIDEO_STATUS } from "~/lib/auth";
+import { API_URL } from "~/lib/auth";
 import type { User } from "./recruit";
 
 interface videoURLType {
     id: string;
     link: string;
 }
-type VideoLink = {
-    id: string;
-    link: string;
-};
 
 export default function RecruitProfile() {
     const { id } = useParams();
     const [user, setUser] = useState<User | null>(null);
-    const [videoUrl, setVideoUrl] = useState<string | null>(null);
     const [error, setError] = useState(false);
     const [liked, setLiked] = useState(false);
     const [videoURL, setVideoURL] = useState<videoURLType>();
@@ -74,27 +69,6 @@ export default function RecruitProfile() {
 
                 const loadedUser = (await response.json()) as User;
                 setUser(loadedUser);
-
-                const video = loadedUser.videos?.find(
-                    ({ status }) => status === VIDEO_STATUS.validated,
-                );
-
-                if (!video) {
-                    setVideoUrl(null);
-                    return;
-                }
-
-                const videoResponse = await fetch(
-                    `${API_URL}/videos/${encodeURIComponent(video.video_id)}`,
-                );
-
-                if (!videoResponse.ok) {
-                    setVideoUrl(null);
-                    return;
-                }
-
-                const { link } = (await videoResponse.json()) as VideoLink;
-                setVideoUrl(link);
             } catch {
                 setError(true);
             }
