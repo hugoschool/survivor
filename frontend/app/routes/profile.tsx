@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import {
     BadgeCheck,
     BriefcaseBusiness,
@@ -10,6 +8,8 @@ import {
     Sparkles,
     UserRound,
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
 import { API_URL, clearSession } from "~/lib/auth";
@@ -38,16 +38,16 @@ export type Model = {
 };
 
 interface VideoStatus {
-  model: Model;
-  status: number;
-  status_reason: string;
-  user_id: number;
-  video_id: string;
+    model: Model;
+    status: number;
+    status_reason: string;
+    user_id: number;
+    video_id: string;
 }
 
 export interface videoURLType {
-    "id": string,
-    "link": string,
+    id: string;
+    link: string;
 }
 
 const isAuthenticated = () => {
@@ -75,11 +75,15 @@ function StatCard({
 
     return (
         <div className="rounded-2xl border border-[#dbe3ee] bg-white p-5 shadow-[0_8px_24px_rgb(23,32,51,0.05)]">
-            <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${accents[accent]}`}>
+            <div
+                className={`flex h-10 w-10 items-center justify-center rounded-xl ${accents[accent]}`}
+            >
                 {icon}
             </div>
             <p className="mt-4 text-sm font-medium text-[#667085]">{label}</p>
-            <p className="mt-1 truncate text-2xl font-bold text-[#172033]">{value}</p>
+            <p className="mt-1 truncate text-2xl font-bold text-[#172033]">
+                {value}
+            </p>
         </div>
     );
 }
@@ -97,8 +101,12 @@ function InfoItem({
         <div className="flex gap-3 rounded-xl bg-[#f7f9fc] p-4">
             <div className="mt-0.5 text-institutionnel">{icon}</div>
             <div className="min-w-0">
-                <p className="text-xs font-bold tracking-[0.12em] text-[#7a8598] uppercase">{label}</p>
-                <p className="mt-1 wrap-break-word text-sm font-semibold text-[#172033]">{value}</p>
+                <p className="text-xs font-bold tracking-[0.12em] text-[#7a8598] uppercase">
+                    {label}
+                </p>
+                <p className="mt-1 wrap-break-word text-sm font-semibold text-[#172033]">
+                    {value}
+                </p>
             </div>
         </div>
     );
@@ -120,7 +128,6 @@ export default function Profile() {
         }
     }, [loggedIn, navigate]);
 
-
     useEffect(() => {
         const getVideoLink = async () => {
             const video = videoData.find(({ status }) => status === 1);
@@ -134,14 +141,17 @@ export default function Profile() {
                     method: "GET",
                     headers: {
                         "content-type": "application/json",
-                    }
+                    },
                 });
 
                 if (!res.ok) {
                     throw new Error("Connection error");
                 }
-                const data = await res.json().catch(() => ({})) as videoURLType;
+                const data = (await res
+                    .json()
+                    .catch(() => ({}))) as videoURLType;
                 setVideoURL(data);
+                // biome-ignore lint: any type for the moment
             } catch (err: any) {
                 setError(err.message || "Connection error");
             }
@@ -180,14 +190,17 @@ export default function Profile() {
                     throw new Error("Connection error");
                 }
 
-                const data = await res.json().catch(() => null) as VideoStatus[] | null;
+                const data = (await res.json().catch(() => null)) as
+                    | VideoStatus[]
+                    | null;
                 setVideoData(data ?? []);
+                // biome-ignore lint: any type for the moment
             } catch (err: any) {
                 setError(err.message || "Connection error");
             }
         };
         getVideoId();
-    },[])
+    }, []);
 
     useEffect(() => {
         const syncAuth = () => setLoggedIn(isAuthenticated());
@@ -231,29 +244,19 @@ export default function Profile() {
     const sectors = user?.sectors?.map(({ content }) => content) ?? [];
     const skills = user?.skills?.map(({ content }) => content) ?? [];
     const hasValidatedVideo = videoData.some(({ status }) => status === 1);
-    const profileFields = [
-        Boolean(user?.first_name),
-        Boolean(user?.last_name),
-        Boolean(user?.age),
-        locations.length > 0,
-        sectors.length > 0,
-        skills.length > 0,
-        surveyScore !== null && surveyScore !== undefined,
-        hasValidatedVideo,
-    ];
-    const profileCompletion = Math.round(
-        (profileFields.filter(Boolean).length / profileFields.length) * 100,
-    );
 
     const handleDeleteAccountClick = async () => {
         try {
-            const res = await fetch(`http://localhost:8080/users/${user?.model.ID}`, {
+            const res = await fetch(
+                `http://localhost:8080/users/${user?.model.ID}`,
+                {
                     method: "DELETE",
                     headers: {
                         Authorization: `Bearer ${window.localStorage.getItem("token")}`,
                         "Content-Type": "application/json",
                     },
-            });
+                },
+            );
 
             const data = await res.json().catch(() => ({}));
 
@@ -267,6 +270,7 @@ export default function Profile() {
             setLoggedIn(false);
             window.dispatchEvent(new Event("auth-change"));
             navigate("/", { replace: true });
+            // biome-ignore lint: any type for the moment
         } catch (err: any) {
             setError(err.message || "Connection error");
         }
@@ -288,8 +292,9 @@ export default function Profile() {
                                 {displayName}
                             </h1>
                             <p className="mt-3 max-w-xl text-base text-institutionnel/70 sm:text-lg">
-                                Votre profil est votre première présentation auprès des recruteurs.
-                                Gardez-le complet et à jour.
+                                Votre profil est votre première présentation
+                                auprès des recruteurs. Gardez-le complet et à
+                                jour.
                             </p>
                         </div>
                         <Button
@@ -307,7 +312,11 @@ export default function Profile() {
                     <StatCard
                         icon={<BadgeCheck className="h-5 w-5" />}
                         label="Questionnaire"
-                        value={surveyScore !== null && surveyScore !== undefined ? `${surveyScore}%` : "À compléter"}
+                        value={
+                            surveyScore !== null && surveyScore !== undefined
+                                ? `${surveyScore}%`
+                                : "À compléter"
+                        }
                         accent="green"
                     />
                     <StatCard
@@ -325,7 +334,13 @@ export default function Profile() {
                     <StatCard
                         icon={<ShieldCheck className="h-5 w-5" />}
                         label="Vidéo"
-                        value={hasValidatedVideo ? "Publiée" : videoData.length ? "En validation" : "À ajouter"}
+                        value={
+                            hasValidatedVideo
+                                ? "Publiée"
+                                : videoData.length
+                                  ? "En validation"
+                                  : "À ajouter"
+                        }
                         accent="purple"
                     />
                 </section>
@@ -353,24 +368,38 @@ export default function Profile() {
                             <InfoItem
                                 icon={<UserRound className="h-5 w-5" />}
                                 label="Âge"
-                                value={user?.age ? `${user.age} ans` : "Non renseigné"}
+                                value={
+                                    user?.age
+                                        ? `${user.age} ans`
+                                        : "Non renseigné"
+                                }
                             />
                             <InfoItem
                                 icon={<MapPin className="h-5 w-5" />}
                                 label="Localisation"
-                                value={locations.length ? locations.join(" · ") : "Non renseignée"}
+                                value={
+                                    locations.length
+                                        ? locations.join(" · ")
+                                        : "Non renseignée"
+                                }
                             />
                             <InfoItem
                                 icon={<BriefcaseBusiness className="h-5 w-5" />}
                                 label="Secteur recherché"
-                                value={sectors.length ? sectors.join(" · ") : "Non renseigné"}
+                                value={
+                                    sectors.length
+                                        ? sectors.join(" · ")
+                                        : "Non renseigné"
+                                }
                             />
                         </div>
 
                         <div className="mt-8 border-t border-[#e5eaf1] pt-6">
                             <div className="flex items-center gap-2">
                                 <Sparkles className="h-5 w-5 text-institutionnel" />
-                                <h3 className="font-bold text-[#172033]">Compétences</h3>
+                                <h3 className="font-bold text-[#172033]">
+                                    Compétences
+                                </h3>
                             </div>
                             {skills.length ? (
                                 <div className="mt-4 flex flex-wrap gap-2">
@@ -385,7 +414,8 @@ export default function Profile() {
                                 </div>
                             ) : (
                                 <p className="mt-3 text-sm text-[#667085]">
-                                    Ajoutez vos compétences pour aider les recruteurs à mieux vous trouver.
+                                    Ajoutez vos compétences pour aider les
+                                    recruteurs à mieux vous trouver.
                                 </p>
                             )}
                         </div>
@@ -397,7 +427,9 @@ export default function Profile() {
                                 <p className="text-xs font-bold tracking-[0.14em] text-[#b8c8e6] uppercase">
                                     Présentation
                                 </p>
-                                <h2 className="mt-1 text-xl font-bold text-institutionnel">Votre vidéo</h2>
+                                <h2 className="mt-1 text-xl font-bold text-institutionnel">
+                                    Votre vidéo
+                                </h2>
                             </div>
                             <PlayCircle className="h-7 w-7 text-[#f6c343]" />
                         </div>
@@ -418,7 +450,9 @@ export default function Profile() {
                         </div>
                         <div className="p-6 pt-4">
                             <p className="text-sm leading-6 text-institutionnel/65">
-                                Une vidéo claire permet aux recruteurs de découvrir votre personnalité avant le premier échange.
+                                Une vidéo claire permet aux recruteurs de
+                                découvrir votre personnalité avant le premier
+                                échange.
                             </p>
                         </div>
                     </section>
@@ -447,8 +481,8 @@ export default function Profile() {
                             Confirmer la suppression
                         </h2>
                         <p className="mt-2 text-sm text-ink/70">
-                            Cette action est irréversible. Toutes vos données seront
-                            supprimées définitivement.
+                            Cette action est irréversible. Toutes vos données
+                            seront supprimées définitivement.
                         </p>
                         <div className="mt-6 flex justify-end gap-3">
                             <Button

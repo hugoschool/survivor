@@ -13,10 +13,9 @@ import { HeadBar } from "~/components/Headbar";
 import { API_URL } from "~/lib/auth";
 import type { User } from "./recruit";
 
-
 interface videoURLType {
-    "id": string,
-    "link": string,
+    id: string;
+    link: string;
 }
 
 export default function RecruitProfile() {
@@ -36,14 +35,17 @@ export default function RecruitProfile() {
                     method: "GET",
                     headers: {
                         "content-type": "application/json",
-                    }
+                    },
                 });
 
                 if (!res.ok) {
                     throw new Error("Connection error");
                 }
-                const data = await res.json().catch(() => ({})) as videoURLType;
+                const data = (await res
+                    .json()
+                    .catch(() => ({}))) as videoURLType;
                 setVideoURL(data);
+                // biome-ignore lint: any type for the moment
             } catch (err: any) {
                 setError(err.message || "Connection error");
             }
