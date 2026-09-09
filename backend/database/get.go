@@ -38,6 +38,17 @@ func GetSimpleUserById(userId uint) (models.User, error) {
 	return user, tx.Error
 }
 
+func GetSurveyById(surveyId uint) (models.Survey, error) {
+	var survey models.Survey
+
+	tx := DB.Model(&survey).
+		Preload("Questions").
+		Preload("Questions.Answers").
+		Where("id = ?", surveyId).
+		Last(&survey)
+	return survey, tx.Error
+}
+
 func GetLastSurvey() (models.Survey, error) {
 	var survey models.Survey
 
