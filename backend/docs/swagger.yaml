@@ -261,6 +261,11 @@ definitions:
     - password
     - role
     type: object
+  routes.userHiddenStateResponse:
+    properties:
+      state:
+        type: boolean
+    type: object
   routes.userSubmitAnswer:
     properties:
       checked:
@@ -725,6 +730,35 @@ paths:
           schema:
             $ref: '#/definitions/models.ApiError'
       summary: Get the current user's details
+      tags:
+      - Users
+  /users/me/hidden:
+    put:
+      consumes:
+      - application/json
+      description: Switch the hidden state for the current user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/routes.userHiddenStateResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ApiError'
+      summary: Switch the hidden state for the current user
       tags:
       - Users
   /videos:

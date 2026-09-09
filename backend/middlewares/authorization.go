@@ -61,7 +61,7 @@ func AuthMiddleware(c *gin.Context) {
 	}
 
 	userId := uint(claims["userId"].(float64))
-	user, err := database.GetUserById(userId)
+	user, err := database.GetUserByIdEvenIfHidden(userId)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)

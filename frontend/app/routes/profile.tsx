@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
-import { clearSession } from "~/lib/auth";
+import { API_URL, clearSession, fetchCurrentUser, getToken } from "~/lib/auth";
 import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 import {
@@ -31,6 +31,7 @@ export default function Profile() {
     const { user, refetch } = useAuth();
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState<boolean>(isAuthenticated);
+    const [hiddenState, setHiddenState] = useState<boolean>(false);
 
     useEffect(() => {
         if (!loggedIn) {
@@ -47,6 +48,14 @@ export default function Profile() {
         return () => {
             window.removeEventListener("storage", syncAuth);
         };
+    }, []);
+
+    useEffect(() => {
+        fetchCurrentUser().then((user) => {
+            if (user) {
+                setHiddenState(user?.hidden);
+            }
+        });
     }, []);
 
     useEffect(() => {
@@ -81,6 +90,32 @@ export default function Profile() {
         clearSession();
         setLoggedIn(false);
         navigate("/login", { replace: true });
+    };
+
+    // biome-ignore lint: any type allowed
+    const switchHiddenState = async (e: any) => {
+        e.preventDefault();
+
+        const token = getToken();
+
+        try {
+            const response = await fetch(`${API_URL}/users/me/hidden`, {
+                method: "PUT",
+                headers: token
+                    ? { Authorization: `Bearer ${token}` }
+                    : undefined,
+            });
+
+            if (!response.ok) {
+                return;
+            }
+
+            const json = await response.json();
+
+            setHiddenState(json.state);
+        } catch {
+            console.error("Hidden state cannot be retrieved");
+        }
     };
 
     return (
@@ -133,6 +168,20 @@ export default function Profile() {
                                     className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15"
                                 >
                                     Mettre a jour ma vidéo
+                                </button>
+                            </p>
+                        </div>
+                        <div className="rounded-2xl border border-border/70 bg-white p-5">
+                            <p className="text-base font-medium text-ink/60">
+                                État du compte
+                            </p>
+                            <p className="mt-2 text-2xl font-medium text-institutionnel">
+                                <button
+                                    type="button"
+                                    onClick={switchHiddenState}
+                                    className="rounded-md bg-white px-5 py-2.5 text-sm font-medium text-institutionnel border-institutionnel border-2 hover:bg-institutionnel/15"
+                                >
+                                    {hiddenState ? "Privé" : "Public"}
                                 </button>
                             </p>
                         </div>

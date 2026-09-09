@@ -41,6 +41,7 @@ export type User = {
     role: number;
     age: number;
     views: number;
+    hidden: boolean;
     survey_score: number | null;
     skills: ProfileItem[] | null;
     locations: ProfileItem[] | null;

@@ -636,6 +636,50 @@ const docTemplate = `{
                 }
             }
         },
+        "/users/me/hidden": {
+            "put": {
+                "description": "Switch the hidden state for the current user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Switch the hidden state for the current user",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/routes.userHiddenStateResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ApiError"
+                        }
+                    }
+                }
+            }
+        },
         "/videos": {
             "get": {
                 "description": "Get a feed of videos",
@@ -1353,6 +1397,14 @@ const docTemplate = `{
                 },
                 "role": {
                     "type": "integer"
+                }
+            }
+        },
+        "routes.userHiddenStateResponse": {
+            "type": "object",
+            "properties": {
+                "state": {
+                    "type": "boolean"
                 }
             }
         },
