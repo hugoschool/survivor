@@ -38,17 +38,17 @@ var (
 // @Failure 500 {object} models.ApiError
 // @Router /users/:id [get]
 func UserGetHandler(c *gin.Context) {
-	id := c.Param("id")
-	var user models.User
+	id, err := strconv.Atoi(c.Param("id"))
 
-	result := database.DB.Preload("Skills").
-		Preload("Locations").
-		Preload("Sectors").
-		Preload("Videos").
-		First(&user, id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, models.ApiError{Message: "Invalid id"})
+		return
+	}
 
-	if result.Error != nil {
-		if result.Error == gorm.ErrRecordNotFound {
+	user, err := database.GetUserById(uint(id))
+
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
 			c.JSON(http.StatusNotFound, models.ApiError{Message: "User not found"})
 			return
 		} else {
@@ -100,13 +100,11 @@ func UsersPaginatedHandler(c *gin.Context) {
 	var users []models.User
 	page, _ := strconv.Atoi(c.Query("page"))
 
-	err := database.DB.Scopes(database.Paginate(page, UsersPageSize)).
-		Preload("Skills").
-		Preload("Locations").
-		Preload("Sectors").
-		Preload("Videos").
+	err := database.GetUserTX().
+		Scopes(database.Paginate(page, UsersPageSize)).
 		Order("updated_at DESC").
 		Order("id ASC").
+		Where("hidden = false").
 		Where("role = ?", models.RoleJobSeeker).
 		Find(&users).Error
 
@@ -166,7 +164,7 @@ func UserDeleteHandler(c *gin.Context) {
 		return
 	}
 
-	user, err := database.GetUserById(uint(id))
+	user, err := database.GetUserByIdEvenIfHidden(uint(id))
 
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
