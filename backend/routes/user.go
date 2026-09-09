@@ -23,6 +23,10 @@ var (
 	ErrVideoNotFound    = errors.New("video not found")
 )
 
+type userHiddenStateResponse struct {
+	State bool `json:"state"`
+}
+
 // UserGetId godoc
 // @Summary Get a singular user
 // @Schemes
@@ -182,4 +186,36 @@ func UserDeleteHandler(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, models.ApiMessage{Message: "Success"})
+}
+
+// UserSwitchHiddenState godoc
+// @Summary Switch the hidden state for the current user
+// @Schemes
+// @Description Switch the hidden state for the current user
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} userHiddenStateResponse
+// @Failure 401 {object} models.ApiError
+// @Failure 500 {object} models.ApiError
+// @Router /users/me/hidden [put]
+func UserSwitchHiddenStateHandler(c *gin.Context) {
+	user, err := models.GetUserFromContext(c)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	user.Hidden = !user.Hidden
+
+	err = database.DB.Save(&user).Error
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
+		return
+	}
+
+	c.JSON(http.StatusOK, userHiddenStateResponse{State: user.Hidden})
 }

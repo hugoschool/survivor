@@ -50,6 +50,7 @@ func main() {
 	users.GET("/:id", routes.UserGetHandler)
 	users.GET("", routes.UsersPaginatedHandler)
 	users.GET("/me", middlewares.AuthMiddleware, routes.UserGetCurrentHandler)
+	users.PUT("/me/hidden", middlewares.AuthMiddleware, routes.UserSwitchHiddenStateHandler)
 	// users.PUT("/:id", middlewares.AuthMiddleware, middlewares.AdminMiddleware, routes.UserUpdateHandler)
 	users.DELETE("/:id", middlewares.AuthMiddleware, routes.UserDeleteHandler)
 
