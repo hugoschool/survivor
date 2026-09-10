@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Footer } from "~/components/Footer";
 import { HeadBar } from "~/components/Headbar";
-import { API_URL, clearSession } from "~/lib/auth";
+import { API_URL, clearSession, fetchCurrentUser, getToken } from "~/lib/auth";
 import { useAuth } from "~/lib/authContext";
 import { Button } from "../components/ui/button";
 
@@ -121,12 +121,21 @@ export default function Profile() {
     const [showConfirm, setShowConfirm] = useState(false);
     const [countdown, setCountdown] = useState(5);
     const [videoURL, setVideoURL] = useState<videoURLType>();
+    const [hiddenState, setHiddenState] = useState<boolean>(false);
 
     useEffect(() => {
         if (!loggedIn) {
             navigate("/login", { replace: true });
         }
     }, [loggedIn, navigate]);
+
+    useEffect(() => {
+        fetchCurrentUser().then((user) => {
+            if (user) {
+                setHiddenState(user?.hidden);
+            }
+        });
+    }, []);
 
     useEffect(() => {
         const getVideoLink = async () => {
@@ -244,6 +253,32 @@ export default function Profile() {
     const sectors = user?.sectors?.map(({ content }) => content) ?? [];
     const skills = user?.skills?.map(({ content }) => content) ?? [];
     const hasValidatedVideo = videoData.some(({ status }) => status === 1);
+
+    // biome-ignore lint: any type allowed
+    const switchHiddenState = async (e: any) => {
+        e.preventDefault();
+
+        const token = getToken();
+
+        try {
+            const response = await fetch(`${API_URL}/users/me/hidden`, {
+                method: "PUT",
+                headers: token
+                    ? { Authorization: `Bearer ${token}` }
+                    : undefined,
+            });
+
+            if (!response.ok) {
+                return;
+            }
+
+            const json = await response.json();
+
+            setHiddenState(json.state);
+        } catch {
+            console.error("Hidden state cannot be retrieved");
+        }
+    };
 
     const handleDeleteAccountClick = async () => {
         try {
@@ -419,6 +454,26 @@ export default function Profile() {
                                     recruteurs à mieux vous trouver.
                                 </p>
                             )}
+                        </div>
+                        <div className="mt-8 border-t border-[#e5eaf1] pt-6">
+                            <div className="flex items-center gap-2">
+                                <UserRound className="h-5 w-5 text-institutionnel" />
+                                <h3 className="font-bold text-[#172033]">
+                                    Confidentialité
+                                </h3>
+                            </div>
+                            <p className="mt-3 text-sm text-[#667085]">
+                                Cliquez sur le bouton ci dessous pour changer
+                                l'état de votre profil.
+                            </p>
+                            <Button
+                                variant="outline"
+                                size="lg"
+                                className="text-institutionnel hover:bg-institutionnel/15 border-institutionnel bg-white font-bold"
+                                onClick={switchHiddenState}
+                            >
+                                Compte {hiddenState ? "privé" : "publique"}
+                            </Button>
                         </div>
                     </section>
 
