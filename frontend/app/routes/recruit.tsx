@@ -10,10 +10,16 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
+import { Pager } from "~/components/application/pager";
 import { HeadBar } from "~/components/Headbar";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { API_URL } from "~/lib/auth";
+import {
+    fetchUsers,
+    type ProfileItem,
+    USERS_PAGE_SIZE,
+    type User,
+} from "~/lib/auth";
 import "@codegouvfr/react-dsfr/dsfr/fonts/index.css";
 import { Footer } from "~/components/Footer";
 import {
@@ -27,35 +33,7 @@ import {
     DrawerTrigger,
 } from "../components/ui/drawer";
 
-export type User = {
-    first_name: string;
-    last_name: string;
-    age: number;
-    role: number;
-    locations: ProfileItem[] | null;
-    sectors: ProfileItem[] | null;
-    skills: ProfileItem[] | null;
-    survey_score: number | null;
-    views: number;
-    videos: UserVideo[] | null;
-    model: {
-        ID: number;
-    };
-};
-
-export type UserVideo = {
-    video_id: string;
-    status: number;
-};
-
-export type ProfileItem = {
-    id: number;
-    content: string;
-};
-
-type VideosResponse = {
-    user: User;
-};
+export type { User } from "~/lib/auth";
 
 type Filters = {
     query: string;
@@ -165,30 +143,38 @@ function ProfileCard({ user }: { user: User }) {
 
 export default function Recruit() {
     const [users, setUsers] = useState<User[]>([]);
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [draftFilters, setDraftFilters] = useState<Filters>(EMPTY_FILTERS);
     const [appliedFilters, setAppliedFilters] =
         useState<Filters>(EMPTY_FILTERS);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     useEffect(() => {
-        const loadProfiles = async () => {
-            try {
-                const response = await fetch(`${API_URL}/videos?page=0`);
-                if (!response.ok) {
-                    throw new Error("Impossible de charger les vidéos.");
-                }
-                const payload = (await response.json()) as VideosResponse[];
-                const usersMap = new Map(
-                    payload.map(({ user }) => [user.model.ID, user]),
-                );
-                setUsers(Array.from(usersMap.values()));
-            } catch {
-                setUsers([]);
-            }
-        };
+        let cancelled = false;
 
-        void loadProfiles();
-    }, []);
+        setLoading(true);
+        setError(false);
+
+        fetchUsers(page)
+            .then((profiles) => {
+                if (!cancelled) setUsers(profiles);
+            })
+            .catch(() => {
+                if (!cancelled) {
+                    setUsers([]);
+                    setError(true);
+                }
+            })
+            .finally(() => {
+                if (!cancelled) setLoading(false);
+            });
+
+        return () => {
+            cancelled = true;
+        };
+    }, [page]);
 
     const sectors = useMemo(
         () => [
@@ -237,13 +223,17 @@ export default function Recruit() {
 
     const applyFilters = () => {
         setAppliedFilters(draftFilters);
+        setPage(1);
         setDrawerOpen(false);
     };
 
     const resetFilters = () => {
         setDraftFilters(EMPTY_FILTERS);
         setAppliedFilters(EMPTY_FILTERS);
+        setPage(1);
     };
+
+    const hasNext = users.length === USERS_PAGE_SIZE;
 
     return (
         <div className="flex h-dvh flex-col overflow-hidden bg-[#F7F9FC] font-secondary text-[#172033] scheme-light">
@@ -437,16 +427,43 @@ export default function Recruit() {
                             </p>
                         </div>
                         <span className="hidden rounded-full bg-institutionnel/8 px-3 py-1.5 text-sm font-bold text-institutionnel sm:block">
-                            {visibleUsers.length} profil
-                            {visibleUsers.length === 1 ? "" : "s"}
+                            {loading
+                                ? "Chargement…"
+                                : `${visibleUsers.length} profil${visibleUsers.length === 1 ? "" : "s"}`}
                         </span>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                        {visibleUsers.map((user) => (
-                            <ProfileCard key={user.model.ID} user={user} />
-                        ))}
-                    </div>
+                    {error ? (
+                        <p className="rounded-2xl border border-red-300 bg-red-50 p-6 text-center text-sm text-red-800">
+                            Impossible de charger les profils. Veuillez
+                            réessayer.
+                        </p>
+                    ) : loading ? (
+                        <p className="rounded-2xl border border-institutionnel/10 bg-white p-6 text-center text-sm text-[#526078]">
+                            Chargement des profils…
+                        </p>
+                    ) : visibleUsers.length === 0 ? (
+                        <p className="rounded-2xl border border-institutionnel/10 bg-white p-6 text-center text-sm text-[#526078]">
+                            Aucun profil ne correspond aux filtres de cette
+                            page.
+                        </p>
+                    ) : (
+                        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                            {visibleUsers.map((user) => (
+                                <ProfileCard key={user.model.ID} user={user} />
+                            ))}
+                        </div>
+                    )}
+
+                    {(hasNext || page > 1) && (
+                        <Pager
+                            className="mt-6"
+                            disabled={loading || error}
+                            hasNext={hasNext}
+                            onPageChange={setPage}
+                            page={page}
+                        />
+                    )}
                 </section>
             </main>
             <Footer />

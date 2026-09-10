@@ -41,6 +41,7 @@ export type User = {
     role: number;
     age: number;
     views: number;
+    hidden: boolean;
     survey_score: number | null;
     skills: ProfileItem[] | null;
     locations: ProfileItem[] | null;
@@ -138,6 +139,7 @@ export type ApiQuestion = {
 };
 
 export type ApiSurvey = {
+    model: { ID: number };
     obtention_rate: number;
     questions: ApiQuestion[] | null;
 };
@@ -276,6 +278,7 @@ export async function reviewVideo(
 }
 
 export type SurveySubmission = {
+    survey_id: number;
     questions: {
         id: number;
         answers: { id: number; checked: boolean }[];

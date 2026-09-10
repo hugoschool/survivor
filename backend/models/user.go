@@ -56,6 +56,7 @@ type User struct {
 
 	// Percentage, out of a hundred
 	SurveyScore *uint `json:"survey_score"`
+	Hidden      bool  `json:"hidden" gorm:"default:false"`
 
 	Login Login `json:"-"`
 

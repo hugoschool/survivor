@@ -24,6 +24,7 @@ type userSubmitQuestion struct {
 }
 
 type userSubmitBody struct {
+	SurveyID  uint                 `json:"survey_id"`
 	Questions []userSubmitQuestion `json:"questions" binding:"required"`
 }
 
@@ -152,9 +153,8 @@ func SurveyPutHandler(c *gin.Context) {
 		return
 	}
 
-	body.ID = survey.ID
-
-	err = database.DB.Save(&body).Error
+	ctx = context.Background()
+	err = gorm.G[models.Survey](database.DB).Create(ctx, &body)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
@@ -265,21 +265,26 @@ func SurveySubmitHandler(c *gin.Context) {
 		return
 	}
 
-	survey, err := getLatestSurvey(c)
+	survey, err := database.GetSurveyById(body.SurveyID)
 
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, models.ApiError{Message: "Survey not found"})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, models.ApiErrorOccured)
 		return
 	}
 
-	if !compareQuestions(survey, &body) {
+	if !compareQuestions(&survey, &body) {
 		c.JSON(http.StatusBadRequest, models.ApiError{Message: "User hasn't completed all questions or invalid survey"})
 		return
 	}
 
-	surveyAnswerMap := getSurveyCorrectAnswers(survey)
+	surveyAnswerMap := getSurveyCorrectAnswers(&survey)
 	userAnswerMap := getUserCorrectAnswers(&body)
 
-	questionIds := getSurveyQuestionIds(survey)
+	questionIds := getSurveyQuestionIds(&survey)
 	answeredCorrectlyIds := make([]uint, 0)
 
 	for _, questionId := range questionIds {
