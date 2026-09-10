@@ -1,0 +1,268 @@
+[
+    {
+        "name": "q01",
+        "prompt": "Vous identifiez un risque de dépassement sur un délai client, mais vous ne savez pas encore de combien.",
+        "choices": [
+            {
+                "label": "Je signale le risque tout de suite, même sans pouvoir annoncer de nouvelle date.",
+                "correct": true
+            },
+            {
+                "label": "J'attends d'avoir une date fiable à proposer avant d'en parler.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q02",
+        "prompt": "Qu'est-ce qui entretient une motivation durable, au-delà des premiers mois ?",
+        "choices": [
+            {
+                "label": "Comprendre à quoi sert concrètement son travail.",
+                "correct": true
+            },
+            {
+                "label": "Constater que ses compétences progressent.",
+                "correct": true
+            },
+            {
+                "label": "Recevoir régulièrement des félicitations de sa hiérarchie.",
+                "correct": false
+            },
+            {
+                "label": "Travailler en permanence sur de nouveaux sujets.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q03",
+        "prompt": "Vous quittez l'entreprise. Vous avez conçu un outil de suivi qui vous a demandé des mois de travail.",
+        "choices": [
+            {
+                "label": "Je le documente et je le laisse à l'équipe : il a été produit dans le cadre de mon poste.",
+                "correct": true
+            },
+            {
+                "label": "J'en garde une copie personnelle : c'est ma méthode et mon savoir-faire.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q04",
+        "prompt": "Quels comportements font réellement progresser une équipe ?",
+        "choices": [
+            {
+                "label": "Partager une information utile sans attendre qu'on la demande.",
+                "correct": true
+            },
+            {
+                "label": "Exprimer un désaccord avant que la décision soit prise.",
+                "correct": true
+            },
+            {
+                "label": "Garder un désaccord mineur pour soi afin de préserver la cohésion.",
+                "correct": false
+            },
+            {
+                "label": "Faire valider chaque étape par le groupe avant d'avancer.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q05",
+        "prompt": "En réunion, un collègue critique publiquement une décision que vous avez prise.",
+        "choices": [
+            {
+                "label": "Je donne le contexte factuel et je propose de reprendre le fond après la réunion.",
+                "correct": true
+            },
+            {
+                "label": "Je réponds point par point immédiatement, pour ne pas laisser de doute s'installer.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q06",
+        "prompt": "Votre charge dépasse votre capacité pour la semaine.",
+        "choices": [
+            {
+                "label": "Trier selon l'impact et l'échéance réelle, pas ressentie.",
+                "correct": true
+            },
+            {
+                "label": "Rendre visible dès maintenant ce qui ne pourra pas être fait.",
+                "correct": true
+            },
+            {
+                "label": "Traiter d'abord les demandes arrivées le plus récemment.",
+                "correct": false
+            },
+            {
+                "label": "Répartir son temps équitablement entre tous les sujets ouverts.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q07",
+        "prompt": "Vous repérez une erreur dans un livrable déjà envoyé au client. Elle est mineure et personne ne l'a signalée.",
+        "choices": [
+            {
+                "label": "Je préviens en précisant l'impact réel et la correction apportée.",
+                "correct": true
+            },
+            {
+                "label": "Je corrige dans la prochaine version, sans alerter inutilement le client.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q08",
+        "prompt": "Quelles situations constituent un conflit d'intérêts qu'il faut déclarer ?",
+        "choices": [
+            {
+                "label": "Participer au choix d'un prestataire dirigé par un proche.",
+                "correct": true
+            },
+            {
+                "label": "Évaluer la performance d'une personne avec qui on a une relation personnelle.",
+                "correct": true
+            },
+            {
+                "label": "Recommander un ancien collègue via le canal de recrutement officiel.",
+                "correct": false
+            },
+            {
+                "label": "Siéger dans un jury où l'on connaît un candidat de vue.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q09",
+        "prompt": "Un nouvel outil est imposé. Après deux semaines, vous constatez qu'il vous ralentit réellement.",
+        "choices": [
+            {
+                "label": "Je note les cas précis où il ralentit et je remonte ces éléments chiffrés.",
+                "correct": true
+            },
+            {
+                "label": "Je reprends l'ancien outil pour mes propres tâches, l'équipe garde le nouveau.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q10",
+        "prompt": "Qu'est-ce qui rend un compte rendu de réunion exploitable une semaine plus tard ?",
+        "choices": [
+            {
+                "label": "Les décisions sont identifiables sans relire tous les échanges.",
+                "correct": true
+            },
+            {
+                "label": "Chaque action a un responsable nommé et une échéance.",
+                "correct": true
+            },
+            {
+                "label": "Les arguments de chaque participant y sont repris.",
+                "correct": false
+            },
+            {
+                "label": "Il est validé par tous les participants avant diffusion.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q11",
+        "prompt": "Une procédure de sécurité vous paraît disproportionnée et ralentit fortement l'équipe.",
+        "choices": [
+            {
+                "label": "Je l'applique telle quelle et je demande sa révision par le canal prévu.",
+                "correct": true
+            },
+            {
+                "label": "Je l'allège le temps de la mission, puis je propose officiellement une révision.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q12",
+        "prompt": "Quels signes traduisent un réel engagement professionnel ?",
+        "choices": [
+            {
+                "label": "Proposer une amélioration en l'appuyant sur un constat concret.",
+                "correct": true
+            },
+            {
+                "label": "Chercher à comprendre comment son travail sert les objectifs de l'équipe.",
+                "correct": true
+            },
+            {
+                "label": "Se rendre disponible en dehors des horaires prévus.",
+                "correct": false
+            },
+            {
+                "label": "Accepter toutes les missions qu'on vous propose.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q13",
+        "prompt": "On vous confie une tâche supplémentaire alors que votre charge est déjà pleine.",
+        "choices": [
+            {
+                "label": "J'accepte en indiquant ce que cela décale, et je fais arbitrer les priorités.",
+                "correct": true
+            },
+            {
+                "label": "J'accepte sans condition : refuser donnerait une mauvaise image.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q14",
+        "prompt": "Que recouvre l'autonomie attendue d'un professionnel confirmé ?",
+        "choices": [
+            {
+                "label": "Identifier le moment où il devient plus efficace de demander de l'aide.",
+                "correct": true
+            },
+            {
+                "label": "Rendre compte de son avancement sans qu'on ait à le demander.",
+                "correct": true
+            },
+            {
+                "label": "Résoudre seul l'ensemble des blocages rencontrés.",
+                "correct": false
+            },
+            {
+                "label": "Fixer seul ses priorités sans les faire valider.",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "name": "q15",
+        "prompt": "À mi-parcours, vous constatez qu'une tâche prendra 50 % de temps en plus que prévu.",
+        "choices": [
+            {
+                "label": "Je le signale maintenant, avec l'impact chiffré sur le planning.",
+                "correct": true
+            },
+            {
+                "label": "Je compense sur mon temps personnel pour tenir l'engagement initial.",
+                "correct": false
+            }
+        ]
+    }
+]
